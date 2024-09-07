@@ -16,7 +16,7 @@ const Sizes: React.FC = () => {
         current_page: 1,
         total: 1,
     });
-    const [error, setError] = useState();
+    const [error, setError] = useState<any>(null);
 
 
   const fetchSizes = async (nextPageUrl = null, perPage = 50) => {
@@ -76,7 +76,7 @@ const Sizes: React.FC = () => {
   };
   return (
     <>
-      <Breadcrumb pageName="All Sizes" />
+      <Breadcrumb pageName="All Sizes" backLink="/" createLink="/books/size/create" />
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3 mt-2">
         {/* Table and Pagination */}
         <table className="min-w-full border-collapse border border-gray-200 rounded-md">

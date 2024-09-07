@@ -8,7 +8,7 @@ import { toast, ToastContainer } from 'react-toastify';
 const CreateBook: React.FC = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState();
+    const [error, setError] = useState<any | null>(null);
     const [sizes, setSizes] = useState<any[]>([]);
     const [bookForm, setBookForm] = useState({
         title: '',
@@ -102,7 +102,7 @@ const CreateBook: React.FC = () => {
 
   return (
     <>
-    <Breadcrumb pageName="Create Book" />
+    <Breadcrumb pageName="Create Book" backLink='/books/all' />
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3">
         <form className="grid grid-cols-12 gap-4 p-4 mx-auto bg-white rounded-lg" onSubmit={submitBook}>
             <div className="col-span-6 flex flex-col gap-2">
@@ -288,6 +288,17 @@ const CreateBook: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
+                    <div className='col-span-12 flex flex-col gap-2'>
+                        <label className="text-sm font-semibold text-gray-600">Valuation</label>
+                        <input
+                        type="text"
+                        name="valuation"
+                        placeholder="Valuation"
+                        value={bookForm.valuation}
+                        onChange={handleInputChange}
+                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
                     <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Date Sold</label>
                         <input
@@ -330,17 +341,6 @@ const CreateBook: React.FC = () => {
                         name="buyer_email"
                         placeholder="Buyer Email"
                         value={bookForm.buyer_email}
-                        onChange={handleInputChange}
-                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
-                    </div>
-                    <div className='col-span-12 flex flex-col gap-2'>
-                        <label className="text-sm font-semibold text-gray-600">Valuation</label>
-                        <input
-                        type="text"
-                        name="valuation"
-                        placeholder="Valuation"
-                        value={bookForm.valuation}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />

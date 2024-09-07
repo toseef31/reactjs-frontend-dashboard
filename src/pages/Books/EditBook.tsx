@@ -4,6 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import constants from '../../Constants';
 import { toast, ToastContainer } from 'react-toastify';
+import MediaGallery from './Components/MediaGallery';
 
 const CreateBook: React.FC = () => {
     const { id } = useParams();
@@ -113,7 +114,7 @@ const CreateBook: React.FC = () => {
 
   return (
     <>
-    <Breadcrumb pageName="Edit Book" />
+    <Breadcrumb pageName="Edit Book" backLink='/books/all' createLink='/books/create' />
     <div>
     {isNewCreated && (
         <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-2" role="alert">
@@ -374,6 +375,7 @@ const CreateBook: React.FC = () => {
             </div>
         </form>
     </div>
+    <MediaGallery book_id={id} />
     <ToastContainer />
     </>
   );

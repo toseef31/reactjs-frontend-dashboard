@@ -16,10 +16,16 @@ import Tables from './pages/Tables';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import DefaultLayout from './layout/DefaultLayout';
+
 import AllBooks from './pages/Books/AllBooks';
 import CreateBook from './pages/Books/CreateBook';
-import Sizes from './pages/Books/Sizes';
 import EditBook from './pages/Books/EditBook';
+
+import CompareBooks from './pages/Books/CompareBooks';
+
+import Sizes from './pages/Books/Sizes';
+import CreateSize from './pages/Books/CreateSize';
+import EditSize from './pages/Books/EditSize';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -42,7 +48,7 @@ function App() {
           index
           element={
             <>
-              <PageTitle title="eCommerce Dashboard | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Collection Dashboard | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <ECommerce />
             </>
           }
@@ -75,11 +81,38 @@ function App() {
           }
         />
         <Route
+          path="/books/compare"
+          element={
+            <>
+              <PageTitle title="Compare Books | Collection Portal" />
+              <CompareBooks />
+            </>
+          }
+        />
+        <Route
           path="/books/sizes"
           element={
             <>
               <PageTitle title="All Sizes | Collection Portal" />
               <Sizes />
+            </>
+          }
+        />
+        <Route
+          path="/books/size/edit/:id"
+          element={
+            <>
+              <PageTitle title="Edit Size | Collection Portal" />
+              <EditSize />
+            </>
+          }
+        />
+        <Route
+          path="/books/size/create"
+          element={
+            <>
+              <PageTitle title="Create Size | Collection Portal" />
+              <CreateSize />
             </>
           }
         />

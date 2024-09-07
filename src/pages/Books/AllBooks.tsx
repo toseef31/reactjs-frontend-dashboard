@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import axios from 'axios';
 import constants from '../../Constants';
 import { toast, ToastContainer } from 'react-toastify';
 
 const AllBooks: React.FC = () => {
+
+  const navigate = useNavigate();
+
   const [books, setBooks] = useState<any[]>([]);
   const [nextPage, setNextPage] = useState();
   const [prevPage, setPrevPage] = useState();
   const [nextPageEnabled, setNextPageEnabled] = useState(false);
   const [prevPageEnabled, setPrevPageEnabled] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
+  const [error, setError] = useState<any | null>(null);
   const [pageInfo, setPageInfo] = useState({
       current_page: 1,
       total: 1,
@@ -25,6 +28,7 @@ const AllBooks: React.FC = () => {
     publication_year: '',
     edition: '',
   });
+  const [selectedBooks, setSelectedBooks] = useState<number[]>([]);
 
   const fetchBooks = async (params = {}, nextPageUrl = null, perPage = 25) => {
     setLoading(true);
@@ -70,7 +74,7 @@ const AllBooks: React.FC = () => {
     fetchBooks();
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setSearchParams((prevParams) => ({
       ...prevParams,
@@ -78,7 +82,7 @@ const AllBooks: React.FC = () => {
     }));
   };
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     e.preventDefault();
     fetchBooks(searchParams,null, 1000);
   };
@@ -93,6 +97,22 @@ const AllBooks: React.FC = () => {
     });
 
     fetchBooks({}, null, 25);
+  };
+
+  const duplicateBook = async (id: number) => {
+    try {
+      const response = await axios.post(constants.BASE_URL + '/book/duplicate/'+id );
+      fetchBooks();
+      toast.success(response.data.message);
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        console.error(error.response.data);
+        toast.error(error.response.data.message || 'An unexpected error occurred. Please try again.');
+      } else {
+        console.error('Unexpected Error:', error);
+        toast.error('An unexpected error occurred. Please try again.');
+      }
+    }
   };
 
   const deleteBook = async (id: number) => {
@@ -111,9 +131,20 @@ const AllBooks: React.FC = () => {
       }
     }
   };
+
+  const handleCheckboxChange = (id: number) => {
+    setSelectedBooks((prevSelected) =>
+      prevSelected.includes(id) ? prevSelected.filter((bookId) => bookId !== id) : [...prevSelected, id]
+    );
+  };
+
+  const handleCompare = () => {
+    console.log('Selected Books for Comparison:', selectedBooks);
+    navigate('/books/compare');
+  };
   return (
     <>
-      <Breadcrumb pageName="All Books" />
+      <Breadcrumb pageName="All Books" backLink="/" createLink='/books/create' />
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3">
         <form className="grid grid-cols-12 gap-1" onSubmit={handleSearch}>
           <input
@@ -183,11 +214,12 @@ const AllBooks: React.FC = () => {
           <thead className="bg-gray-100 text-left text-gray-600">
             {/* Table Header */}
             <tr className="py-2">
-              <th className="border-b border-gray-300 p-2 w-40 pl-5">Book ID</th>
+              <th className="border-b border-gray-300 p-2 w-10 pl-4">&nbsp;</th>
+              <th className="border-b border-gray-300 p-2 w-40">Book ID</th>
               <th className="border-b border-gray-300 p-2">Book Name</th>
-              <th className="border-b border-gray-300 p-2 w-50">Author</th>
-              <th className="border-b border-gray-300 p-2 w-50">Publisher</th>
-              <th className="border-b border-gray-300 p-2 w-30">Year</th>
+              <th className="border-b border-gray-300 p-2 w-40">Author</th>
+              <th className="border-b border-gray-300 p-2 w-40">Publisher</th>
+              <th className="border-b border-gray-300 p-2 w-20">Year</th>
               <th className="border-b border-gray-300 p-2 w-40">Edition</th>
               <th className="border-b border-gray-300 p-2">Action</th>
             </tr>
@@ -209,7 +241,16 @@ const AllBooks: React.FC = () => {
             {books.map((book) => (
               <tr className="hover:bg-gray-50" key={book.id}>
                 {/* Table Data */}
-                <td className="border-b border-gray-50 p-1 pl-5">{book.book_id}</td>
+                <td className="border-b border-gray-50 p-1 w-10 pl-4">
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4"
+                    name="id"
+                    value={book.id}
+                    onChange={() => handleCheckboxChange(book.id)}
+                  />
+                </td>
+                <td className="border-b border-gray-50 p-1">{book.book_id}</td>
                 <td className="border-b border-gray-50 p-1">{book.title}</td>
                 <td className="border-b border-gray-50 p-1">{book.author}</td>
                 <td className="border-b border-gray-50 p-1">{book.publisher}</td>
@@ -218,7 +259,7 @@ const AllBooks: React.FC = () => {
                 <td className="border-b border-gray-50 p-1 w-60 pr-5">
                   <Link to={`/books/edit/${book.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
                   <span className="mx-2"></span>
-                  <Link to="/duplicate" className="text-green-500 font-bold hover:underline">Duplicate</Link>
+                  <button onClick={() => duplicateBook(book.id)} className="text-green-500 font-bold hover:underline">Duplicate</button>
                   <span className="mx-2"></span>
                   <button onClick={() => deleteBook(book.id)} className="text-red-500 font-bold">Delete</button>
                 </td>
@@ -228,6 +269,7 @@ const AllBooks: React.FC = () => {
         </table>
         {/* Pagination Controls */}
         <div className="flex justify-between items-center mt-3">
+          <button className='bg-primary py-1 px-3 rounded-lg text-white' onClick={handleCompare}>Compare Books</button>
           <div className="text-gray-500">Total Books: {pageInfo.total} | Page {pageInfo.current_page}</div>
           <div className="flex gap-2 items-center">
             <button
