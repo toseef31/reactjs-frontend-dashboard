@@ -51,7 +51,7 @@ const CreateSize: React.FC = () => {
 
   return (
     <>
-    <Breadcrumb pageName="Create Size" />
+    <Breadcrumb pageName="Create Size" backLink='/books/sizes' />
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3">
         <form className="grid grid-cols-12 gap-4 p-4 mx-auto bg-white rounded-lg" onSubmit={submitSize}>
             <div className="col-span-12 flex flex-col gap-2">
