@@ -18,7 +18,7 @@ const CreateBook: React.FC = () => {
     });
     const [updated, setUpdated] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<any[] | null>(null);
     const [sizes, setSizes] = useState<any[]>([]);
     const [bookForm, setBookForm] = useState({
         id:id,
@@ -245,33 +245,36 @@ const CreateBook: React.FC = () => {
                             <option value="sold" selected={bookForm.status === 'sold'}>Sold</option>
                         </select>
                     </div>
-                    <div className='col-span-12 flex flex-col gap-2'>
+                        <div className="col-span-12 flex flex-col gap-2">
                         <label className="text-sm font-semibold text-gray-600">Book Condition</label>
                         <textarea
-                        name="book_condition"
-                        placeholder="Book Condition"
-                        onChange={handleInputChange}
-                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        >{bookForm.book_condition}</textarea>
-                    </div>
-                    <div className='col-span-12 flex flex-col gap-2'>
+                            name="book_condition"
+                            placeholder="Book Condition"
+                            onChange={handleInputChange}
+                            value={bookForm.book_condition} // Use value prop here
+                            className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        </div>
+                        <div className="col-span-12 flex flex-col gap-2">
                         <label className="text-sm font-semibold text-gray-600">Jacket Condition</label>
                         <textarea
-                        name="jacket_condition"
-                        placeholder="Jacket Condition"
-                        onChange={handleInputChange}
-                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        >{bookForm.jacket_condition}</textarea>
-                    </div>
-                    <div className='col-span-12 flex flex-col gap-2'>
+                            name="jacket_condition"
+                            placeholder="Jacket Condition"
+                            onChange={handleInputChange}
+                            value={bookForm.jacket_condition} // Use value prop here
+                            className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        </div>
+                        <div className="col-span-12 flex flex-col gap-2">
                         <label className="text-sm font-semibold text-gray-600">Comment</label>
                         <textarea
-                        name="comment"
-                        placeholder="Comment"
-                        onChange={handleInputChange}
-                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        >{bookForm.comment}</textarea>
-                    </div>
+                            name="comment"
+                            placeholder="Comment"
+                            onChange={handleInputChange}
+                            value={bookForm.comment} // Use value prop here
+                            className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        </div>
                 </div>
             </div>
 
@@ -364,7 +367,7 @@ const CreateBook: React.FC = () => {
                 </div>
             </div>
             <div className="col-span-12 flex justify-between mt-4">
-                <div>{error && <div className="text-red-500">{`${error.message.tostring()} : ${error.error.tostring()}`}</div>}</div>
+                <div>{error && <div className="text-red-500">{`${error.message} : ${error.error}`}</div>}</div>
                 <button
                 type="submit"
                 className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"

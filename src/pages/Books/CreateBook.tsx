@@ -10,6 +10,7 @@ const CreateBook: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<any | null>(null);
     const [sizes, setSizes] = useState<any[]>([]);
+    const [nextBook, setNextBook] = useState<any>(null);
     const [bookForm, setBookForm] = useState({
         title: '',
         author: '',
@@ -49,6 +50,21 @@ const CreateBook: React.FC = () => {
     }
     setLoading(false);
   };
+
+  const fetchNextBook = async () => {
+    try{
+        const url = constants.BASE_URL + '/books/next';
+        const response = await axios.get(url);
+        setNextBook(response.data.data.book_id);
+    }catch(err){
+        if (axios.isAxiosError(err) && err.response) {
+            console.error(err.response.data);
+        } else {
+            console.error('Unexpected Error:', err);
+            toast.error('An unexpected error occurred. Please try again.');
+        }
+    }
+  }
   const fetchSizes = async () => {
     try{
         const url = constants.BASE_URL + '/sizes';
@@ -66,6 +82,7 @@ const CreateBook: React.FC = () => {
 
   useEffect(() => {
     fetchSizes();
+    fetchNextBook();
   }, []);
 
   const resetForm = () => {
@@ -116,7 +133,7 @@ const CreateBook: React.FC = () => {
                         type="text"
                         name="book_id"
                         placeholder="Book ID"
-                        value="B0005"
+                        value={nextBook}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 disabled:bg-yellow-100 disabled:cursor-not-allowed"
                         disabled
                         />

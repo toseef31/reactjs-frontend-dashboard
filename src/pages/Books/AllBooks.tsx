@@ -140,7 +140,11 @@ const AllBooks: React.FC = () => {
 
   const handleCompare = () => {
     console.log('Selected Books for Comparison:', selectedBooks);
-    navigate('/books/compare');
+    if(selectedBooks.length < 2){
+      toast.error('Please select at least two books to compare.');
+    }else{
+      navigate('/books/compare?book_ids=' + selectedBooks.join(','));
+    }
   };
   return (
     <>
