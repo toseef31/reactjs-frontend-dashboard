@@ -100,6 +100,11 @@ const AllBooks: React.FC = () => {
   };
 
   const duplicateBook = async (id: number) => {
+    const isConfirmed = window.confirm('Are you sure you want to duplicate this Book?');
+
+    if (!isConfirmed) {
+      return; // Exit if the user cancels the action
+    }
     try {
       const response = await axios.post(constants.BASE_URL + '/book/duplicate/'+id );
       fetchBooks();
@@ -116,6 +121,11 @@ const AllBooks: React.FC = () => {
   };
 
   const deleteBook = async (id: number) => {
+    const isConfirmed = window.confirm('Are you sure you want to delete this Book?');
+
+    if (!isConfirmed) {
+      return; // Exit if the user cancels the action
+    }
     try {
       await axios.post(constants.BASE_URL + '/book/delete', { id });
       // Update state to remove the deleted book

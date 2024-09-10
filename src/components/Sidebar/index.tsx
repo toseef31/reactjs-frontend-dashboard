@@ -11,6 +11,7 @@ interface SidebarProps {
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const location = useLocation();
   const { pathname } = location;
+  const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null;
 
   const trigger = useRef<any>(null);
   const sidebar = useRef<any>(null);
@@ -94,6 +95,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         {/* <!-- Sidebar Menu --> */}
+        {loggedInUser && (
         <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
           {/* <!-- Menu Group --> */}
           <div>
@@ -338,6 +340,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             </ul>
           </div>
         </nav>
+        )}
         {/* <!-- Sidebar Menu --> */}
       </div>
     </aside>

@@ -5,8 +5,8 @@ import axios from 'axios';
 import constants from '../../Constants';
 import { toast, ToastContainer } from 'react-toastify';
 
-const Sizes: React.FC = () => {
-    const [sizes, setSizes] = useState<any[]>([]);
+const AllUsers: React.FC = () => {
+    const [users, setUsers] = useState<any[]>([]);
     const [nextPage, setNextPage] = useState();
     const [prevPage, setPrevPage] = useState();
     const [nextPageEnabled, setNextPageEnabled] = useState(false);
@@ -17,15 +17,15 @@ const Sizes: React.FC = () => {
         total: 1,
     });
     const [error, setError] = useState<any>(null);
+    const [loggedInUser, setLoggedInUser] = useState<any>(null);
 
-
-  const fetchSizes = async (nextPageUrl = null, perPage = 50) => {
+  const fetchUsers = async (nextPageUrl = null, perPage = 50) => {
     setLoading(true);
   
     try {
-      const url = nextPageUrl || constants.BASE_URL + '/sizes';
+      const url = nextPageUrl || constants.BASE_URL + '/users';
       const response = await axios.get(url, { params: { per_page: perPage } });
-      setSizes(response.data.data);
+      setUsers(response.data.data);
       setNextPage(response.data.pagination.next_page_url);
       setPrevPage(response.data.pagination.prev_page_url);
       setNextPageEnabled(response.data.pagination.next_page_url !== null);
@@ -47,28 +47,30 @@ const Sizes: React.FC = () => {
   
 
   const handleNextPage = async () => {
-    fetchSizes(nextPage);
+    fetchUsers(nextPage);
   };
 
   const handlePrevPage = async () => {
-    fetchSizes(prevPage);
+    fetchUsers(prevPage);
   };
 
   useEffect(() => {
-    fetchSizes();
+    fetchUsers();
+    const user = JSON.parse(localStorage.getItem('user'));
+    setLoggedInUser(user.user.id);
   }, []);
 
-  const deleteSize = async (id: number) => {
-    const isConfirmed = window.confirm('Are you sure you want to delete this Size?');
+  const deleteUser = async (id: number) => {
+    const isConfirmed = window.confirm('Are you sure you want to delete this user?');
 
     if (!isConfirmed) {
       return; // Exit if the user cancels the action
     }
     try {
-      await axios.post(constants.BASE_URL + '/size/delete', { id });
+      await axios.post(constants.BASE_URL + '/user/delete', { id });
       // Update state to remove the deleted book
-      setSizes(prevBooks => prevBooks.filter(book => book.id !== id));
-      toast.success('Size deleted successfully!');
+      setUsers(prevBooks => prevBooks.filter(book => book.id !== id));
+      toast.success('User deleted successfully!');
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         console.error(error.response.data);
@@ -81,15 +83,17 @@ const Sizes: React.FC = () => {
   };
   return (
     <>
-      <Breadcrumb pageName="All Sizes" backLink="/" createLink="/books/size/create" />
+      <Breadcrumb pageName="All Users" backLink="/" createLink="/users/create" />
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3 mt-2">
         {/* Table and Pagination */}
         <table className="min-w-full border-collapse border border-gray-200 rounded-md">
           <thead className="bg-gray-100 text-left text-gray-600">
             {/* Table Header */}
             <tr className="py-2">
-              <th className="border-b border-gray-300 p-2 w-40 pl-5">Size</th>
-              <th className="border-b border-gray-300 p-2">Description</th>
+              <th className="border-b border-gray-300 p-2 w-40 pl-5">Name</th>
+              <th className="border-b border-gray-300 p-2">Email</th>
+              <th className="border-b border-gray-300 p-2">Role</th>
+              <th className="border-b border-gray-300 p-2">Is Active</th>
               <th className="border-b border-gray-300 p-2">Action</th>
             </tr>
           </thead>
@@ -107,15 +111,17 @@ const Sizes: React.FC = () => {
                 </td>
             </tr>
             ) : null}
-            {sizes.map((size) => (
-              <tr className="hover:bg-gray-50" key={size.id}>
+            {users.map((user) => (
+              <tr className="hover:bg-gray-50" key={user.id}>
                 {/* Table Data */}
-                <td className="border-b border-gray-50 p-1 pl-5">{size.size}</td>
-                <td className="border-b border-gray-50 p-1">{size.description}</td>
+                <td className="border-b border-gray-50 p-1 pl-5">{user.name}</td>
+                <td className="border-b border-gray-50 p-1">{user.email}</td>
+                <td className="border-b border-gray-50 p-1">{user.role}</td>
+                <td className="border-b border-gray-50 p-1">{user.is_active ? 'Active' : 'Inactive'}</td>
                 <td className="border-b border-gray-50 p-1 w-60 pr-5">
-                  <Link to={`/books/size/edit/${size.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
+                  <Link to={`/users/edit/${user.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
                   <span className="mx-2"></span>
-                  <button onClick={() => deleteSize(size.id)} className="text-red-500 font-bold">Delete</button>
+                  <button onClick={() => deleteUser(user.id)} disabled={user.id === loggedInUser} className="text-red-500 font-bold disabled:opacity-10 disabled:cursor-not-allowed">Delete</button>
                 </td>
               </tr>
             ))}
@@ -123,7 +129,7 @@ const Sizes: React.FC = () => {
         </table>
         {/* Pagination Controls */}
         <div className="flex justify-between items-center mt-3">
-          <div className="text-gray-500">Total Sizes: {pageInfo.total} | Page {pageInfo.current_page}</div>
+          <div className="text-gray-500">Total Users: {pageInfo.total} | Page {pageInfo.current_page}</div>
           <div className="flex gap-2 items-center">
             <button
               onClick={handlePrevPage}
@@ -180,4 +186,4 @@ const Sizes: React.FC = () => {
   );
 };
 
-export default Sizes;
+export default AllUsers;
