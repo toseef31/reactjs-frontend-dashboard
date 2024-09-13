@@ -37,6 +37,11 @@ const MediaGallery = ({ book_id }: MediaGalleryProps) => {
     }, [book_id]);
 
     const deleteMedia = async (id: number) => {
+        const isConfirmed = window.confirm('Are you sure you want to delete this File?');
+
+        if (!isConfirmed) {
+          return; // Exit if the user cancels the action
+        }
         try {
             const url = `${constants.BASE_URL}/book-media/delete`;
             const response = await axios.post(url, { id });
