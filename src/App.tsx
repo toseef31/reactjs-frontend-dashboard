@@ -24,12 +24,20 @@ import Sizes from './pages/Books/Sizes';
 import CreateSize from './pages/Books/CreateSize';
 import EditSize from './pages/Books/EditSize';
 
+import AllEphemeras from './pages/Ephemera/AllEphemeras';
+
 import AllUsers from './pages/Users/AllUsers';
 import CreateUser from './pages/Users/CreateUser';
 import EditUser from './pages/Users/EditUser';
 
 // 404 Not Found component
 import NotFound from './pages/NotFound'; // Make sure to create this component
+import CreateEphemera from './pages/Ephemera/CreateEphemera';
+import EditEphemera from './pages/Ephemera/EditEphemera';
+import AllReels from './pages/HardyReels/AllReels';
+import CreateReel from './pages/HardyReels/CreateReel';
+import EditReel from './pages/HardyReels/EditReel';
+
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -82,6 +90,13 @@ function App() {
             <Route path="/books/sizes" element={<><PageTitle title="All Sizes | Collection Portal" /> <Sizes /></>} />
             <Route path="/books/size/edit/:id" element={<><PageTitle title="Edit Size | Collection Portal" /> <EditSize /></>} />
             <Route path="/books/size/create" element={<><PageTitle title="Create Size | Collection Portal" /> <CreateSize /></>} />
+            <Route path="/ephemeras/all" element={<><PageTitle title="All Ephemeras | Collection Portal" /> <AllEphemeras /></>} />
+            <Route path="/ephemeras/create" element={<><PageTitle title="Create Ephemera | Collection Portal" /> <CreateEphemera /></>} />
+            <Route path="/ephemeras/edit/:id" element={<><PageTitle title="Edit Ephemera | Collection Portal" /> <EditEphemera /></>} />
+            <Route path="/hardyreels/all" element={<><PageTitle title="All Hardy Reels | Collection Portal" /> <AllReels /></>} />
+            <Route path="/hardyreels/create" element={<><PageTitle title="Create Hardy Reel | Collection Portal" /> <CreateReel /></>} />
+            <Route path="/hardyreels/edit/:id" element={<><PageTitle title="Edit Hardy Reel | Collection Portal" /> <EditReel /></>} />
+
             <Route path="/users/all" element={<><PageTitle title="All Users | Collection Portal" /> <AllUsers /></>} />
             <Route path="/users/create" element={<><PageTitle title="Create User | Collection Portal" /> <CreateUser /></>} />
             <Route path="/users/edit/:id" element={<><PageTitle title="Edit User | Collection Portal" /> <EditUser /></>} />
