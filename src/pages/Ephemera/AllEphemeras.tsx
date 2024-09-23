@@ -4,6 +4,7 @@ import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import axios from 'axios';
 import constants from '../../Constants';
 import { toast, ToastContainer } from 'react-toastify';
+import WidgetCard from '../GeneralComponenet/WidgetCard';
 
 const AllEphemeras: React.FC = () => {
 
@@ -121,6 +122,7 @@ const AllEphemeras: React.FC = () => {
   return (
     <>
       <Breadcrumb pageName="All Ephemeras" backLink="/" createLink='/ephemeras/create' />
+      <WidgetCard parameter='ephemera'/>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3">
         <form className="grid grid-cols-12 gap-1" onSubmit={handleSearch}>
           <input

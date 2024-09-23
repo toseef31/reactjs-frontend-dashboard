@@ -6,13 +6,15 @@ import ChartTwo from '../../components/Charts/ChartTwo';
 import ChatCard from '../../components/Chat/ChatCard';
 import MapOne from '../../components/Maps/MapOne';
 import TableOne from '../../components/Tables/TableOne';
+import WidgetCard from '../GeneralComponenet/WidgetCard';
 
 const ECommerce: React.FC = () => {
 
   const randomvar = 'salam';
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
+      <WidgetCard parameter='books,ephemera,hardy_reels,users'/>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5 mt-6">
         <CardDataStats title="Total views" total="$3.456K" rate="0.43%" levelUp>
           <svg
             className="fill-primary dark:fill-white"
