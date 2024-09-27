@@ -37,6 +37,15 @@ import EditEphemera from './pages/Ephemera/EditEphemera';
 import AllReels from './pages/HardyReels/AllReels';
 import CreateReel from './pages/HardyReels/CreateReel';
 import EditReel from './pages/HardyReels/EditReel';
+import AllLures from './pages/Lures/AllLures';
+import CreateLures from './pages/Lures/CreateLures';
+import EditLures from './pages/Lures/EditLures';
+import AllRods from './pages/Rods/AllRods';
+import CreateRods from './pages/Rods/CreateRods';
+import EditRods from './pages/Rods/EditRods';
+import AllPennCatalogues from './pages/PennCatalogues/AllPennCatalogues';
+import CreatePennCatalogue from './pages/PennCatalogues/CreatePennCatalogue';
+import EditPennCatalogue from './pages/PennCatalogues/EditPennCatalogue';
 
 
 function App() {
@@ -96,6 +105,21 @@ function App() {
             <Route path="/hardyreels/all" element={<><PageTitle title="All Hardy Reels | Collection Portal" /> <AllReels /></>} />
             <Route path="/hardyreels/create" element={<><PageTitle title="Create Hardy Reel | Collection Portal" /> <CreateReel /></>} />
             <Route path="/hardyreels/edit/:id" element={<><PageTitle title="Edit Hardy Reel | Collection Portal" /> <EditReel /></>} />
+            <Route path="/lures/all" element={<><PageTitle title="All Lures | Collection Portal" /> <AllLures /></>} />
+            <Route path="/lures/create" element={<><PageTitle title="Create Lures | Collection Portal" /> <CreateLures /></>} />
+            <Route path="/lures/edit/:id" element={<><PageTitle title="Edit Lures | Collection Portal" /> <EditLures /></>} />
+            <Route path="/rods/all" element={<><PageTitle title="All Rods | Collection Portal" /> <AllRods /></>} />
+            <Route path="/rods/create" element={<><PageTitle title="Create Rods | Collection Portal" /> <CreateRods /></>} />
+            <Route path="/rods/edit/:id" element={<><PageTitle title="Edit Rods | Collection Portal" /> <EditRods /></>} />
+            <Route path="/penn-catalogues/all" element={<><PageTitle title="All Penn Catalogues | Collection Portal" /> <AllPennCatalogues /></>} />
+            <Route path="/penn-catalogues/create" element={<><PageTitle title="Create Penn Catalogue | Collection Portal" /> <CreatePennCatalogue /></>} />
+            <Route path="/penn-catalogues/edit/:id" element={<><PageTitle title="Edit Penn Catalogue | Collection Portal" /> <EditPennCatalogue /></>} />
+
+
+
+            
+
+
 
             <Route path="/users/all" element={<><PageTitle title="All Users | Collection Portal" /> <AllUsers /></>} />
             <Route path="/users/create" element={<><PageTitle title="Create User | Collection Portal" /> <CreateUser /></>} />

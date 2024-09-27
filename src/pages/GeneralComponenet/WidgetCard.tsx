@@ -12,6 +12,9 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
         hardy_reels: null,
         books: null,
         ephemera: null,
+        lures: null,
+        rods: null,
+        penncatalogue: null,
     });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -63,15 +66,66 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
                     <div className="bg-white shadow-lg rounded-lg p-6">
                         <h2 className="text-xl font-bold mb-4">Hardy Reels</h2>
                         <p className="text-gray-700 text-2xl font-semibold">
-                            Count: {widgetData.hardy_reels.count}
+                            Count: {widgetData.hardy_reels.count || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Cost Price: ${widgetData.hardy_reels.total_cost_price}
+                            Total Cost Price: ${widgetData.hardy_reels.total_cost_price || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Valuation Price: ${widgetData.hardy_reels.total_valuation_price}
+                            Total Valuation Price: ${widgetData.hardy_reels.total_valuation_price || 0}
                         </p>
                         <p className="text-gray-600">Next ID: {widgetData.hardy_reels.next_id}</p>
+                    </div>
+                )}
+
+                
+                {/* Lures Widget */}
+                {widgetData.lures && (
+                    <div className="bg-white shadow-lg rounded-lg p-6">
+                        <h2 className="text-xl font-bold mb-4">Lures</h2>
+                        <p className="text-gray-700 text-2xl font-semibold">
+                            Count: {widgetData.lures.count || 0}
+                        </p>
+                        <p className="text-gray-600">
+                            Total Cost Price: ${widgetData.lures.total_cost_price || 0}
+                        </p>
+                        <p className="text-gray-600">
+                            Total Valuation Price: ${widgetData.lures.total_valuation_price || 0}
+                        </p>
+                        <p className="text-gray-600">Next ID: {widgetData.lures.next_id}</p>
+                    </div>
+                )}
+
+                {/* Lures Widget */}
+                {widgetData.rods && (
+                    <div className="bg-white shadow-lg rounded-lg p-6">
+                        <h2 className="text-xl font-bold mb-4">Rods</h2>
+                        <p className="text-gray-700 text-2xl font-semibold">
+                            Count: {widgetData.rods.count || 0}
+                        </p>
+                        <p className="text-gray-600">
+                            Total Cost Price: ${widgetData.rods.total_cost_price || 0}
+                        </p>
+                        <p className="text-gray-600">
+                            Total Valuation Price: ${widgetData.rods.total_valuation_price || 0}
+                        </p>
+                        <p className="text-gray-600">Next ID: {widgetData.rods.next_id}</p>
+                    </div>
+                )}
+
+                {/* Lures Widget */}
+                {widgetData.penncatalogue && (
+                    <div className="bg-white shadow-lg rounded-lg p-6">
+                        <h2 className="text-xl font-bold mb-4">Penn Catalogues</h2>
+                        <p className="text-gray-700 text-2xl font-semibold">
+                            Count: {widgetData.penncatalogue.count || 0}
+                        </p>
+                        <p className="text-gray-600">
+                            Total Cost Price: ${widgetData.penncatalogue.total_cost_price || 0}
+                        </p>
+                        <p className="text-gray-600">
+                            Total Valuation Price: ${widgetData.penncatalogue.total_valuation_price || 0}
+                        </p>
                     </div>
                 )}
 
@@ -80,13 +134,13 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
                     <div className="bg-white shadow-lg rounded-lg p-6">
                         <h2 className="text-xl font-bold mb-4">Books</h2>
                         <p className="text-gray-700 text-2xl font-semibold">
-                            Count: {widgetData.books.count}
+                            Count: {widgetData.books.count || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Cost Price: ${widgetData.books.total_cost_price}
+                            Total Cost Price: ${widgetData.books.total_cost_price || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Valuation Price: ${widgetData.books.total_valuation_price}
+                            Total Valuation Price: ${widgetData.books.total_valuation_price || 0}
                         </p>
                         <p className="text-gray-600">Next ID: {widgetData.books.next_id}</p>
                     </div>
@@ -97,13 +151,13 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
                     <div className="bg-white shadow-lg rounded-lg p-6">
                         <h2 className="text-xl font-bold mb-4">Ephemera</h2>
                         <p className="text-gray-700 text-2xl font-semibold">
-                            Count: {widgetData.ephemera.count}
+                            Count: {widgetData.ephemera.count || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Cost Price: ${widgetData.ephemera.total_cost_price}
+                            Total Cost Price: ${widgetData.ephemera.total_cost_price || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Valuation Price: ${widgetData.ephemera.total_valuation_price}
+                            Total Valuation Price: ${widgetData.ephemera.total_valuation_price || 0}
                         </p>
                         <p className="text-gray-600">Next ID: {widgetData.ephemera.next_id}</p>
                     </div>
