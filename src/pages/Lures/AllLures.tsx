@@ -196,7 +196,7 @@ const AllLures: React.FC = () => {
           >Reset</button>
         </form>
       </div>
-      <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3 mt-2">
+      <div className="w-full overflow-x-auto rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3 mt-2">
         {/* Table and Pagination */}
         <table className="min-w-full border-collapse border border-gray-200 rounded-md">
           <thead className="bg-gray-100 text-left text-gray-600">
