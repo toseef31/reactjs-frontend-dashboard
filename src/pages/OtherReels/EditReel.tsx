@@ -1,17 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
+import { useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import constants from '../../Constants';
-import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import MediaGallery from './Components/MediaGallery';
 
 const CreateReel: React.FC = () => {
-    const navigate = useNavigate();
+    const { id } = useParams();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const isNewCreated = queryParams.get('newCreated') === 'true';
+
+    const [reelProtected, setReelProtected] = useState({
+        id:id,
+        reel_id: '',
+    });
+    const [updated, setUpdated] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<any | null>(null);
-    const [sizes, setSizes] = useState<any[]>([]);
-    const [nextReel, setNextReel] = useState<any>(null);
+    const [error, setError] = useState<any[] | null>(null);
     const [reelForm, setReelForm] = useState({
+        id:id,
         makers_name: '',
         model: '',
         sub_model: '',
@@ -30,30 +39,38 @@ const CreateReel: React.FC = () => {
         buyer_email: '',
         valuation: '',
     });
-
+      
+    const updateReelId = (newReelId:string) => {
+        setReelProtected((prevState) => ({
+          ...prevState, // Keep the existing state
+          reel_id: newReelId, // Update the reel_id
+        }));
+      };
   const submitReel = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-    try{
-        const url = constants.BASE_URL + '/create-hardyreel';
-        const response = await axios.post(url, reelForm);
-        navigate(`/hardyreels/edit/${response.data.data.id}?newCreated=true`);
-    }catch(err){
-        if (axios.isAxiosError(err) && err.response) {
-            setError(err.response.data);
-        } else {
-            console.error('Unexpected Error:', err);
-            toast.error('An unexpected error occurred. Please try again.');
+        try{
+            const url = constants.BASE_URL + '/otherreel/edit';
+            await axios.post(url, reelForm);
+            setUpdated(true);
+        }catch(err){
+            if (axios.isAxiosError(err) && err.response) {
+                setError(err.response.data);
+            } else {
+                console.error('Unexpected Error:', err);
+                toast.error('An unexpected error occurred. Please try again.');
+            }
         }
-    }
     setLoading(false);
   };
 
-  const fetchNextReel = async () => {
+  const fetchReel = async () => {
     try{
-        const url = constants.BASE_URL + '/hardyreels/next';
+        const url = constants.BASE_URL + '/otherreel/' + id;
         const response = await axios.get(url);
-        setNextReel(response.data.data.reel_id);
+        updateReelId(response.data.data.reel_id);
+        delete response.data.data.reel_id;
+        setReelForm(response.data.data);
     }catch(err){
         if (axios.isAxiosError(err) && err.response) {
             console.error(err.response.data);
@@ -62,33 +79,12 @@ const CreateReel: React.FC = () => {
             toast.error('An unexpected error occurred. Please try again.');
         }
     }
-  }
+  };
 
   useEffect(() => {
-    fetchNextReel();
+    fetchReel();
   }, []);
 
-  const resetForm = () => {
-    setReelForm({
-        makers_name: '',
-        model: '',
-        sub_model: '',
-        handle: '',
-        foot: '',
-        approximate_date: '',
-        tension_regultor: '',
-        size: '',
-        details: '',
-        condition: '',
-        cost_price: '',
-        add_date: '',
-        sold_price: '',
-        sold_date: '',
-        buyer_name: '',
-        buyer_email: '',
-        valuation: '',
-    });
-  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -100,10 +96,22 @@ const CreateReel: React.FC = () => {
 
   return (
     <>
-    <Breadcrumb pageName="Create Hardy Reel" backLink='/hardyreels/all' />
+    <Breadcrumb pageName="Edit Other Reel" backLink='/otherreels/all' createLink='/otherreels/create' />
+    <div>
+    {isNewCreated && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-2" role="alert">
+        Reel created successfully!
+        </div>
+    )}
+    {updated && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-2" role="alert">
+        Reel Updated successfully!
+        </div>
+    )}
+    </div>
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3">
         <form className="grid grid-cols-12 gap-4 p-4 mx-auto bg-white rounded-lg" onSubmit={submitReel}>
-            <div className="col-span-6 flex flex-col gap-2">
+        <div className="col-span-6 flex flex-col gap-2">
                 <div className='grid grid-cols-12 gap-4'>
                     <div className='col-span-12 flex flex-col gap-2 border-b'>
                         <label className="text-lg font-semibold text-gray-600">Reel Details</label>
@@ -114,7 +122,7 @@ const CreateReel: React.FC = () => {
                         type="text"
                         name="reel_id"
                         placeholder="Reel ID"
-                        value={nextReel}
+                        value={reelProtected.reel_id}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 disabled:bg-yellow-100 disabled:cursor-not-allowed"
                         disabled
                         />
@@ -225,8 +233,8 @@ const CreateReel: React.FC = () => {
                         <textarea
                         name="details"
                         placeholder="Details"
-                        onChange={handleInputChange}
                         value={reelForm.details}
+                        onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >{reelForm.details}</textarea>
                     </div>
@@ -322,13 +330,6 @@ const CreateReel: React.FC = () => {
                 </div>
             </div>
             <div className="col-span-12 flex justify-between mt-4">
-                <button
-                type="button"
-                onClick={resetForm}
-                className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
-                >
-                Reset
-                </button>
                 {error && <div className="text-red-500">{error.message+" : "+error.error}</div>}
                 <button
                 type="submit"
@@ -340,6 +341,7 @@ const CreateReel: React.FC = () => {
             </div>
         </form>
     </div>
+    <MediaGallery reel_id={id} />
     <ToastContainer />
     </>
   );

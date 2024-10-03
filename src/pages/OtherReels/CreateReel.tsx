@@ -35,9 +35,9 @@ const CreateReel: React.FC = () => {
     event.preventDefault();
     setLoading(true);
     try{
-        const url = constants.BASE_URL + '/create-hardyreel';
+        const url = constants.BASE_URL + '/create-otherreel';
         const response = await axios.post(url, reelForm);
-        navigate(`/hardyreels/edit/${response.data.data.id}?newCreated=true`);
+        navigate(`/otherreels/edit/${response.data.data.id}?newCreated=true`);
     }catch(err){
         if (axios.isAxiosError(err) && err.response) {
             setError(err.response.data);
@@ -51,7 +51,7 @@ const CreateReel: React.FC = () => {
 
   const fetchNextReel = async () => {
     try{
-        const url = constants.BASE_URL + '/hardyreels/next';
+        const url = constants.BASE_URL + '/otherreels/next';
         const response = await axios.get(url);
         setNextReel(response.data.data.reel_id);
     }catch(err){
@@ -100,7 +100,7 @@ const CreateReel: React.FC = () => {
 
   return (
     <>
-    <Breadcrumb pageName="Create Hardy Reel" backLink='/hardyreels/all' />
+    <Breadcrumb pageName="Create Other Reel" backLink='/otherreels/all' />
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3">
         <form className="grid grid-cols-12 gap-4 p-4 mx-auto bg-white rounded-lg" onSubmit={submitReel}>
             <div className="col-span-6 flex flex-col gap-2">
@@ -216,7 +216,6 @@ const CreateReel: React.FC = () => {
                         name="condition"
                         placeholder="Condition"
                         onChange={handleInputChange}
-                        value={reelForm.condition}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >{reelForm.condition}</textarea>
                     </div>
@@ -226,7 +225,6 @@ const CreateReel: React.FC = () => {
                         name="details"
                         placeholder="Details"
                         onChange={handleInputChange}
-                        value={reelForm.details}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >{reelForm.details}</textarea>
                     </div>

@@ -37,6 +37,9 @@ import EditEphemera from './pages/Ephemera/EditEphemera';
 import AllReels from './pages/HardyReels/AllReels';
 import CreateReel from './pages/HardyReels/CreateReel';
 import EditReel from './pages/HardyReels/EditReel';
+import AllOtherReels from './pages/OtherReels/AllReels';
+import CreateOtherReel from './pages/OtherReels/CreateReel';
+import EditOtherReel from './pages/OtherReels/EditReel';
 import AllLures from './pages/Lures/AllLures';
 import CreateLures from './pages/Lures/CreateLures';
 import EditLures from './pages/Lures/EditLures';
@@ -46,6 +49,13 @@ import EditRods from './pages/Rods/EditRods';
 import AllPennCatalogues from './pages/PennCatalogues/AllPennCatalogues';
 import CreatePennCatalogue from './pages/PennCatalogues/CreatePennCatalogue';
 import EditPennCatalogue from './pages/PennCatalogues/EditPennCatalogue';
+import AllTackles from './pages/OtherTackles/AllTackles';
+import CreateTackle from './pages/OtherTackles/CreateTackle';
+import EditTackle from './pages/OtherTackles/EditTackle';
+
+import AllInUseTackles from './pages/InUseTackles/AllTackles';
+import CreateInUseTackle from './pages/InUseTackles/CreateTackle';
+import EditInUseTackle from './pages/InUseTackles/EditTackle';
 
 
 function App() {
@@ -92,28 +102,47 @@ function App() {
           <>
             {/* Protected routes go here */}
             <Route index element={<><PageTitle title="Collection Dashboard | TailAdmin - Tailwind CSS Admin Dashboard Template" /> <ECommerce /></>} />
+
             <Route path="/books/all" element={<><PageTitle title="All Books | Collection Portal" /> <AllBooks /></>} />
             <Route path="/books/create" element={<><PageTitle title="Create Book | Collection Portal" /> <CreateBook /></>} />
             <Route path="/books/edit/:id" element={<><PageTitle title="Edit Book | Collection Portal" /> <EditBook /></>} />
             <Route path="/books/compare" element={<><PageTitle title="Compare Books | Collection Portal" /> <CompareBooks /></>} />
+
             <Route path="/books/sizes" element={<><PageTitle title="All Sizes | Collection Portal" /> <Sizes /></>} />
             <Route path="/books/size/edit/:id" element={<><PageTitle title="Edit Size | Collection Portal" /> <EditSize /></>} />
             <Route path="/books/size/create" element={<><PageTitle title="Create Size | Collection Portal" /> <CreateSize /></>} />
+
             <Route path="/ephemeras/all" element={<><PageTitle title="All Ephemeras | Collection Portal" /> <AllEphemeras /></>} />
             <Route path="/ephemeras/create" element={<><PageTitle title="Create Ephemera | Collection Portal" /> <CreateEphemera /></>} />
             <Route path="/ephemeras/edit/:id" element={<><PageTitle title="Edit Ephemera | Collection Portal" /> <EditEphemera /></>} />
+
             <Route path="/hardyreels/all" element={<><PageTitle title="All Hardy Reels | Collection Portal" /> <AllReels /></>} />
             <Route path="/hardyreels/create" element={<><PageTitle title="Create Hardy Reel | Collection Portal" /> <CreateReel /></>} />
             <Route path="/hardyreels/edit/:id" element={<><PageTitle title="Edit Hardy Reel | Collection Portal" /> <EditReel /></>} />
+
+            <Route path="/otherreels/all" element={<><PageTitle title="All Other Reels | Collection Portal" /> <AllOtherReels /></>} />
+            <Route path="/otherreels/create" element={<><PageTitle title="Create Other Reel | Collection Portal" /> <CreateOtherReel /></>} />
+            <Route path="/otherreels/edit/:id" element={<><PageTitle title="Edit Other Reel | Collection Portal" /> <EditOtherReel /></>} />
+
             <Route path="/lures/all" element={<><PageTitle title="All Lures | Collection Portal" /> <AllLures /></>} />
             <Route path="/lures/create" element={<><PageTitle title="Create Lures | Collection Portal" /> <CreateLures /></>} />
             <Route path="/lures/edit/:id" element={<><PageTitle title="Edit Lures | Collection Portal" /> <EditLures /></>} />
+
             <Route path="/rods/all" element={<><PageTitle title="All Rods | Collection Portal" /> <AllRods /></>} />
             <Route path="/rods/create" element={<><PageTitle title="Create Rods | Collection Portal" /> <CreateRods /></>} />
             <Route path="/rods/edit/:id" element={<><PageTitle title="Edit Rods | Collection Portal" /> <EditRods /></>} />
+
             <Route path="/penn-catalogues/all" element={<><PageTitle title="All Penn Catalogues | Collection Portal" /> <AllPennCatalogues /></>} />
             <Route path="/penn-catalogues/create" element={<><PageTitle title="Create Penn Catalogue | Collection Portal" /> <CreatePennCatalogue /></>} />
             <Route path="/penn-catalogues/edit/:id" element={<><PageTitle title="Edit Penn Catalogue | Collection Portal" /> <EditPennCatalogue /></>} />
+
+            <Route path="/othertackles/all" element={<><PageTitle title="All Other Tackles | Collection Portal" /> <AllTackles /></>} />
+            <Route path="/othertackles/create" element={<><PageTitle title="Create Other Tackle | Collection Portal" /> <CreateTackle /></>} />
+            <Route path="/othertackles/edit/:id" element={<><PageTitle title="Edit Other Tackle | Collection Portal" /> <EditTackle /></>} />
+
+            <Route path="/inusetackles/all" element={<><PageTitle title="All In Use Tackles | Collection Portal" /> <AllInUseTackles /></>} />
+            <Route path="/inusetackles/create" element={<><PageTitle title="Create In Use Tackle | Collection Portal" /> <CreateInUseTackle /></>} />
+            <Route path="/inusetackles/edit/:id" element={<><PageTitle title="Edit In Use Tackle | Collection Portal" /> <EditInUseTackle /></>} />
 
 
 

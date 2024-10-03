@@ -5,21 +5,22 @@ import constants from '../../Constants';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 
-const CreateReel: React.FC = () => {
+const CreateTackle: React.FC = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<any | null>(null);
-    const [sizes, setSizes] = useState<any[]>([]);
-    const [nextReel, setNextReel] = useState<any>(null);
-    const [reelForm, setReelForm] = useState({
+    const [nextTackles, setNextTackles] = useState<any>(null);
+    const [tackleForm, setTacklesForm] = useState({
         makers_name: '',
         model: '',
+        type:'',
         sub_model: '',
-        handle: '',
-        foot: '',
+        serial_no: '',
         approximate_date: '',
-        tension_regultor: '',
         size: '',
+        foot: '',
+        handle: '',
+        tension_regulator: '',
         details: '',
         condition: '',
         cost_price: '',
@@ -31,13 +32,13 @@ const CreateReel: React.FC = () => {
         valuation: '',
     });
 
-  const submitReel = async (event: React.FormEvent<HTMLFormElement>) => {
+  const submitTackles = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
     try{
-        const url = constants.BASE_URL + '/create-hardyreel';
-        const response = await axios.post(url, reelForm);
-        navigate(`/hardyreels/edit/${response.data.data.id}?newCreated=true`);
+        const url = constants.BASE_URL + '/create-inusetackle';
+        const response = await axios.post(url, tackleForm);
+        navigate(`/inusetackles/edit/${response.data.data.id}?newCreated=true`);
     }catch(err){
         if (axios.isAxiosError(err) && err.response) {
             setError(err.response.data);
@@ -49,11 +50,11 @@ const CreateReel: React.FC = () => {
     setLoading(false);
   };
 
-  const fetchNextReel = async () => {
+  const fetchNextTackles = async () => {
     try{
-        const url = constants.BASE_URL + '/hardyreels/next';
+        const url = constants.BASE_URL + '/inusetackles/next';
         const response = await axios.get(url);
-        setNextReel(response.data.data.reel_id);
+        setNextTackles(response.data.data.tackle_id);
     }catch(err){
         if (axios.isAxiosError(err) && err.response) {
             console.error(err.response.data);
@@ -65,18 +66,20 @@ const CreateReel: React.FC = () => {
   }
 
   useEffect(() => {
-    fetchNextReel();
+    fetchNextTackles();
   }, []);
 
   const resetForm = () => {
-    setReelForm({
+    setTacklesForm({
         makers_name: '',
         model: '',
+        type:'',
         sub_model: '',
-        handle: '',
+        serial_no: '',
         foot: '',
+        handle: '',
+        tension_regulator: '',
         approximate_date: '',
-        tension_regultor: '',
         size: '',
         details: '',
         condition: '',
@@ -92,7 +95,7 @@ const CreateReel: React.FC = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setReelForm((prevParams) => ({
+    setTacklesForm((prevParams) => ({
       ...prevParams,
       [name]: value,
     }));
@@ -100,21 +103,21 @@ const CreateReel: React.FC = () => {
 
   return (
     <>
-    <Breadcrumb pageName="Create Hardy Reel" backLink='/hardyreels/all' />
+    <Breadcrumb pageName="Create Tackles" backLink='/inusetackles/all' />
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3">
-        <form className="grid grid-cols-12 gap-4 p-4 mx-auto bg-white rounded-lg" onSubmit={submitReel}>
+        <form className="grid grid-cols-12 gap-4 p-4 mx-auto bg-white rounded-lg" onSubmit={submitTackles}>
             <div className="col-span-6 flex flex-col gap-2">
                 <div className='grid grid-cols-12 gap-4'>
                     <div className='col-span-12 flex flex-col gap-2 border-b'>
-                        <label className="text-lg font-semibold text-gray-600">Reel Details</label>
+                        <label className="text-lg font-semibold text-gray-600">Tackles Details</label>
                     </div>
                     <div className='col-span-3 flex flex-col gap-2'>
-                        <label className="text-sm font-semibold text-gray-600">Reel ID</label>
+                        <label className="text-sm font-semibold text-gray-600">Tackle ID</label>
                         <input
                         type="text"
-                        name="reel_id"
-                        placeholder="Reel ID"
-                        value={nextReel}
+                        name="tackle_id"
+                        placeholder="Tackle ID"
+                        value={nextTackles}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 disabled:bg-yellow-100 disabled:cursor-not-allowed"
                         disabled
                         />
@@ -125,7 +128,7 @@ const CreateReel: React.FC = () => {
                         type="text"
                         name="makers_name"
                         placeholder="Makers Name"
-                        value={reelForm.makers_name}
+                        value={tackleForm.makers_name}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-3 font-bold text-lg rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -136,7 +139,7 @@ const CreateReel: React.FC = () => {
                         type="text"
                         name="model"
                         placeholder="Model"
-                        value={reelForm.model}
+                        value={tackleForm.model}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -148,7 +151,7 @@ const CreateReel: React.FC = () => {
                         type="text"
                         name="sub_model"
                         placeholder="Sub Model"
-                        value={reelForm.sub_model}
+                        value={tackleForm.sub_model}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -160,7 +163,7 @@ const CreateReel: React.FC = () => {
                         type="date"
                         name="approximate_date"
                         placeholder="Approximate Date"
-                        value={reelForm.approximate_date}
+                        value={tackleForm.approximate_date}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -172,18 +175,51 @@ const CreateReel: React.FC = () => {
                         type="text"
                         name="size"
                         placeholder="Size"
-                        value={reelForm.size}
+                        value={tackleForm.size}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-8 flex flex-col gap-2'>
+                    <div className='col-span-4 flex flex-col gap-2'>
+                        <label className="text-sm font-semibold text-gray-600">Serial Number</label>
+                        <input
+                        type="text"
+                        name="serial_no"
+                        placeholder="Serial Number"
+                        value={tackleForm.serial_no}
+                        onChange={handleInputChange}
+                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+                    <div className='col-span-4 flex flex-col gap-2'>
+                        <label className="text-sm font-semibold text-gray-600">Type</label>
+                        <select
+                            name="type"
+                            onChange={handleInputChange}
+                            required
+                            className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                            <option value="">Select</option>
+                            <option value="Cast holder ">Cast holder </option>
+                            <option value="Creel ">Creel </option>
+                            <option value="Flies ">Flies </option>
+                            <option value="Fly box ">Fly box </option>
+                            <option value="Gaff ">Gaff </option>
+                            <option value="Hook">Hook</option>
+                            <option value="Line/trace">Line/trace</option>
+                            <option value="Lure ">Lure </option>
+                            <option value="Net ">Net </option>
+                            <option value="Other">Other</option>
+                        </select>
+
+                    </div>
+                    <div className='col-span-12 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Foot</label>
                         <input
                         type="text"
                         name="foot"
                         placeholder="Foot"
-                        value={reelForm.foot}
+                        value={tackleForm.foot}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -194,7 +230,7 @@ const CreateReel: React.FC = () => {
                         type="text"
                         name="handle"
                         placeholder="Handle"
-                        value={reelForm.handle}
+                        value={tackleForm.handle}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -203,9 +239,9 @@ const CreateReel: React.FC = () => {
                         <label className="text-sm font-semibold text-gray-600">Tension Regultor</label>
                         <input
                         type="text"
-                        name="tension_regultor"
-                        placeholder="Tension Regultor"
-                        value={reelForm.tension_regultor}
+                        name="tension_regulator"
+                        placeholder="Tension Regulator"
+                        value={tackleForm.tension_regulator}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -216,9 +252,8 @@ const CreateReel: React.FC = () => {
                         name="condition"
                         placeholder="Condition"
                         onChange={handleInputChange}
-                        value={reelForm.condition}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        >{reelForm.condition}</textarea>
+                        >{tackleForm.condition}</textarea>
                     </div>
                     <div className='col-span-12 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Details</label>
@@ -226,9 +261,8 @@ const CreateReel: React.FC = () => {
                         name="details"
                         placeholder="Details"
                         onChange={handleInputChange}
-                        value={reelForm.details}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        >{reelForm.details}</textarea>
+                        >{tackleForm.details}</textarea>
                     </div>
                 </div>
             </div>
@@ -246,7 +280,7 @@ const CreateReel: React.FC = () => {
                         <input
                         type="date"
                         name="add_date"
-                        value={reelForm.add_date}
+                        value={tackleForm.add_date}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -257,7 +291,7 @@ const CreateReel: React.FC = () => {
                         type="number"
                         name="cost_price"
                         placeholder="Cost"
-                        value={reelForm.cost_price}
+                        value={tackleForm.cost_price}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -268,7 +302,7 @@ const CreateReel: React.FC = () => {
                         type="text"
                         name="valuation"
                         placeholder="Valuation"
-                        value={reelForm.valuation}
+                        value={tackleForm.valuation}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -278,7 +312,7 @@ const CreateReel: React.FC = () => {
                         <input
                         type="date"
                         name="sold_date"
-                        value={reelForm.sold_date}
+                        value={tackleForm.sold_date}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -289,7 +323,7 @@ const CreateReel: React.FC = () => {
                         type="number"
                         name="sold_price"
                         placeholder="Sold Price"
-                        value={reelForm.sold_price}
+                        value={tackleForm.sold_price}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -303,7 +337,7 @@ const CreateReel: React.FC = () => {
                         type="text"
                         name="buyer_name"
                         placeholder="Buyer Name"
-                        value={reelForm.buyer_name}
+                        value={tackleForm.buyer_name}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -314,7 +348,7 @@ const CreateReel: React.FC = () => {
                         type="email"
                         name="buyer_email"
                         placeholder="Buyer Email"
-                        value={reelForm.buyer_email}
+                        value={tackleForm.buyer_email}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -345,4 +379,4 @@ const CreateReel: React.FC = () => {
   );
 };
 
-export default CreateReel;
+export default CreateTackle;
