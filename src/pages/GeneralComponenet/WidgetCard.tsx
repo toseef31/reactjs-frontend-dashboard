@@ -20,15 +20,14 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        // Construct the API query based on the parameter
         const fetchData = async () => {
             try {
                 let url = constants.BASE_URL + "/dashboard";
                 if (parameter) {
-                    url += `?${parameter.split(',').map(param => `${param}=1`).join('&')}`; // For example: ?users=1&books=1
+                    url += `?${parameter.split(',').map(param => `${param}=1`).join('&')}`;
                 }
                 const response = await axios.get(url);
-                setWidgetData(response.data.data); // Assuming API returns data in `data` object
+                setWidgetData(response.data.data);
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching widget data", error);
@@ -51,115 +50,117 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
     return (
         <div className="container mx-auto my-2">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Users Widget */}
                 {widgetData.users && (
                     <div className="bg-white shadow-lg rounded-lg p-6">
                         <h2 className="text-xl font-bold mb-4">Users</h2>
-                        <p className="text-gray-700 text-2xl font-semibold">
+                        <p className="text-gray-700 text-lg font-semibold">
                             Count: {widgetData.users.count}
                         </p>
                     </div>
                 )}
 
-                {/* Hardy Reels Widget */}
                 {widgetData.hardy_reels && (
                     <div className="bg-white shadow-lg rounded-lg p-6">
                         <h2 className="text-xl font-bold mb-4">Hardy Reels</h2>
-                        <p className="text-gray-700 text-2xl font-semibold">
+                        <p className="text-gray-600">
+                            Next ID: <span className="text-lg font-bold">{widgetData.hardy_reels.next_id}</span>
+                        </p>
+                        <p className="text-gray-700 text-lg font-semibold">
                             Count: {widgetData.hardy_reels.count || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Cost Price: ${widgetData.hardy_reels.total_cost_price || 0}
+                            Total Cost: ${widgetData.hardy_reels.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
                         </p>
                         <p className="text-gray-600">
-                            Total Valuation Price: ${widgetData.hardy_reels.total_valuation_price || 0}
+                            Total Valuation Cost: ${widgetData.hardy_reels.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
                         </p>
-                        <p className="text-gray-600">Next ID: {widgetData.hardy_reels.next_id}</p>
                     </div>
                 )}
 
-                
-                {/* Lures Widget */}
                 {widgetData.lures && (
                     <div className="bg-white shadow-lg rounded-lg p-6">
                         <h2 className="text-xl font-bold mb-4">Lures</h2>
-                        <p className="text-gray-700 text-2xl font-semibold">
+                        <p className="text-gray-600">
+                            Next ID: <span className="text-lg font-bold">{widgetData.lures.next_id}</span>
+                        </p>
+                        <p className="text-gray-700 text-lg font-semibold">
                             Count: {widgetData.lures.count || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Cost Price: ${widgetData.lures.total_cost_price || 0}
+                            Total Cost: ${widgetData.lures.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
                         </p>
                         <p className="text-gray-600">
-                            Total Valuation Price: ${widgetData.lures.total_valuation_price || 0}
+                            Total Valuation Cost: ${widgetData.lures.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
                         </p>
-                        <p className="text-gray-600">Next ID: {widgetData.lures.next_id}</p>
                     </div>
                 )}
 
-                {/* Lures Widget */}
                 {widgetData.rods && (
                     <div className="bg-white shadow-lg rounded-lg p-6">
                         <h2 className="text-xl font-bold mb-4">Rods</h2>
-                        <p className="text-gray-700 text-2xl font-semibold">
+                        <p className="text-gray-600">
+                            Next ID: <span className="text-lg font-bold">{widgetData.rods.next_id}</span>
+                        </p>
+                        <p className="text-gray-700 text-lg font-semibold">
                             Count: {widgetData.rods.count || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Cost Price: ${widgetData.rods.total_cost_price || 0}
+                            Total Cost: ${widgetData.rods.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
                         </p>
                         <p className="text-gray-600">
-                            Total Valuation Price: ${widgetData.rods.total_valuation_price || 0}
+                            Total Valuation Cost: ${widgetData.rods.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
                         </p>
-                        <p className="text-gray-600">Next ID: {widgetData.rods.next_id}</p>
                     </div>
                 )}
 
-                {/* Lures Widget */}
                 {widgetData.penncatalogue && (
                     <div className="bg-white shadow-lg rounded-lg p-6">
                         <h2 className="text-xl font-bold mb-4">Penn Catalogues</h2>
-                        <p className="text-gray-700 text-2xl font-semibold">
+                        <p className="text-gray-700 text-lg font-semibold">
                             Count: {widgetData.penncatalogue.count || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Cost Price: ${widgetData.penncatalogue.total_cost_price || 0}
+                            Total Cost: ${widgetData.penncatalogue.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
                         </p>
                         <p className="text-gray-600">
-                            Total Valuation Price: ${widgetData.penncatalogue.total_valuation_price || 0}
+                            Total Valuation Cost: ${widgetData.penncatalogue.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
                         </p>
                     </div>
                 )}
 
-                {/* Books Widget */}
                 {widgetData.books && (
                     <div className="bg-white shadow-lg rounded-lg p-6">
                         <h2 className="text-xl font-bold mb-4">Books</h2>
-                        <p className="text-gray-700 text-2xl font-semibold">
+                        <p className="text-gray-600">
+                            Next ID: <span className="text-lg font-bold">{widgetData.books.next_id}</span>
+                        </p>
+                        <p className="text-gray-700 text-lg font-semibold">
                             Count: {widgetData.books.count || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Cost Price: ${widgetData.books.total_cost_price || 0}
+                            Total Cost: ${widgetData.books.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
                         </p>
                         <p className="text-gray-600">
-                            Total Valuation Price: ${widgetData.books.total_valuation_price || 0}
+                            Total Valuation Cost: ${widgetData.books.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
                         </p>
-                        <p className="text-gray-600">Next ID: {widgetData.books.next_id}</p>
                     </div>
                 )}
 
-                {/* Ephemera Widget */}
                 {widgetData.ephemera && (
                     <div className="bg-white shadow-lg rounded-lg p-6">
                         <h2 className="text-xl font-bold mb-4">Ephemera</h2>
-                        <p className="text-gray-700 text-2xl font-semibold">
+                        <p className="text-gray-600">
+                            Next ID: <span className="text-lg font-bold">{widgetData.ephemera.next_id}</span>
+                        </p>
+                        <p className="text-gray-700 text-lg font-semibold">
                             Count: {widgetData.ephemera.count || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Cost Price: ${widgetData.ephemera.total_cost_price || 0}
+                            Total Cost: ${widgetData.ephemera.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
                         </p>
                         <p className="text-gray-600">
-                            Total Valuation Price: ${widgetData.ephemera.total_valuation_price || 0}
+                            Total Valuation Cost: ${widgetData.ephemera.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
                         </p>
-                        <p className="text-gray-600">Next ID: {widgetData.ephemera.next_id}</p>
                     </div>
                 )}
             </div>

@@ -170,7 +170,7 @@ const AllRods: React.FC = () => {
           <input
             type="text"
             name="cost_price"
-            placeholder="Price"
+            placeholder="Cost"
             value={searchParams.cost_price}
             onChange={handleInputChange}
             className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -178,7 +178,7 @@ const AllRods: React.FC = () => {
           <input
             type="text"
             name="sold_price"
-            placeholder="Sale Price"
+            placeholder="Sale Cost"
             value={searchParams.sold_price}
             onChange={handleInputChange}
             className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -207,8 +207,8 @@ const AllRods: React.FC = () => {
               <th className="border-b border-gray-300 p-2 w-30">Model</th>
               <th className="border-b border-gray-300 p-2 w-30">Sub Model</th>
               <th className="border-b border-gray-300 p-2 w-30">Size</th>
-              <th className="border-b border-gray-300 p-2 w-20">Price</th>
-              <th className="border-b border-gray-300 p-2 w-30">Sale Price</th>
+              <th className="border-b border-gray-300 p-2 w-20">Cost</th>
+              <th className="border-b border-gray-300 p-2 w-30 hidden">Sale Cost</th>
               <th className="border-b border-gray-300 p-2 w-20">Action</th>
             </tr>
           </thead>
@@ -233,8 +233,8 @@ const AllRods: React.FC = () => {
                 <td className="border-b border-gray-50 p-1">{rods.model}</td>
                 <td className="border-b border-gray-50 p-1">{rods.sub_model}</td>
                 <td className="border-b border-gray-50 p-1">{rods.size}</td>
-                <td className="border-b border-gray-50 p-1">{rods.cost_price}</td>
-                <td className="border-b border-gray-50 p-1">{rods.sold_price}</td>
+                <td className="border-b border-gray-50 p-1">{Math.floor(rods.cost_price)}</td>
+                <td className="border-b border-gray-50 p-1 hidden">{rods.sold_price}</td>
                 <td className="border-b border-gray-50 p-1 w-30 pr-5">
                   <Link to={`/rods/edit/${rods.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
                   <span className="mx-2"></span>

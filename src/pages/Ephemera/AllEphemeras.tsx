@@ -121,7 +121,7 @@ const AllEphemeras: React.FC = () => {
 
   return (
     <>
-      <Breadcrumb pageName="All Ephemeras" backLink="/" createLink='/ephemeras/create' />
+      <Breadcrumb pageName="All Ephemera" backLink="/" createLink='/ephemeras/create' />
       <WidgetCard parameter='ephemera'/>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3">
         <form className="grid grid-cols-12 gap-1" onSubmit={handleSearch}>
@@ -168,7 +168,7 @@ const AllEphemeras: React.FC = () => {
           <input
             type="text"
             name="cost_price"
-            placeholder="Price"
+            placeholder="Cost"
             value={searchParams.cost_price}
             onChange={handleInputChange}
             className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -197,7 +197,7 @@ const AllEphemeras: React.FC = () => {
               <th className="border-b border-gray-300 p-2">Details</th>
               <th className="border-b border-gray-300 p-2 w-40">Size</th>
               <th className="border-b border-gray-300 p-2 w-40">Condition</th>
-              <th className="border-b border-gray-300 p-2 w-20">Price</th>
+              <th className="border-b border-gray-300 p-2 w-20">Cost</th>
               <th className="border-b border-gray-300 p-2">Action</th>
             </tr>
           </thead>
@@ -222,7 +222,7 @@ const AllEphemeras: React.FC = () => {
                 <td className="border-b border-gray-50 p-1">{ephemera.details}</td>
                 <td className="border-b border-gray-50 p-1">{ephemera.size}</td>
                 <td className="border-b border-gray-50 p-1">{ephemera.condition}</td>
-                <td className="border-b border-gray-50 p-1">{ephemera.cost_price}</td>
+                <td className="border-b border-gray-50 p-1">{Math.floor(ephemera.cost_price)}</td>
                 <td className="border-b border-gray-50 p-1 w-60 pr-5">
                   <Link to={`/ephemeras/edit/${ephemera.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
                   <span className="mx-2"></span>

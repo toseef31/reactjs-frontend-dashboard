@@ -56,7 +56,7 @@ const TableTwo = () => {
           <p className="font-medium">Category</p>
         </div>
         <div className="col-span-1 flex items-center">
-          <p className="font-medium">Price</p>
+          <p className="font-medium">Cost</p>
         </div>
         <div className="col-span-1 flex items-center">
           <p className="font-medium">Sold</p>

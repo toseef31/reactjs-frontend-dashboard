@@ -158,7 +158,7 @@ const AllPennCatalogues: React.FC = () => {
           <input
             type="text"
             name="cost_price"
-            placeholder="Price"
+            placeholder="Cost"
             value={searchParams.cost_price}
             onChange={handleInputChange}
             className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -186,7 +186,7 @@ const AllPennCatalogues: React.FC = () => {
               <th className="border-b border-gray-300 p-2 w-30">Year</th>
               <th className="border-b border-gray-300 p-2 w-30">Cat</th>
               <th className="border-b border-gray-300 p-2 w-30">Condition</th>
-              <th className="border-b border-gray-300 p-2 w-20">Price</th>
+              <th className="border-b border-gray-300 p-2 w-20">Cost</th>
               <th className="border-b border-gray-300 p-2 w-20">Action</th>
             </tr>
           </thead>
@@ -210,7 +210,7 @@ const AllPennCatalogues: React.FC = () => {
                 <td className="border-b border-gray-50 p-1">{pennCatalogue.year}</td>
                 <td className="border-b border-gray-50 p-1">{pennCatalogue.catalogue_no}</td>
                 <td className="border-b border-gray-50 p-1">{pennCatalogue.condition}</td>
-                <td className="border-b border-gray-50 p-1">{pennCatalogue.cost_price}</td>
+                <td className="border-b border-gray-50 p-1">{Math.floor(pennCatalogue.cost_price)}</td>
                 <td className="border-b border-gray-50 p-1 w-30 pr-5">
                   <Link to={`/penn-catalogues/edit/${pennCatalogue.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
                   <span className="mx-2"></span>

@@ -46,15 +46,15 @@ const CompareBooks = () => {
                             <p className="text-gray-700 mb-2"><span className="font-medium text-primary">Status:</span> {
                                     book.status == 'for_sale' ? 'For Sale' : book.status == 'collection' ? 'Collection' : book.status == 'sold' ? 'Sold' : 'N/A'}</p>
                             <hr />
-                            <p className="text-gray-700 mt-2"><span className="font-medium text-primary">Cost Price:</span> {book.cost_price ? `$${book.cost_price}` : 'N/A'}</p>
+                            <p className="text-gray-700 mt-2"><span className="font-medium text-primary">Cost:</span> {book.cost_price ? `$${book.cost_price}` : 'N/A'}</p>
                             <p className="text-gray-700"><span className="font-medium text-primary">Added Date:</span> {book.add_date}</p>
                             <p className="text-gray-700"><span className="font-medium text-primary">Valuation:</span> {book.valuation ? `$${book.valuation}` : 'N/A'}</p>
-                            <p className="text-gray-700"><span className="font-medium text-primary">Sold Price:</span> {book.sold_price ? `$${book.sold_price}` : 'N/A'}</p>
+                            <p className="text-gray-700"><span className="font-medium text-primary">Sold Cost:</span> {book.sold_price ? `$${book.sold_price}` : 'N/A'}</p>
                             <p className="text-gray-700 mb-2"><span className="font-medium text-primary">Sold Date:</span> {book.sold_date}</p>
                             <hr />
                             <p className="text-gray-700 mt-2"><span className="font-medium text-primary">Book Condition:</span> {book.book_condition}</p>
                             <p className="text-gray-700 mt-2"><span className="font-medium text-primary">Jacket Condition:</span> {book.jacket_condition}</p>
-                            <p className="text-gray-700 mt-2"><span className="font-medium text-primary">Comment:</span> {book.comment}</p>
+                            <p className="text-gray-700 mt-2"><span className="font-medium text-primary">Comments:</span> {book.comment}</p>
                         </div>
                         <div className="flex justify-start items-center flex-wrap gap-2 my-3">
                             {book.book_media.map((image: any) => (

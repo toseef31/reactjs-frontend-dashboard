@@ -230,8 +230,8 @@ const CreateBook: React.FC = () => {
                             ))}
                         </select>
                     </div>
-                    <div className='col-span-12 flex flex-col gap-2'>
-                        <label className="text-sm font-semibold text-gray-600">Size</label>
+                    <div className='col-span-12 flex flex-col gap-2 hidden'>
+                        <label className="text-sm font-semibold text-gray-600">Status</label>
                         <select
                         name="size"
                         onChange={handleInputChange}
@@ -266,10 +266,10 @@ const CreateBook: React.FC = () => {
                         />
                         </div>
                         <div className="col-span-12 flex flex-col gap-2">
-                        <label className="text-sm font-semibold text-gray-600">Comment</label>
+                        <label className="text-sm font-semibold text-gray-600">Comments</label>
                         <textarea
                             name="comment"
-                            placeholder="Comment"
+                            placeholder="Comments"
                             onChange={handleInputChange}
                             value={bookForm.comment} // Use value prop here
                             className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -318,7 +318,7 @@ const CreateBook: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-6 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2 hidden'>
                         <label className="text-sm font-semibold text-gray-600">Date Sold</label>
                         <input
                         type="date"
@@ -328,21 +328,21 @@ const CreateBook: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-6 flex flex-col gap-2'>
-                        <label className="text-sm font-semibold text-gray-600">Sold Price</label>
+                    <div className='col-span-6 flex flex-col gap-2 hidden'>
+                        <label className="text-sm font-semibold text-gray-600">Sold Cost</label>
                         <input
                         type="number"
                         name="sold_price"
-                        placeholder="Sold Price"
+                        placeholder="Sold Cost"
                         value={bookForm.sold_price}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-12 flex flex-col gap-2 border-b'>
+                    <div className='col-span-12 flex flex-col gap-2 border-b hidden'>
                         <label className="text-lg font-semibold text-gray-600">Customer Information</label>
                     </div>
-                    <div className='col-span-6 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2 hidden'>
                         <label className="text-sm font-semibold text-gray-600">Sold To</label>
                         <input
                         type="text"
@@ -353,7 +353,7 @@ const CreateBook: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-6 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2 hidden'>
                         <label className="text-sm font-semibold text-gray-600">Buyer Email</label>
                         <input
                         type="email"

@@ -208,11 +208,11 @@ const CreateReel: React.FC = () => {
                         />
                     </div>
                     <div className='col-span-6 flex flex-col gap-2'>
-                        <label className="text-sm font-semibold text-gray-600">Tension Regultor</label>
+                        <label className="text-sm font-semibold text-gray-600">Tension Regulator</label>
                         <input
                         type="text"
                         name="tension_regultor"
-                        placeholder="Tension Regultor"
+                        placeholder="Tension Regulator"
                         value={reelForm.tension_regultor}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -281,7 +281,7 @@ const CreateReel: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-6 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2 hidden'>
                         <label className="text-sm font-semibold text-gray-600">Date Sold</label>
                         <input
                         type="date"
@@ -291,21 +291,21 @@ const CreateReel: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-6 flex flex-col gap-2'>
-                        <label className="text-sm font-semibold text-gray-600">Sold Price</label>
+                    <div className='col-span-6 flex flex-col gap-2 hidden'>
+                        <label className="text-sm font-semibold text-gray-600">Sold Cost</label>
                         <input
                         type="number"
                         name="sold_price"
-                        placeholder="Sold Price"
+                        placeholder="Sold Cost"
                         value={reelForm.sold_price}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-12 flex flex-col gap-2 border-b'>
+                    <div className='col-span-12 flex flex-col gap-2 border-b hidden'>
                         <label className="text-lg font-semibold text-gray-600">Customer Information</label>
                     </div>
-                    <div className='col-span-6 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2 hidden'>
                         <label className="text-sm font-semibold text-gray-600">Sold To</label>
                         <input
                         type="text"
@@ -316,7 +316,7 @@ const CreateReel: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-6 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2 hidden'>
                         <label className="text-sm font-semibold text-gray-600">Buyer Email</label>
                         <input
                         type="email"

@@ -170,7 +170,7 @@ const AllLures: React.FC = () => {
           <input
             type="text"
             name="cost_price"
-            placeholder="Price"
+            placeholder="Cost"
             value={searchParams.cost_price}
             onChange={handleInputChange}
             className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -207,8 +207,8 @@ const AllLures: React.FC = () => {
               <th className="border-b border-gray-300 p-2 w-30">Model</th>
               <th className="border-b border-gray-300 p-2 w-30">Sub Model</th>
               <th className="border-b border-gray-300 p-2 w-30">Size</th>
-              <th className="border-b border-gray-300 p-2 w-20">Price</th>
               <th className="border-b border-gray-300 p-2 w-30">Valuation</th>
+              <th className="border-b border-gray-300 p-2 w-20">Cost</th>
               <th className="border-b border-gray-300 p-2 w-20">Action</th>
             </tr>
           </thead>
@@ -233,8 +233,8 @@ const AllLures: React.FC = () => {
                 <td className="border-b border-gray-50 p-1">{lures.model}</td>
                 <td className="border-b border-gray-50 p-1">{lures.sub_model}</td>
                 <td className="border-b border-gray-50 p-1">{lures.size}</td>
-                <td className="border-b border-gray-50 p-1">{lures.cost_price}</td>
                 <td className="border-b border-gray-50 p-1">{lures.valuation}</td>
+                <td className="border-b border-gray-50 p-1">{Math.floor(lures.cost_price)}</td>
                 <td className="border-b border-gray-50 p-1 w-30 pr-5">
                   <Link to={`/lures/edit/${lures.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
                   <span className="mx-2"></span>

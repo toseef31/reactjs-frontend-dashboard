@@ -167,6 +167,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }`}
                       >
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
+                        <li>
+                            <NavLink
+                              to="/books/all"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                            >
+                              All Books
+                            </NavLink>
+                          </li>
                           <li>
                             <NavLink
                               to="/books/create"
@@ -178,17 +189,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               Create
                             </NavLink>
                           </li>
-                          <li>
-                            <NavLink
-                              to="/books/all"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
-                              }
-                            >
-                              All Books
-                            </NavLink>
-                          </li>
+
                           <li>
                             <NavLink
                               to="/books/sizes"
@@ -230,7 +231,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }}
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-loader"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>
-                        Ephemeras
+                        Ephemera
                         <svg
                           className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
                             open && 'rotate-180'
@@ -251,6 +252,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }`}
                       >
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
+                        <li>
+                            <NavLink
+                              to="/ephemeras/all"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                            >
+                              All Ephemera
+                            </NavLink>
+                          </li>
                           <li>
                             <NavLink
                               to="/ephemeras/create"
@@ -260,17 +272,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               }
                             >
                               Create
-                            </NavLink>
-                          </li>
-                          <li>
-                            <NavLink
-                              to="/ephemeras/all"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
-                              }
-                            >
-                              All Ephemeras
                             </NavLink>
                           </li>
                         </ul>
@@ -324,17 +325,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }`}
                       >
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
-                          <li>
-                            <NavLink
-                              to="/hardyreels/create"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
-                              }
-                            >
-                              Create
-                            </NavLink>
-                          </li>
+
                           <li>
                             <NavLink
                               to="/hardyreels/all"
@@ -344,6 +335,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               }
                             >
                               All Hardy Reels
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink
+                              to="/hardyreels/create"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                            >
+                              Create
                             </NavLink>
                           </li>
                         </ul>
@@ -398,17 +400,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }`}
                       >
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
-                          <li>
-                            <NavLink
-                              to="/otherreels/create"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
-                              }
-                            >
-                              Create
-                            </NavLink>
-                          </li>
+
                           <li>
                             <NavLink
                               to="/otherreels/all"
@@ -418,6 +410,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               }
                             >
                               All Other Reels
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink
+                              to="/otherreels/create"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                            >
+                              Create
                             </NavLink>
                           </li>
                         </ul>
@@ -472,17 +475,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }`}
                       >
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
-                          <li>
-                            <NavLink
-                              to="/lures/create"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
-                              }
-                            >
-                              Create
-                            </NavLink>
-                          </li>
+
                           <li>
                             <NavLink
                               to="/lures/all"
@@ -492,6 +485,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               }
                             >
                               All Lures
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink
+                              to="/lures/create"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                            >
+                              Create
                             </NavLink>
                           </li>
                         </ul>
@@ -544,17 +548,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }`}
                       >
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
-                          <li>
-                            <NavLink
-                              to="/rods/create"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
-                              }
-                            >
-                              Create
-                            </NavLink>
-                          </li>
+
                           <li>
                             <NavLink
                               to="/rods/all"
@@ -564,6 +558,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               }
                             >
                               All Rods
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink
+                              to="/rods/create"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                            >
+                              Create
                             </NavLink>
                           </li>
                         </ul>
@@ -616,17 +621,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }`}
                       >
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
-                          <li>
-                            <NavLink
-                              to="/othertackles/create"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
-                              }
-                            >
-                              Create
-                            </NavLink>
-                          </li>
+
                           <li>
                             <NavLink
                               to="/othertackles/all"
@@ -636,6 +631,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               }
                             >
                               All Tackle
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink
+                              to="/othertackles/create"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                            >
+                              Create
                             </NavLink>
                           </li>
                         </ul>
@@ -688,17 +694,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }`}
                       >
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
-                          <li>
-                            <NavLink
-                              to="/inusetackles/create"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
-                              }
-                            >
-                              Create
-                            </NavLink>
-                          </li>
+
                           <li>
                             <NavLink
                               to="/inusetackles/all"
@@ -708,6 +704,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               }
                             >
                               All Tackles
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink
+                              to="/inusetackles/create"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                            >
+                              Create
                             </NavLink>
                           </li>
                         </ul>
@@ -762,17 +769,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }`}
                       >
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
-                          <li>
-                            <NavLink
-                              to="/penn-catalogues/create"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
-                              }
-                            >
-                              Create
-                            </NavLink>
-                          </li>
+
                           <li>
                             <NavLink
                               to="/penn-catalogues/all"
@@ -782,6 +779,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               }
                             >
                               All Penn Catalogues
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink
+                              to="/penn-catalogues/create"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                            >
+                              Create
                             </NavLink>
                           </li>
                         </ul>
@@ -891,17 +899,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }`}
                       >
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
-                          <li>
-                            <NavLink
-                              to="/users/create"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
-                              }
-                            >
-                              Create
-                            </NavLink>
-                          </li>
+
                           <li>
                             <NavLink
                               to="/users/all"
@@ -911,6 +909,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               }
                             >
                               All Users
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink
+                              to="/users/create"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                            >
+                              Create
                             </NavLink>
                           </li>
                         </ul>
