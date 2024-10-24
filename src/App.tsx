@@ -56,6 +56,9 @@ import EditTackle from './pages/OtherTackles/EditTackle';
 import AllInUseTackles from './pages/InUseTackles/AllTackles';
 import CreateInUseTackle from './pages/InUseTackles/CreateTackle';
 import EditInUseTackle from './pages/InUseTackles/EditTackle';
+import Types from './pages/EphemeraTypes/Types';
+import CreateType from './pages/EphemeraTypes/CreateType';
+import EditType from './pages/EphemeraTypes/EditType';
 
 
 function App() {
@@ -115,6 +118,10 @@ function App() {
             <Route path="/ephemeras/all" element={<><PageTitle title="All Ephemeras | Collection Portal" /> <AllEphemeras /></>} />
             <Route path="/ephemeras/create" element={<><PageTitle title="Create Ephemera | Collection Portal" /> <CreateEphemera /></>} />
             <Route path="/ephemeras/edit/:id" element={<><PageTitle title="Edit Ephemera | Collection Portal" /> <EditEphemera /></>} />
+
+            <Route path="/ephemera-types" element={<><PageTitle title="All Types | Collection Portal" /> <Types /></>} />
+            <Route path="/ephemera-types/edit/:id" element={<><PageTitle title="Edit Type | Collection Portal" /> <EditType /></>} />
+            <Route path="/ephemera-types/create" element={<><PageTitle title="Create Type | Collection Portal" /> <CreateType /></>} />
 
             <Route path="/hardyreels/all" element={<><PageTitle title="All Hardy Reels | Collection Portal" /> <AllReels /></>} />
             <Route path="/hardyreels/create" element={<><PageTitle title="Create Hardy Reel | Collection Portal" /> <CreateReel /></>} />

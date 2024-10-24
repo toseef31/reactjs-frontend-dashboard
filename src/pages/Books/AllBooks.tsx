@@ -227,62 +227,59 @@ const AllBooks: React.FC = () => {
       <div className="w-full overflow-x-auto rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3 mt-2">
         {/* Table and Pagination */}
         <table className="min-w-full border-collapse border border-gray-200 rounded-md">
-          <thead className="bg-gray-100 text-left text-gray-600">
-            {/* Table Header */}
-            <tr className="py-2">
-              <th className="border-b border-gray-300 p-2 w-10 pl-4">&nbsp;</th>
-              <th className="border-b border-gray-300 p-2 w-40">Book ID</th>
-              <th className="border-b border-gray-300 p-2">Book Name</th>
-              <th className="border-b border-gray-300 p-2 w-40">Author</th>
-              <th className="border-b border-gray-300 p-2 w-40">Publisher</th>
-              <th className="border-b border-gray-300 p-2 w-20">Year</th>
-              <th className="border-b border-gray-300 p-2 w-40">Edition</th>
-              <th className="border-b border-gray-300 p-2">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-          {loading ? (
-            <tr>
-                <td colSpan={7} className="text-center">
-                Loading...
-                </td>
-            </tr>
-            ) : error ? (
-            <tr>
-                <td colSpan={7} className="text-center">
-                Error: {error.message}
-                </td>
-            </tr>
-            ) : null}
-            {books.map((book) => (
-              <tr className="hover:bg-gray-50" key={book.id}>
-                {/* Table Data */}
-                <td className="border-b border-gray-50 p-1 w-10 pl-4">
-                  <input
-                    type="checkbox"
-                    className="w-4 h-4"
-                    name="id"
-                    value={book.id}
-                    onChange={() => handleCheckboxChange(book.id)}
-                  />
-                </td>
-                <td className="border-b border-gray-50 p-1">{book.book_id}</td>
-                <td className="border-b border-gray-50 p-1">{book.title}</td>
-                <td className="border-b border-gray-50 p-1">{book.author}</td>
-                <td className="border-b border-gray-50 p-1">{book.publisher}</td>
-                <td className="border-b border-gray-50 p-1">{book.publication_year}</td>
-                <td className="border-b border-gray-50 p-1">{book.edition}</td>
-                <td className="border-b border-gray-50 p-1 w-60 pr-5">
-                  <Link to={`/books/edit/${book.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
-                  <span className="mx-2"></span>
-                  <button onClick={() => duplicateBook(book.id)} className="text-green-500 font-bold hover:underline">Duplicate</button>
-                  <span className="mx-2"></span>
-                  <button onClick={() => deleteBook(book.id)} className="text-red-500 font-bold">Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+  <thead className="bg-gray-100 text-left text-gray-600">
+    <tr className="py-2">
+      <th className="border-b border-gray-300 p-2 w-10 pl-4">&nbsp;</th>
+      <th className="border-b border-gray-300 p-2 w-10"></th>
+      <th className="border-b border-gray-300 p-2 w-40">Book ID</th>
+      <th className="border-b border-gray-300 p-2">Book Name</th>
+      <th className="border-b border-gray-300 p-2 w-40">Author</th>
+      <th className="border-b border-gray-300 p-2 w-40">Publisher</th>
+      <th className="border-b border-gray-300 p-2 w-20">Year</th>
+      <th className="border-b border-gray-300 p-2 w-30">Edition</th>
+    </tr>
+  </thead>
+  <tbody>
+    {loading ? (
+      <tr>
+        <td colSpan={7} className="text-center">Loading...</td>
+      </tr>
+    ) : error ? (
+      <tr>
+        <td colSpan={7} className="text-center">Error: {error.message}</td>
+      </tr>
+    ) : null}
+    {books.map((book) => (
+      <tr className="hover:bg-gray-50" key={book.id}>
+        <td className="border-b border-gray-50 p-1 w-10 pl-4">
+          <input
+            type="checkbox"
+            className="w-4 h-4"
+            name="id"
+            value={book.id}
+            onChange={() => handleCheckboxChange(book.id)}
+          />
+        </td>
+        <td className="border-b border-gray-50 p-1 w-10 pr-5 relative">
+          <div className="action-buttons w-60">
+            <Link to={`/books/edit/${book.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
+            <span className="mx-2"></span>
+            <button onClick={() => duplicateBook(book.id)} className="text-green-500 font-bold hover:underline">Duplicate</button>
+            <span className="mx-2"></span>
+            <button onClick={() => deleteBook(book.id)} className="text-red-500 font-bold">Delete</button>
+          </div>
+        </td>
+        <td className="border-b border-gray-50 p-1">{book.book_id}</td>
+        <td className="border-b border-gray-50 p-1">{book.title}</td>
+        <td className="border-b border-gray-50 p-1">{book.author}</td>
+        <td className="border-b border-gray-50 p-1">{book.publisher}</td>
+        <td className="border-b border-gray-50 p-1">{book.publication_year}</td>
+        <td className="border-b border-gray-50 p-1">{book.edition}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
         {/* Pagination Controls */}
         <div className="flex justify-between items-center mt-3">
           <button className='bg-primary py-1 px-3 rounded-lg text-white' onClick={handleCompare}>Compare Books</button>

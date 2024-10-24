@@ -5,8 +5,8 @@ import axios from 'axios';
 import constants from '../../Constants';
 import { toast, ToastContainer } from 'react-toastify';
 
-const AllUsers: React.FC = () => {
-    const [users, setUsers] = useState<any[]>([]);
+const Types: React.FC = () => {
+    const [types, setTypes] = useState<any[]>([]);
     const [nextPage, setNextPage] = useState();
     const [prevPage, setPrevPage] = useState();
     const [nextPageEnabled, setNextPageEnabled] = useState(false);
@@ -17,15 +17,15 @@ const AllUsers: React.FC = () => {
         total: 1,
     });
     const [error, setError] = useState<any>(null);
-    const [loggedInUser, setLoggedInUser] = useState<any>(null);
 
-  const fetchUsers = async (nextPageUrl = null, perPage = 50) => {
+
+  const fetchTypes = async (nextPageUrl = null, perPage = 50) => {
     setLoading(true);
   
     try {
-      const url = nextPageUrl || constants.BASE_URL + '/users';
+      const url = nextPageUrl || constants.BASE_URL + '/types';
       const response = await axios.get(url, { params: { per_page: perPage } });
-      setUsers(response.data.data);
+      setTypes(response.data.data);
       setNextPage(response.data.pagination.next_page_url);
       setPrevPage(response.data.pagination.prev_page_url);
       setNextPageEnabled(response.data.pagination.next_page_url !== null);
@@ -47,30 +47,28 @@ const AllUsers: React.FC = () => {
   
 
   const handleNextPage = async () => {
-    fetchUsers(nextPage);
+    fetchTypes(nextPage);
   };
 
   const handlePrevPage = async () => {
-    fetchUsers(prevPage);
+    fetchTypes(prevPage);
   };
 
   useEffect(() => {
-    fetchUsers();
-    const user = JSON.parse(localStorage.getItem('user'));
-    setLoggedInUser(user.user.id);
+    fetchTypes();
   }, []);
 
-  const deleteUser = async (id: number) => {
-    const isConfirmed = window.confirm('Are you sure you want to delete this user?');
+  const deleteType = async (id: number) => {
+    const isConfirmed = window.confirm('Are you sure you want to delete this Type?');
 
     if (!isConfirmed) {
       return; // Exit if the user cancels the action
     }
     try {
-      await axios.post(constants.BASE_URL + '/user/delete', { id });
+      await axios.post(constants.BASE_URL + '/type/delete', { id });
       // Update state to remove the deleted book
-      setUsers(prevBooks => prevBooks.filter(book => book.id !== id));
-      toast.success('User deleted successfully!');
+      setTypes(prevBooks => prevBooks.filter(book => book.id !== id));
+      toast.success('Type deleted successfully!');
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         console.error(error.response.data);
@@ -83,18 +81,16 @@ const AllUsers: React.FC = () => {
   };
   return (
     <>
-      <Breadcrumb pageName="All Users" backLink="/" createLink="/users/create" />
+      <Breadcrumb pageName="All Types" backLink="/" createLink="/ephemera-types/create" />
       <div className="w-full overflow-x-auto rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3 mt-2">
         {/* Table and Pagination */}
         <table className="min-w-full border-collapse border border-gray-200 rounded-md">
           <thead className="bg-gray-100 text-left text-gray-600">
             {/* Table Header */}
             <tr className="py-2">
-              <th className="border-b border-gray-300 p-2"></th>
-              <th className="border-b border-gray-300 p-2 w-40 pl-5">Name</th>
-              <th className="border-b border-gray-300 p-2">Email</th>
-              <th className="border-b border-gray-300 p-2">Role</th>
-              <th className="border-b border-gray-300 p-2">Is Active</th>
+              <th className="border-b border-gray-300 p-2 w-10"></th>
+              <th className="border-b border-gray-300 p-2 w-40 pl-5">Type</th>
+              <th className="border-b border-gray-300 p-2">Description</th>
             </tr>
           </thead>
           <tbody>
@@ -111,27 +107,25 @@ const AllUsers: React.FC = () => {
                 </td>
             </tr>
             ) : null}
-            {users.map((user) => (
-              <tr className="hover:bg-gray-50" key={user.id}>
+            {types.map((type) => (
+              <tr className="hover:bg-gray-50" key={type.id}>
                 {/* Table Data */}
-                <td className="border-b border-gray-50 w-10 relative">
-                <div className="action-buttons w-40">
-                  <Link to={`/users/edit/${user.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
-                  <span className="mx-2"></span>
-                  <button onClick={() => deleteUser(user.id)} disabled={user.id === loggedInUser} className="text-red-500 font-bold disabled:opacity-10 disabled:cursor-not-allowed">Delete</button>
-                </div>
+                <td className="border-b border-gray-50 p-1 w-10 pr-5 relative">
+                  <div className="action-buttons w-60 bg-white">
+                    <Link to={`/ephemera-types/edit/${type.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
+                    <span className="mx-2"></span>
+                    <button onClick={() => deleteType(type.id)} className="text-red-500 font-bold">Delete</button>
+                  </div>
                 </td>
-                <td className="border-b border-gray-50 p-1 pl-5">{user.name}</td>
-                <td className="border-b border-gray-50 p-1">{user.email}</td>
-                <td className="border-b border-gray-50 p-1">{user.role}</td>
-                <td className="border-b border-gray-50 p-1">{user.is_active ? 'Active' : 'Inactive'}</td>
+                <td className="border-b border-gray-50 p-1 pl-5">{type.type}</td>
+                <td className="border-b border-gray-50 p-1">{type.description}</td>
               </tr>
             ))}
           </tbody>
         </table>
         {/* Pagination Controls */}
         <div className="flex justify-between items-center mt-3">
-          <div className="text-gray-500">Total Users: {pageInfo.total} | Page {pageInfo.current_page}</div>
+          <div className="text-gray-500">Total Types: {pageInfo.total} | Page {pageInfo.current_page}</div>
           <div className="flex gap-2 items-center">
             <button
               onClick={handlePrevPage}
@@ -188,4 +182,4 @@ const AllUsers: React.FC = () => {
   );
 };
 
-export default AllUsers;
+export default Types;

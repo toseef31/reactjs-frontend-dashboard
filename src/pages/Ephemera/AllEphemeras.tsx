@@ -192,13 +192,13 @@ const AllEphemeras: React.FC = () => {
           <thead className="bg-gray-100 text-left text-gray-600">
             {/* Table Header */}
             <tr className="py-2">
+              <th className="border-b border-gray-300 p-2"></th>
               <th className="border-b border-gray-300 p-2 w-40">Ephemera ID</th>
               <th className="border-b border-gray-300 p-2 w-40">Ephemera Type</th>
               <th className="border-b border-gray-300 p-2">Details</th>
               <th className="border-b border-gray-300 p-2 w-40">Size</th>
               <th className="border-b border-gray-300 p-2 w-40">Condition</th>
               <th className="border-b border-gray-300 p-2 w-20">Cost</th>
-              <th className="border-b border-gray-300 p-2">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -217,17 +217,19 @@ const AllEphemeras: React.FC = () => {
             ) : null}
             {ephemeras.map((ephemera) => (
               <tr className="hover:bg-gray-50" key={ephemera.id}>
+                <td className="border-b border-gray-50 p-1 w-10 relative">
+                  <div className="action-buttons w-40">
+                  <Link to={`/ephemeras/edit/${ephemera.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
+                  <span className="mx-2"></span>
+                  <button onClick={() => deleteEphemera(ephemera.id)} className="text-red-500 font-bold">Delete</button>
+                  </div>
+                </td>
                 <td className="border-b border-gray-50 p-1">{ephemera.ephemera_id}</td>
                 <td className="border-b border-gray-50 p-1">{ephemera.type}</td>
                 <td className="border-b border-gray-50 p-1">{ephemera.details}</td>
                 <td className="border-b border-gray-50 p-1">{ephemera.size}</td>
                 <td className="border-b border-gray-50 p-1">{ephemera.condition}</td>
                 <td className="border-b border-gray-50 p-1">{Math.floor(ephemera.cost_price)}</td>
-                <td className="border-b border-gray-50 p-1 w-60 pr-5">
-                  <Link to={`/ephemeras/edit/${ephemera.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
-                  <span className="mx-2"></span>
-                  <button onClick={() => deleteEphemera(ephemera.id)} className="text-red-500 font-bold">Delete</button>
-                </td>
               </tr>
             ))}
           </tbody>

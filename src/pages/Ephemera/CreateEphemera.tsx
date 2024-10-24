@@ -10,6 +10,7 @@ const CreateEphemera: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<any | null>(null);
     const [nextEphemera, setNextEphemera] = useState<any>(null);
+    const [types, setTypes] = useState<any[]>([]);
     const [ephemeraForm, setEphemeraForm] = useState({
         type: '',
         details: '',
@@ -58,9 +59,24 @@ const CreateEphemera: React.FC = () => {
         }
     }
   }
+  const fetchTypes = async () => {
+    try{
+        const url = constants.BASE_URL + '/types';
+        const response = await axios.get(url);
+        setTypes(response.data.data);
+    }catch(err){
+        if (axios.isAxiosError(err) && err.response) {
+            console.error(err.response.data);
+        } else {
+            console.error('Unexpected Error:', err);
+            toast.error('An unexpected error occurred. Please try again.');
+        }
+    }
+  };
 
   useEffect(() => {
     fetchNextEphemera();
+    fetchTypes();
   }, []);
 
   const resetForm = () => {
@@ -150,23 +166,15 @@ const CreateEphemera: React.FC = () => {
                             name="type"
                             onChange={handleInputChange}
                             required
+                            value={ephemeraForm.type}
                             className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
                             <option value="">Select</option>
-                            <option value="Badge">Badge</option>
-                            <option value="Brochure">Brochure</option>
-                            <option value="Card">Card</option>
-                            <option value="Catalogue">Catalogue</option>
-                            <option value="Cheque">Cheque</option>
-                            <option value="Display">Display</option>
-                            <option value="Envelope">Envelope</option>
-                            <option value="Letter">Letter</option>
-                            <option value="Licence">Licence</option>
-                            <option value="Other">Other</option>
-                            <option value="Photograph">Photograph</option>
-                            <option value="Postcard">Postcard</option>
-                            <option value="Poster">Poster</option>
-                            <option value="Stamp">Stamp</option>
+                            {types.map((size) => (
+                                <option key={size.id} value={size.id}>
+                                    {size.type}
+                                </option>
+                            ))}
                                
                         </select>
 

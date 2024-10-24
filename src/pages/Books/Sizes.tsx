@@ -88,9 +88,9 @@ const Sizes: React.FC = () => {
           <thead className="bg-gray-100 text-left text-gray-600">
             {/* Table Header */}
             <tr className="py-2">
+              <th className="border-b border-gray-300 p-2 w-10"></th>
               <th className="border-b border-gray-300 p-2 w-40 pl-5">Size</th>
               <th className="border-b border-gray-300 p-2">Description</th>
-              <th className="border-b border-gray-300 p-2">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -110,13 +110,15 @@ const Sizes: React.FC = () => {
             {sizes.map((size) => (
               <tr className="hover:bg-gray-50" key={size.id}>
                 {/* Table Data */}
+                <td className="border-b border-gray-50 p-1 w-10 pr-5 relative">
+                  <div className="action-buttons w-60 bg-white">
+                    <Link to={`/books/size/edit/${size.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
+                    <span className="mx-2"></span>
+                    <button onClick={() => deleteSize(size.id)} className="text-red-500 font-bold">Delete</button>
+                  </div>
+                </td>
                 <td className="border-b border-gray-50 p-1 pl-5">{size.size}</td>
                 <td className="border-b border-gray-50 p-1">{size.description}</td>
-                <td className="border-b border-gray-50 p-1 w-60 pr-5">
-                  <Link to={`/books/size/edit/${size.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
-                  <span className="mx-2"></span>
-                  <button onClick={() => deleteSize(size.id)} className="text-red-500 font-bold">Delete</button>
-                </td>
               </tr>
             ))}
           </tbody>

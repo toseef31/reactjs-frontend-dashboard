@@ -219,7 +219,7 @@ const CreateBook: React.FC = () => {
                             <option value="0">Select Size</option>
                             {sizes.map((size) => (
                                 <option key={size.id} value={size.id}>
-                                    {size.size}
+                                    {size.size + ' (' + size.description + ')'}
                                 </option>
                             ))}
                         </select>

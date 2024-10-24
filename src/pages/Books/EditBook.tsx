@@ -219,13 +219,14 @@ const CreateBook: React.FC = () => {
                         <label className="text-sm font-semibold text-gray-600">Size</label>
                         <select
                         name="size"
+                        value={bookForm.size}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >
                             <option value="0">Select Size</option>
                             {sizes.map((size) => (
                                 <option key={size.id} value={size.id} selected={bookForm.size === size.id}>
-                                    {size.size}
+                                    {size.size + ' (' + size.description + ') '}
                                 </option>
                             ))}
                         </select>

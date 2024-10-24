@@ -182,12 +182,12 @@ const AllPennCatalogues: React.FC = () => {
           <thead className="bg-gray-100 text-left text-gray-600">
             {/* Table Header */}
             <tr className="py-2">
+              <th className="border-b border-gray-300 p-2"></th>
               <th className="border-b border-gray-300 p-2 w-30">Name</th>
               <th className="border-b border-gray-300 p-2 w-30">Year</th>
               <th className="border-b border-gray-300 p-2 w-30">Cat</th>
               <th className="border-b border-gray-300 p-2 w-30">Condition</th>
               <th className="border-b border-gray-300 p-2 w-20">Cost</th>
-              <th className="border-b border-gray-300 p-2 w-20">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -206,16 +206,18 @@ const AllPennCatalogues: React.FC = () => {
             ) : null}
             {pennCataloguess.map((pennCatalogue) => (
               <tr className="hover:bg-gray-50" key={pennCatalogue.id}>
+                <td className="border-b border-gray-50 w-10 relative">
+                  <div className="action-buttons w-40">
+                    <Link to={`/penn-catalogues/edit/${pennCatalogue.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
+                    <span className="mx-2"></span>
+                    <button onClick={() => deletePennCatalogues(pennCatalogue.id)} className="text-red-500 font-bold">Delete</button>
+                  </div>
+                </td>
                 <td className="border-b border-gray-50 p-1">{pennCatalogue.name}</td>
                 <td className="border-b border-gray-50 p-1">{pennCatalogue.year}</td>
                 <td className="border-b border-gray-50 p-1">{pennCatalogue.catalogue_no}</td>
                 <td className="border-b border-gray-50 p-1">{pennCatalogue.condition}</td>
                 <td className="border-b border-gray-50 p-1">{Math.floor(pennCatalogue.cost_price)}</td>
-                <td className="border-b border-gray-50 p-1 w-30 pr-5">
-                  <Link to={`/penn-catalogues/edit/${pennCatalogue.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
-                  <span className="mx-2"></span>
-                  <button onClick={() => deletePennCatalogues(pennCatalogue.id)} className="text-red-500 font-bold">Delete</button>
-                </td>
               </tr>
             ))}
           </tbody>

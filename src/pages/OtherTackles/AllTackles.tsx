@@ -201,6 +201,7 @@ const AllTackles: React.FC = () => {
           <thead className="bg-gray-100 text-left text-gray-600">
             {/* Table Header */}
             <tr className="py-2">
+              <th className="border-b border-gray-300 p-2"></th>
               <th className="border-b border-gray-300 p-2 w-20">Tackles ID</th>
               <th className="border-b border-gray-300 p-2 w-30">Makers Name</th>
               <th className="border-b border-gray-300 p-2 w-30">Model</th>
@@ -208,7 +209,6 @@ const AllTackles: React.FC = () => {
               <th className="border-b border-gray-300 p-2 w-30">Size</th>
               <th className="border-b border-gray-300 p-2 w-20">Cost</th>
               <th className="border-b border-gray-300 p-2 w-30 hidden">Sale Cost</th>
-              <th className="border-b border-gray-300 p-2 w-20">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -227,6 +227,13 @@ const AllTackles: React.FC = () => {
             ) : null}
             {othertackless.map((othertackles) => (
               <tr className="hover:bg-gray-50" key={othertackles.id}>
+                <td className="border-b border-gray-50 w-10 relative">
+                <div className="action-buttons w-40">
+                  <Link to={`/othertackles/edit/${othertackles.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
+                  <span className="mx-2"></span>
+                  <button onClick={() => deleteTackles(othertackles.id)} className="text-red-500 font-bold">Delete</button>
+                </div>
+                </td>
                 <td className="border-b border-gray-50 p-1">{othertackles.tackle_id}</td>
                 <td className="border-b border-gray-50 p-1">{othertackles.makers_name}</td>
                 <td className="border-b border-gray-50 p-1">{othertackles.model}</td>
@@ -234,11 +241,6 @@ const AllTackles: React.FC = () => {
                 <td className="border-b border-gray-50 p-1">{othertackles.size}</td>
                 <td className="border-b border-gray-50 p-1">{Math.floor(othertackles.cost_price)}</td>
                 <td className="border-b border-gray-50 p-1 hidden">{othertackles.sold_price}</td>
-                <td className="border-b border-gray-50 p-1 w-30 pr-5">
-                  <Link to={`/othertackles/edit/${othertackles.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
-                  <span className="mx-2"></span>
-                  <button onClick={() => deleteTackles(othertackles.id)} className="text-red-500 font-bold">Delete</button>
-                </td>
               </tr>
             ))}
           </tbody>
