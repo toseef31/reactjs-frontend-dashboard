@@ -97,13 +97,13 @@ const CreateTackle: React.FC = () => {
 
   return (
     <>
-    <Breadcrumb pageName="Create Tackles" backLink='/othertackles/all' />
+    <Breadcrumb pageName="Create Tackle" backLink='/othertackles/all' />
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3">
         <form className="grid grid-cols-12 gap-4 p-4 mx-auto bg-white rounded-lg" onSubmit={submitTackles}>
             <div className="col-span-6 flex flex-col gap-2">
                 <div className='grid grid-cols-12 gap-4'>
                     <div className='col-span-12 flex flex-col gap-2 border-b'>
-                        <label className="text-lg font-semibold text-gray-600">Tackles Details</label>
+                        <label className="text-lg font-semibold text-gray-600">Tackle Details</label>
                     </div>
                     <div className='col-span-3 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Tackle ID</label>

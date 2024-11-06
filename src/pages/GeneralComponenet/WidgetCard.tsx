@@ -50,15 +50,42 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
     return (
         <div className="container mx-auto my-2">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {widgetData.users && (
+
+            {widgetData.books && (
                     <div className="bg-white shadow-lg rounded-lg p-6">
-                        <h2 className="text-xl font-bold mb-4">Users</h2>
+                        <h2 className="text-xl font-bold mb-4">Books</h2>
+                        <p className="text-gray-600">
+                            Next ID: <span className="text-lg font-bold">{widgetData.books.next_id}</span>
+                        </p>
                         <p className="text-gray-700 text-lg font-semibold">
-                            Count: {widgetData.users.count}
+                            Count: {widgetData.books.count || 0}
+                        </p>
+                        <p className="text-gray-600">
+                            Total Cost: ${widgetData.books.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
+                        </p>
+                        <p className="text-gray-600">
+                            Total Valuation Cost: ${widgetData.books.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
                         </p>
                     </div>
                 )}
 
+                {widgetData.ephemera && (
+                    <div className="bg-white shadow-lg rounded-lg p-6">
+                        <h2 className="text-xl font-bold mb-4">Ephemera</h2>
+                        <p className="text-gray-600">
+                            Next ID: <span className="text-lg font-bold">{widgetData.ephemera.next_id}</span>
+                        </p>
+                        <p className="text-gray-700 text-lg font-semibold">
+                            Count: {widgetData.ephemera.count || 0}
+                        </p>
+                        <p className="text-gray-600">
+                            Total Cost: ${widgetData.ephemera.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
+                        </p>
+                        <p className="text-gray-600">
+                            Total Valuation Cost: ${widgetData.ephemera.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
+                        </p>
+                    </div>
+                )}
                 {widgetData.hardy_reels && (
                     <div className="bg-white shadow-lg rounded-lg p-6">
                         <h2 className="text-xl font-bold mb-4">Hardy Reels</h2>
@@ -128,38 +155,12 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
                     </div>
                 )}
 
-                {widgetData.books && (
-                    <div className="bg-white shadow-lg rounded-lg p-6">
-                        <h2 className="text-xl font-bold mb-4">Books</h2>
-                        <p className="text-gray-600">
-                            Next ID: <span className="text-lg font-bold">{widgetData.books.next_id}</span>
-                        </p>
-                        <p className="text-gray-700 text-lg font-semibold">
-                            Count: {widgetData.books.count || 0}
-                        </p>
-                        <p className="text-gray-600">
-                            Total Cost: ${widgetData.books.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
-                        </p>
-                        <p className="text-gray-600">
-                            Total Valuation Cost: ${widgetData.books.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
-                        </p>
-                    </div>
-                )}
 
-                {widgetData.ephemera && (
+                {widgetData.users && (
                     <div className="bg-white shadow-lg rounded-lg p-6">
-                        <h2 className="text-xl font-bold mb-4">Ephemera</h2>
-                        <p className="text-gray-600">
-                            Next ID: <span className="text-lg font-bold">{widgetData.ephemera.next_id}</span>
-                        </p>
+                        <h2 className="text-xl font-bold mb-4">Users</h2>
                         <p className="text-gray-700 text-lg font-semibold">
-                            Count: {widgetData.ephemera.count || 0}
-                        </p>
-                        <p className="text-gray-600">
-                            Total Cost: ${widgetData.ephemera.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
-                        </p>
-                        <p className="text-gray-600">
-                            Total Valuation Cost: ${widgetData.ephemera.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
+                            Count: {widgetData.users.count}
                         </p>
                     </div>
                 )}

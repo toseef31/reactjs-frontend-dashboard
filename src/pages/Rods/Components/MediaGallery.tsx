@@ -96,7 +96,7 @@ const MediaGallery = ({ rod_id }: MediaGalleryProps) => {
             <div className="text-lg font-semibold my-4">Rods Media</div>
             <div className="grid grid-cols-12 gap-2">
                 {rodsMedia.length > 0 ? (
-                    rodsMedia.map((media) => (
+                    rodsMedia.slice().reverse().map((media) => (
                         <div key={media.id} className="col-span-2 min-w-[150px] h-[150px] overflow-hidden border rounded-lg relative">
                             <img src={`${basePath}${media.media_path}`} alt={media.media_path} className="w-full h-full object-cover" />
                             <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40 flex items-baseline justify-between p-1">

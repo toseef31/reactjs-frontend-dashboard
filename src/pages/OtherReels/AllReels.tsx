@@ -176,7 +176,7 @@ const AllReels: React.FC = () => {
             placeholder="Foot"
             value={searchParams.foot}
             onChange={handleInputChange}
-            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 hidden"
           />
           <input
             type="text"
@@ -184,7 +184,7 @@ const AllReels: React.FC = () => {
             placeholder="Cost"
             value={searchParams.cost_price}
             onChange={handleInputChange}
-            className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 hidden"
           />
           <input
             type="text"
@@ -192,7 +192,7 @@ const AllReels: React.FC = () => {
             placeholder="Handle"
             value={searchParams.handle}
             onChange={handleInputChange}
-            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 hidden"
           />
           <input
             type="text"
@@ -200,7 +200,7 @@ const AllReels: React.FC = () => {
             placeholder="Tension Regulator"
             value={searchParams.tension_regultor}
             onChange={handleInputChange}
-            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 hidden"
           />
           <button
             type="submit"

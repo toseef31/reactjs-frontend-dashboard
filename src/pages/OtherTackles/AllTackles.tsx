@@ -123,13 +123,13 @@ const AllTackles: React.FC = () => {
 
   return (
     <>
-      <Breadcrumb pageName="All Tackles" backLink="/" createLink='/othertackles/create' />
+      <Breadcrumb pageName="All Tackle" backLink="/" createLink='/othertackles/create' />
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3">
         <form className="grid grid-cols-12 gap-1" onSubmit={handleSearch}>
           <input
             type="text"
             name="tackle_id"
-            placeholder="Tackles ID"
+            placeholder="Tackle ID"
             value={searchParams.tackle_id}
             onChange={handleInputChange}
             className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
@@ -164,7 +164,7 @@ const AllTackles: React.FC = () => {
             placeholder="Size"
             value={searchParams.size}
             onChange={handleInputChange}
-            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 hidden"
           />
           <input
             type="text"
@@ -172,7 +172,7 @@ const AllTackles: React.FC = () => {
             placeholder="Cost"
             value={searchParams.cost_price}
             onChange={handleInputChange}
-            className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 hidden"
           />
           <input
             type="text"
@@ -180,7 +180,7 @@ const AllTackles: React.FC = () => {
             placeholder="Sale Cost"
             value={searchParams.sold_price}
             onChange={handleInputChange}
-            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 hidden"
           />
           <button
             type="submit"
@@ -202,7 +202,7 @@ const AllTackles: React.FC = () => {
             {/* Table Header */}
             <tr className="py-2">
               <th className="border-b border-gray-300 p-2"></th>
-              <th className="border-b border-gray-300 p-2 w-20">Tackles ID</th>
+              <th className="border-b border-gray-300 p-2 w-20">Tackle ID</th>
               <th className="border-b border-gray-300 p-2 w-30">Makers Name</th>
               <th className="border-b border-gray-300 p-2 w-30">Model</th>
               <th className="border-b border-gray-300 p-2 w-30">Sub Model</th>
@@ -247,7 +247,7 @@ const AllTackles: React.FC = () => {
         </table>
         {/* Pagination Controls */}
         <div className="flex justify-between items-center mt-3">
-          <div className="text-gray-500">Total Tackles: {pageInfo.total} | Page {pageInfo.current_page}</div>
+          <div className="text-gray-500">Total Tackle: {pageInfo.total} | Page {pageInfo.current_page}</div>
           <div className="flex gap-2 items-center">
             <button
               onClick={handlePrevPage}

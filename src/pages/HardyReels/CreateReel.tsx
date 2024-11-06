@@ -157,7 +157,7 @@ const CreateReel: React.FC = () => {
                     <div className='col-span-4 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Approximate Date</label>
                         <input
-                        type="date"
+                        type="text"
                         name="approximate_date"
                         placeholder="Approximate Date"
                         value={reelForm.approximate_date}

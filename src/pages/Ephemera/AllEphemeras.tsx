@@ -131,7 +131,7 @@ const AllEphemeras: React.FC = () => {
             placeholder="Ephemera ID"
             value={searchParams.ephemera_id}
             onChange={handleInputChange}
-            className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
           />
           <input
             type="text"
@@ -147,7 +147,7 @@ const AllEphemeras: React.FC = () => {
             placeholder="Ephemera details"
             value={searchParams.details}
             onChange={handleInputChange}
-            className="col-span-3 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="col-span-3 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 hidden"
           />
           <input
             type="text"
@@ -155,7 +155,7 @@ const AllEphemeras: React.FC = () => {
             placeholder="Size"
             value={searchParams.size}
             onChange={handleInputChange}
-            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 hidden"
           />
           <input
             type="text"
@@ -163,7 +163,7 @@ const AllEphemeras: React.FC = () => {
             placeholder="Condition"
             value={searchParams.condition}
             onChange={handleInputChange}
-            className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 hidden"
           />
           <input
             type="text"
@@ -171,7 +171,7 @@ const AllEphemeras: React.FC = () => {
             placeholder="Cost"
             value={searchParams.cost_price}
             onChange={handleInputChange}
-            className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 hidden"
           />
           <button
             type="submit"
@@ -193,6 +193,7 @@ const AllEphemeras: React.FC = () => {
             {/* Table Header */}
             <tr className="py-2">
               <th className="border-b border-gray-300 p-2"></th>
+              <th className="border-b border-gray-300 p-2 w-20">Thumbnail</th>
               <th className="border-b border-gray-300 p-2 w-40">Ephemera ID</th>
               <th className="border-b border-gray-300 p-2 w-40">Ephemera Type</th>
               <th className="border-b border-gray-300 p-2">Details</th>
@@ -223,6 +224,15 @@ const AllEphemeras: React.FC = () => {
                   <span className="mx-2"></span>
                   <button onClick={() => deleteEphemera(ephemera.id)} className="text-red-500 font-bold">Delete</button>
                   </div>
+                </td>
+                <td className="border-b border-gray-50 p-1">
+                {ephemera?.ephemera_media?.length > 0 && (
+                    <img 
+                        src={`${constants.BASE_ASSET_URL}/storage/${ephemera.ephemera_media[0].media_path}`} 
+                        alt='404'
+                        style={{width: '50px', height: '50px', objectFit: 'cover', borderRadius: '50%'}} 
+                    />
+                )}
                 </td>
                 <td className="border-b border-gray-50 p-1">{ephemera.ephemera_id}</td>
                 <td className="border-b border-gray-50 p-1">{ephemera.type}</td>

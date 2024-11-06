@@ -233,3 +233,7 @@ span.flatpickr-weekday,
 [x-cloak] {
   display: none !important;
 }
+.first-compare-image:first{
+  width: 240px !important;
+  height: 240px !important;
+}

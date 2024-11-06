@@ -57,10 +57,11 @@ const CompareBooks = () => {
                             <p className="text-gray-700 mt-2"><span className="font-medium text-primary">Comments:</span> {book.comment}</p>
                         </div>
                         <div className="flex justify-start items-center flex-wrap gap-2 my-3">
-                            {book.book_media.map((image: any) => (
-                                <img src={`${constants.BASE_ASSET_URL}/storage/${image.media_path}`} onClick={() => window.open(`${constants.BASE_ASSET_URL}/storage/${image.media_path}`, '_blank')} alt={book.title} className="w-[70px] h-[70px] object-cover rounded-md cursor-pointer" />
+                            {book.book_media.slice().reverse().map((image: any) => (
+                                <img src={`${constants.BASE_ASSET_URL}/storage/${image.media_path}`} onClick={() => window.open(`${constants.BASE_ASSET_URL}/storage/${image.media_path}`, '_blank')} alt={book.title} className="w-[70px] h-[70px] object-cover rounded-md cursor-pointer first-compare-image" />
                             ))}
                         </div>
+
                     </div>
                 ))}
             </div>

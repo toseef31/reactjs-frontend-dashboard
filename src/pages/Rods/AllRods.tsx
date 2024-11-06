@@ -165,7 +165,7 @@ const AllRods: React.FC = () => {
             placeholder="Size"
             value={searchParams.size}
             onChange={handleInputChange}
-            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 hidden"
           />
           <input
             type="text"
@@ -173,7 +173,7 @@ const AllRods: React.FC = () => {
             placeholder="Cost"
             value={searchParams.cost_price}
             onChange={handleInputChange}
-            className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 hidden"
           />
           <input
             type="text"
@@ -181,7 +181,7 @@ const AllRods: React.FC = () => {
             placeholder="Sale Cost"
             value={searchParams.sold_price}
             onChange={handleInputChange}
-            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 hidden"
           />
           <button
             type="submit"

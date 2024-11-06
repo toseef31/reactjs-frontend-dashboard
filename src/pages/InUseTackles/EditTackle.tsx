@@ -98,16 +98,16 @@ const EditTackles: React.FC = () => {
 
   return (
     <>
-    <Breadcrumb pageName="Edit Tackles" backLink='/inusetackles/all' createLink='/inusetackles/create' />
+    <Breadcrumb pageName="Edit Tackle" backLink='/inusetackles/all' createLink='/inusetackles/create' />
     <div>
     {isNewCreated && (
         <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-2" role="alert">
-        Tackles created successfully!
+        Tackle created successfully!
         </div>
     )}
     {updated && (
         <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-2" role="alert">
-        Tackles Updated successfully!
+        Tackle Updated successfully!
         </div>
     )}
     </div>
@@ -116,14 +116,14 @@ const EditTackles: React.FC = () => {
         <div className="col-span-6 flex flex-col gap-2">
                 <div className='grid grid-cols-12 gap-4'>
                     <div className='col-span-12 flex flex-col gap-2 border-b'>
-                        <label className="text-lg font-semibold text-gray-600">Tackles Details</label>
+                        <label className="text-lg font-semibold text-gray-600">Tackle Details</label>
                     </div>
                     <div className='col-span-3 flex flex-col gap-2'>
-                        <label className="text-sm font-semibold text-gray-600">Tackles ID</label>
+                        <label className="text-sm font-semibold text-gray-600">Tackle ID</label>
                         <input
                         type="text"
                         name="tackle_id"
-                        placeholder="Tackles ID"
+                        placeholder="Tackle ID"
                         value={tacklesProtected.tackle_id}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 disabled:bg-yellow-100 disabled:cursor-not-allowed"
                         disabled

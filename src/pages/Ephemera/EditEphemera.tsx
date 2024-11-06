@@ -34,6 +34,7 @@ const EditEphemera: React.FC = () => {
         buyer_name: '',
         buyer_email: '',
         valuation: '',
+        ephemera_media: [],
     });
       
     const updateEphemeraId = (newEphemeraId:string) => {
@@ -289,6 +290,15 @@ const EditEphemera: React.FC = () => {
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
+                    </div>
+                    <div className='col-span-12'>
+                    {ephemeraForm?.ephemera_media?.length > 0 && (
+                        <img 
+                            src={`${constants.BASE_ASSET_URL}/storage/${ephemeraForm.ephemera_media[0].media_path}`} 
+                            alt='404'
+                            style={{width: '100%', height: '320px', objectFit: 'cover', borderRadius: '15px'}} 
+                        />
+                    )}
                     </div>
                 </div>
             </div>

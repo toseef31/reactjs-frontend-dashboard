@@ -142,7 +142,7 @@ const AllPennCatalogues: React.FC = () => {
           <input
             type="text"
             name="catalogue_no"
-            placeholder="Cat"
+            placeholder="Catalogue Number"
             value={searchParams.catalogue_no}
             onChange={handleInputChange}
             className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -153,7 +153,7 @@ const AllPennCatalogues: React.FC = () => {
             placeholder="Condition"
             value={searchParams.condition}
             onChange={handleInputChange}
-            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="col-span-2 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500  hidden"
           />
           <input
             type="text"
@@ -161,7 +161,7 @@ const AllPennCatalogues: React.FC = () => {
             placeholder="Cost"
             value={searchParams.cost_price}
             onChange={handleInputChange}
-            className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="col-span-1 border border-blue-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 hidden"
           />
           <button
             type="submit"
@@ -185,7 +185,7 @@ const AllPennCatalogues: React.FC = () => {
               <th className="border-b border-gray-300 p-2"></th>
               <th className="border-b border-gray-300 p-2 w-30">Name</th>
               <th className="border-b border-gray-300 p-2 w-30">Year</th>
-              <th className="border-b border-gray-300 p-2 w-30">Cat</th>
+              <th className="border-b border-gray-300 p-2 w-30">Catalogue</th>
               <th className="border-b border-gray-300 p-2 w-30">Condition</th>
               <th className="border-b border-gray-300 p-2 w-20">Cost</th>
             </tr>

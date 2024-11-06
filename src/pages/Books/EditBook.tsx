@@ -40,6 +40,7 @@ const CreateBook: React.FC = () => {
         buyer_name: '',
         buyer_email: '',
         valuation: '',
+        book_media: [],
     });
       
     const updateBookId = (newBookId:string) => {
@@ -364,6 +365,15 @@ const CreateBook: React.FC = () => {
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
+                    </div>
+                    <div className='col-span-12'>
+                    {bookForm?.book_media?.length > 0 && (
+                        <img 
+                            src={`${constants.BASE_ASSET_URL}/storage/${bookForm.book_media[0].media_path}`} 
+                            alt='404'
+                            style={{width: '100%', height: '320px', objectFit: 'cover', borderRadius: '15px'}} 
+                        />
+                    )}
                     </div>
                 </div>
             </div>
