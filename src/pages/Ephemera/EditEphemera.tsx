@@ -294,7 +294,7 @@ const EditEphemera: React.FC = () => {
                     <div className='col-span-12'>
                     {ephemeraForm?.ephemera_media?.length > 0 && (
                         <img 
-                            src={`${constants.BASE_ASSET_URL}/storage/${ephemeraForm.ephemera_media[0].media_path}`} 
+                            src={`${constants.BASE_ASSET_URL}/storage/${ephemeraForm.ephemera_media[ephemeraForm?.ephemera_media?.length-1].media_path}`} 
                             alt='404'
                             style={{width: '100%', height: '320px', objectFit: 'cover', borderRadius: '15px'}} 
                         />

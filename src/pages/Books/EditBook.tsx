@@ -369,7 +369,7 @@ const CreateBook: React.FC = () => {
                     <div className='col-span-12'>
                     {bookForm?.book_media?.length > 0 && (
                         <img 
-                            src={`${constants.BASE_ASSET_URL}/storage/${bookForm.book_media[0].media_path}`} 
+                            src={`${constants.BASE_ASSET_URL}/storage/${bookForm.book_media[bookForm?.book_media?.length - 1].media_path}`} 
                             alt='404'
                             style={{width: '100%', height: '320px', objectFit: 'cover', borderRadius: '15px'}} 
                         />

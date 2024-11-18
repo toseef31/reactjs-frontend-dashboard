@@ -28,6 +28,7 @@ const EditPennCatalogue: React.FC = () => {
         buyer_name: '',
         buyer_email: '',
         valuation: '',
+        penn_catalogue_media: [],
     });
       
   const submitPennCatalogue = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -233,6 +234,15 @@ const EditPennCatalogue: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
+                    <div className='col-span-12'>
+                    {pennCataloguesForm?.penn_catalogue_media?.length > 0 && (
+                        <img 
+                            src={`${constants.BASE_ASSET_URL}/storage/${pennCataloguesForm?.penn_catalogue_media[pennCataloguesForm?.penn_catalogue_media?.length-1].media_path}`} 
+                            alt='404'
+                            style={{width: '100%', height: '320px', objectFit: 'cover', borderRadius: '15px'}} 
+                        />
+                    )}
+                    </div>
                 </div>
             </div>
             <div className="col-span-12 flex justify-between mt-4">
@@ -245,6 +255,7 @@ const EditPennCatalogue: React.FC = () => {
                 {loading ? ("Saving...") : ("Submit")}
                 </button>
             </div>
+
         </form>
     </div>
     <MediaGallery pennCatalogue_id={id} />

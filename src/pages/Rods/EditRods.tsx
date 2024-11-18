@@ -36,6 +36,7 @@ const EditRods: React.FC = () => {
         buyer_name: '',
         buyer_email: '',
         valuation: '',
+        rods_media: [],
     });
       
     const updateRodsId = (newRodsId:string) => {
@@ -301,6 +302,15 @@ const EditRods: React.FC = () => {
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
+                    </div>
+                    <div className='col-span-12'>
+                    {rodsForm?.rods_media?.length > 0 && (
+                        <img 
+                            src={`${constants.BASE_ASSET_URL}/storage/${rodsForm?.rods_media[rodsForm?.rods_media?.length-1].media_path}`} 
+                            alt='404'
+                            style={{width: '100%', height: '320px', objectFit: 'cover', borderRadius: '15px'}} 
+                        />
+                    )}
                     </div>
                 </div>
             </div>

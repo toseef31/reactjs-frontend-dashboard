@@ -61,10 +61,10 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
                             Count: {widgetData.books.count || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Cost: ${widgetData.books.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
+                            Total Cost: ${widgetData.books.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
                         </p>
                         <p className="text-gray-600">
-                            Total Valuation Cost: ${widgetData.books.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
+                            Total Valuation Cost: ${widgetData.books.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
                         </p>
                     </div>
                 )}
@@ -79,10 +79,10 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
                             Count: {widgetData.ephemera.count || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Cost: ${widgetData.ephemera.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
+                            Total Cost: ${widgetData.ephemera.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
                         </p>
                         <p className="text-gray-600">
-                            Total Valuation Cost: ${widgetData.ephemera.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
+                            Total Valuation Cost: ${widgetData.ephemera.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
                         </p>
                     </div>
                 )}
@@ -96,10 +96,10 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
                             Count: {widgetData.hardy_reels.count || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Cost: ${widgetData.hardy_reels.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
+                            Total Cost: ${widgetData.hardy_reels.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
                         </p>
                         <p className="text-gray-600">
-                            Total Valuation Cost: ${widgetData.hardy_reels.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
+                            Total Valuation Cost: ${widgetData.hardy_reels.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
                         </p>
                     </div>
                 )}
@@ -114,10 +114,10 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
                             Count: {widgetData.lures.count || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Cost: ${widgetData.lures.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
+                            Total Cost: ${widgetData.lures.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
                         </p>
                         <p className="text-gray-600">
-                            Total Valuation Cost: ${widgetData.lures.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
+                            Total Valuation Cost: ${widgetData.lures.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
                         </p>
                     </div>
                 )}
@@ -132,10 +132,10 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
                             Count: {widgetData.rods.count || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Cost: ${widgetData.rods.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
+                            Total Cost: ${widgetData.rods.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
                         </p>
                         <p className="text-gray-600">
-                            Total Valuation Cost: ${widgetData.rods.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
+                            Total Valuation Cost: ${widgetData.rods.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
                         </p>
                     </div>
                 )}
@@ -147,10 +147,10 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
                             Count: {widgetData.penncatalogue.count || 0}
                         </p>
                         <p className="text-gray-600">
-                            Total Cost: ${widgetData.penncatalogue.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
+                            Total Cost: ${widgetData.penncatalogue.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
                         </p>
                         <p className="text-gray-600">
-                            Total Valuation Cost: ${widgetData.penncatalogue.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace('.', ',') || '0,00'}
+                            Total Valuation Cost: ${widgetData.penncatalogue.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
                         </p>
                     </div>
                 )}

@@ -37,6 +37,7 @@ const EditTackles: React.FC = () => {
         buyer_name: '',
         buyer_email: '',
         valuation: '',
+        tackle_media: [],
     });
       
     const updateTacklesId = (newTacklesId:string) => {
@@ -326,6 +327,15 @@ const EditTackles: React.FC = () => {
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
+                    </div>
+                    <div className='col-span-12'>
+                    {tacklesForm?.tackle_media?.length > 0 && (
+                        <img 
+                            src={`${constants.BASE_ASSET_URL}/storage/${tacklesForm?.tackle_media[tacklesForm?.tackle_media?.length-1].media_path}`} 
+                            alt='404'
+                            style={{width: '100%', height: '320px', objectFit: 'cover', borderRadius: '15px'}} 
+                        />
+                    )}
                     </div>
                 </div>
             </div>
