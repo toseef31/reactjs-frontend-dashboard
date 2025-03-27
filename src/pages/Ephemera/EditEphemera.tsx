@@ -70,6 +70,8 @@ const EditEphemera: React.FC = () => {
         updateEphemeraId(response.data.data.ephemera_id);
         delete response.data.data.ephemera_id;
         setEphemeraForm(response.data.data);
+        const thumbnail = response.data.data.ephemera_media?.find((m: any) => m.thumbnail === 'thumbnail');
+    setPreviewImage(thumbnail ? `${constants.BASE_ASSET_URL}/storage/${thumbnail.media_path}` : '');
     }catch(err){
         if (axios.isAxiosError(err) && err.response) {
             console.error(err.response.data);
@@ -295,43 +297,36 @@ const EditEphemera: React.FC = () => {
             </div>
             <div className="col-span-1 flex flex-wrap flex-col gap-2">
             </div>
-            <div className="col-span-5 flex flex-wrap flex-col gap-2">
-                <div className="col-span-12">
-                    {(() => {
-                    const thumbnailImage = ephemeraForm?.ephemera_media?.find(media => media.thumbnail === 'thumbnail');
-                    // const lastImage = ephemeraForm?.ephemera_media?.length > 0
-                    //     ? ephemeraForm.ephemera_media[ephemeraForm.ephemera_media.length - 1]
-                    //     : null;
-
-                    if (thumbnailImage) {
-                        return (
-                        <img
-                            src={`${constants.BASE_ASSET_URL}/storage/${thumbnailImage.media_path}`}
-                            alt="Ephemera Preview"
-                            style={{ width: '100%', height: '320px', objectFit: 'cover', borderRadius: '15px' }}
-                        />
-                        );
-                    } 
-                    // else if (lastImage) {
-                    //     return (
-                    //     <img
-                    //         src={`${constants.BASE_ASSET_URL}/storage/${lastImage.media_path}`}
-                    //         alt="Ephemera Preview"
-                    //         style={{ width: '100%', height: '320px', objectFit: 'cover', borderRadius: '15px' }}
-                    //     />
-                    //     );
-                    // } 
-                    else {
-                        return (
-                        <div className="w-full h-[320px] flex items-center justify-center border border-gray-300 rounded-lg text-gray-400">
-                            No Image Available
-                        </div>
-                        );
-                    }
-                    })()}
-                </div>
-                </div>
-           
+            <div className="col-span-12 lg:col-span-5 flex flex-wrap flex-col gap-2">
+            <div className="col-span-12">
+                
+                {previewImage ? (
+                <img
+                    src={previewImage}
+                    alt="Ephemera Preview"
+                    style={{ objectFit: 'cover', borderRadius: '15px' }}
+                />
+                ) : (() => {
+                const thumbnailImage = ephemeraForm?.ephemera_media?.find(media => media.thumbnail === 'thumbnail');
+                if (thumbnailImage) {
+                    return (
+                    <img
+                        src={`${constants.BASE_ASSET_URL}/storage/${thumbnailImage.media_path}`}
+                        alt="Ephemera Preview"
+                        style={{ objectFit: 'cover', borderRadius: '15px' }}
+                    />
+                    );
+                } else {
+                    return (
+                    <div className="w-full h-[320px] flex items-center justify-center border border-gray-300 rounded-lg text-gray-400">
+                        No Image Available
+                    </div>
+                    );
+                }
+                })()}
+            </div>
+                
+            </div>
             <div className="col-span-12 flex justify-between mt-4">
                 {error && <div className="text-red-500">{error.message+" : "+error.error}</div>}
                 <button

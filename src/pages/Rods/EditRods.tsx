@@ -316,7 +316,7 @@ const EditRods: React.FC = () => {
                     <img
                         src={previewImage}
                         alt="Preview"
-                        style={{ objectFit: 'cover', borderRadius: '15px', width: '100%', height: '320px' }}
+                        style={{ objectFit: 'cover', borderRadius: '15px' }}
                     />
                     ) : rodsForm?.rods_media?.length > 0 ? (
                     (() => {
@@ -331,7 +331,7 @@ const EditRods: React.FC = () => {
                         <img
                             src={imageUrl}
                             alt="Preview"
-                            style={{ objectFit: 'cover', borderRadius: '15px', width: '100%', height: '320px' }}
+                            style={{ objectFit: 'cover', borderRadius: '15px' }}
                         />
                         ) : (
                         <div className="w-full h-[320px] flex items-center justify-center border border-gray-300 rounded-lg text-gray-400">
