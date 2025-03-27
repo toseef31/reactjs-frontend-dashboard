@@ -226,13 +226,23 @@ const AllEphemeras: React.FC = () => {
                   </div>
                 </td>
                 <td className="border-b border-gray-50 p-1">
-                {ephemera?.ephemera_media?.length > 0 && (
-                    <img 
-                        src={`${constants.BASE_ASSET_URL}/storage/${ephemera.ephemera_media[0].media_path}`} 
-                        alt='404'
-                        style={{width: '50px', height: '50px', objectFit: 'cover', borderRadius: '50%'}} 
-                    />
-                )}
+                {(() => {
+                  const thumbnailImage = ephemera?.ephemera_media?.find(
+                    (media) => media.thumbnail === 'thumbnail'
+                  );
+                  if (thumbnailImage) {
+                    return (
+                      <img
+                        src={`${constants.BASE_ASSET_URL}/storage/${thumbnailImage.media_path}`}
+                        alt="Thumbnail"
+                        style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '50%' }}
+                      />
+                    );
+                  } else {
+                    return null; // Don't render anything if thumbnail not found
+                  }
+                })()}
+
                 </td>
                 <td className="border-b border-gray-50 p-1">{ephemera.ephemera_id}</td>
                 <td className="border-b border-gray-50 p-1">{ephemera.ephemera_type.type}</td>
