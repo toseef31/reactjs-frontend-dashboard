@@ -203,22 +203,17 @@ const CreateLures: React.FC = () => {
                         >{luresForm.details}</textarea>
                     </div>
                 </div>
-            </div>
-
-            <div className="col-span-2 flex flex-wrap flex-col gap-2">
-
-            </div>
-            <div className="col-span-4 flex flex-col gap-2">
+                <div className="col-span-4 flex flex-col gap-2 mt-3">
                 <div className='grid grid-cols-12 gap-4'>
                     <div className='col-span-12 flex flex-col gap-2 border-b'>
                         <label className="text-lg font-semibold text-gray-600">Costing and History</label>
                     </div>
-                    <div className='col-span-6 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2 hidden'>
                         <label className="text-sm font-semibold text-gray-600">Date Added</label>
                         <input
                         type="date"
                         name="add_date"
-                        value={luresForm.add_date}
+                        value={luresForm.add_date || new Date().toISOString().split('T')[0]}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -234,7 +229,7 @@ const CreateLures: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-12 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Valuation</label>
                         <input
                         type="text"
@@ -293,6 +288,12 @@ const CreateLures: React.FC = () => {
                     </div>
                 </div>
             </div>
+            </div>
+
+            <div className="col-span-2 flex flex-wrap flex-col gap-2">
+
+            </div>
+          
             <div className="col-span-12 flex justify-between mt-4">
                 <button
                 type="button"

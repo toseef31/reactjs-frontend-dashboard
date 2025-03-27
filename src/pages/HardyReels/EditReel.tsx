@@ -11,6 +11,8 @@ const CreateReel: React.FC = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const isNewCreated = queryParams.get('newCreated') === 'true';
+    const [previewImage, setPreviewImage] = useState<string | null>(null);
+
 
     const [reelProtected, setReelProtected] = useState({
         id:id,
@@ -240,27 +242,22 @@ const CreateReel: React.FC = () => {
                         >{reelForm.details}</textarea>
                     </div>
                 </div>
-            </div>
-
-            <div className="col-span-2 flex flex-wrap flex-col gap-2">
-
-            </div>
-            <div className="col-span-4 flex flex-col gap-2">
+                <div className="col-span-4 flex flex-col gap-2 mt-3">
                 <div className='grid grid-cols-12 gap-4'>
                     <div className='col-span-12 flex flex-col gap-2 border-b'>
                         <label className="text-lg font-semibold text-gray-600">Costing and History</label>
                     </div>
-                    <div className='col-span-6 flex flex-col gap-2'>
+                    {/* <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Date Added</label>
                         <input
                         type="date"
                         name="add_date"
-                        value={reelForm.add_date}
+                        value={reelForm.add_date || new Date().toISOString().split('T')[0]}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
-                    </div>
-                    <div className='col-span-6 flex flex-col gap-2'>
+                    </div> */}
+                    <div className='col-span-12 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Cost</label>
                         <input
                         type="number"
@@ -328,17 +325,36 @@ const CreateReel: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-12'>
-                    {reelForm?.reel_media?.length > 0 && (
-                        <img 
-                            src={`${constants.BASE_ASSET_URL}/storage/${reelForm?.reel_media[reelForm?.reel_media?.length-1].media_path}`} 
-                            alt='404'
-                            style={{width: '100%', height: '320px', objectFit: 'cover', borderRadius: '15px'}} 
-                        />
-                    )}
-                    </div>
+                  
                 </div>
             </div>
+            </div>
+
+            <div className="col-span-1 flex flex-wrap flex-col gap-2">
+
+            </div>
+            <div className="col-span-5 flex flex-wrap flex-col gap-2">
+                <div className="col-span-12">
+                    {previewImage ? (
+                    <img 
+                        src={previewImage}
+                        alt="Preview"
+                        style={{ objectFit: 'cover', borderRadius: '15px' }} 
+                    />
+                    ) : reelForm?.reel_media?.find(m => m.thumbnail === 'thumbnail') ? (
+                    <img 
+                        src={`${constants.BASE_ASSET_URL}/storage/${reelForm.reel_media.find(m => m.thumbnail === 'thumbnail').media_path}`} 
+                        alt="Thumbnail"
+                        style={{ objectFit: 'cover', borderRadius: '15px' }} 
+                    />
+                    )  : (
+                    <div className="w-full h-[320px] flex items-center justify-center border border-gray-300 rounded-lg text-gray-400">
+                        No Image Available
+                    </div>
+                    )}
+                </div>
+                </div>
+         
             <div className="col-span-12 flex justify-between mt-4">
                 {error && <div className="text-red-500">{error.message+" : "+error.error}</div>}
                 <button
@@ -351,7 +367,12 @@ const CreateReel: React.FC = () => {
             </div>
         </form>
     </div>
-    <MediaGallery reel_id={id} />
+    <MediaGallery 
+        reel_id={id} 
+        onPreviewImage={(imageUrl) => setPreviewImage(imageUrl)} 
+        onMediaChange={fetchReel} 
+        />
+
     <ToastContainer />
     </>
   );

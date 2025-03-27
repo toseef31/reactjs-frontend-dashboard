@@ -272,13 +272,31 @@ const AllBooks: React.FC = () => {
         </td>
         <td className="border-b border-gray-50 p-1">{book.book_id}</td>
         <td className="border-b border-gray-50 p-1">
-        {book?.book_media?.length > 0 && (
-            <img 
-                src={`${constants.BASE_ASSET_URL}/storage/${book.book_media[0].media_path}`} 
-                alt='404'
-                style={{width: '50px', height: '50px', objectFit: 'cover', borderRadius: '50%'}} 
-            />
-        )}
+        {(() => {
+          const thumbnailImage = book?.book_media?.find(media => media.thumbnail === 'thumbnail');
+          // const firstImage = book?.book_media?.[0];
+
+          const imagePath = thumbnailImage
+              ? `${constants.BASE_ASSET_URL}/storage/${thumbnailImage.media_path}`
+              // : firstImage
+              // ? `${constants.BASE_ASSET_URL}/storage/${firstImage.media_path}`
+              : null;
+
+            return imagePath ? (
+                <img 
+                    src={imagePath}
+                    alt="Thumbnail"
+                    style={{
+                        width: '50px',
+                        height: '50px',
+                        objectFit: 'cover',
+                        borderRadius: '50%'
+                    }}
+                    onError={(e) => (e.currentTarget.style.display = 'none')}
+                />
+            ) : null;
+        })()}
+
         </td>
         <td className="border-b border-gray-50 p-1">{book.title}</td>
         <td className="border-b border-gray-50 p-1">{book.author}</td>

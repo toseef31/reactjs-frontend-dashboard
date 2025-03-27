@@ -6,9 +6,12 @@ import constants from '../../Constants';
 import { toast, ToastContainer } from 'react-toastify';
 import MediaGallery from './Components/MediaGallery';
 
+
 const CreateBook: React.FC = () => {
     const { id } = useParams();
     const location = useLocation();
+    const [previewImage, setPreviewImage] = useState<string>('');
+
     const queryParams = new URLSearchParams(location.search);
     const isNewCreated = queryParams.get('newCreated') === 'true';
 
@@ -22,6 +25,7 @@ const CreateBook: React.FC = () => {
     const [sizes, setSizes] = useState<any[]>([]);
     const [bookForm, setBookForm] = useState({
         id:id,
+        book_id:'',
         title: '',
         author: '',
         publisher: '',
@@ -72,8 +76,11 @@ const CreateBook: React.FC = () => {
         const url = constants.BASE_URL + '/book/' + id;
         const response = await axios.get(url);
         updateBookId(response.data.data.book_id);
-        delete response.data.data.book_id;
+        // delete response.data.data.book_id;
         setBookForm(response.data.data);
+         // Reset preview image if the thumbnail was deleted
+    const thumbnail = response.data.data.book_media?.find((m: any) => m.thumbnail === 'thumbnail');
+    setPreviewImage(thumbnail ? `${constants.BASE_ASSET_URL}/storage/${thumbnail.media_path}` : '');
     }catch(err){
         if (axios.isAxiosError(err) && err.response) {
             console.error(err.response.data);
@@ -102,6 +109,7 @@ const CreateBook: React.FC = () => {
   useEffect(() => {
     fetchSizes();
     fetchBook();
+    
   }, []);
 
 
@@ -138,12 +146,19 @@ const CreateBook: React.FC = () => {
                     <div className='col-span-3 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Book ID</label>
                         <input
-                        type="text"
-                        placeholder="Book ID"
-                        value={bookProtected.book_id}
-                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 disabled:bg-yellow-100 disabled:cursor-not-allowed"
-                        disabled
+                            type="text"
+                            name="book_id"
+                            placeholder="Book ID"
+                            value={bookForm.book_id}
+                            onChange={(e) =>
+                                setBookForm((prevForm) => ({
+                                    ...prevForm,
+                                    book_id: e.target.value, // Allow editing
+                                }))
+                            }
+                            className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
                         />
+
                     </div>
                     <div className='col-span-12 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Title</label>
@@ -183,12 +198,12 @@ const CreateBook: React.FC = () => {
                     <div className='col-span-4 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Year of Publication</label>
                         <input
-                        type="number"
+                        type="text"
                         min={1200}
                         max={new Date().getFullYear()}
                         name="publication_year"
                         placeholder="Year of Publication"
-                        value={new Date().getFullYear()}
+                        value={bookForm.publication_year}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -278,22 +293,17 @@ const CreateBook: React.FC = () => {
                         />
                         </div>
                 </div>
-            </div>
-
-            <div className="col-span-2 flex flex-wrap flex-col gap-2">
-
-            </div>
-            <div className="col-span-4 flex flex-col gap-2">
-                <div className='grid grid-cols-12 gap-4'>
+                <div className="col-span-4 flex flex-col gap-2 mt-3">
+                <div className='grid grid-cols-12 gap-4 '>
                     <div className='col-span-12 flex flex-col gap-2 border-b'>
                         <label className="text-lg font-semibold text-gray-600">Costing and History</label>
                     </div>
-                    <div className='col-span-6 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2 hidden'>
                         <label className="text-sm font-semibold text-gray-600">Date Added</label>
                         <input
                         type="date"
                         name="add_date"
-                        value={bookForm.add_date}
+                        value={bookForm.add_date || new Date().toISOString().split('T')[0]} // Default to today's date
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -309,7 +319,7 @@ const CreateBook: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-12 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Valuation</label>
                         <input
                         type="text"
@@ -366,15 +376,43 @@ const CreateBook: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-12'>
-                    {bookForm?.book_media?.length > 0 && (
-                        <img 
-                            src={`${constants.BASE_ASSET_URL}/storage/${bookForm.book_media[bookForm?.book_media?.length - 1].media_path}`} 
-                            alt='404'
-                            style={{width: '100%', height: '320px', objectFit: 'cover', borderRadius: '15px'}} 
+                  
+                </div>
+            </div>
+            </div>
+            <div className="col-span-1 flex flex-wrap flex-col gap-2">
+            </div>
+            <div className="col-span-5 flex flex-wrap flex-col gap-2">
+            <div className="col-span-12">
+                {previewImage ? (
+                    <img 
+                    src={previewImage} 
+                    alt="Preview" 
+                    style={{ objectFit: 'cover', borderRadius: '15px' }} 
+                    />
+                ) : (
+                    (() => {
+                    const thumbnailImage = bookForm?.book_media?.find(media => media.thumbnail === 'thumbnail');
+                    // const lastImage = bookForm?.book_media?.length > 0 ? bookForm.book_media[bookForm.book_media.length - 1] : null;
+                    const imageUrl = thumbnailImage
+                        ? `${constants.BASE_ASSET_URL}/storage/${thumbnailImage.media_path}`
+                        // : lastImage
+                        // ? `${constants.BASE_ASSET_URL}/storage/${lastImage.media_path}`
+                        : null;
+
+                    return imageUrl ? (
+                        <img
+                        src={imageUrl}
+                        alt="Preview"
+                        style={{ objectFit: 'cover', borderRadius: '15px' }}
                         />
-                    )}
-                    </div>
+                    ) : (
+                        <div className="w-full h-[320px] flex items-center justify-center border border-gray-300 rounded-lg text-gray-400">
+                        No Image Available
+                        </div>
+                    );
+                    })()
+                )}
                 </div>
             </div>
             <div className="col-span-12 flex justify-between mt-4">
@@ -389,7 +427,7 @@ const CreateBook: React.FC = () => {
             </div>
         </form>
     </div>
-    <MediaGallery book_id={id} />
+    <MediaGallery book_id={id} onPreviewImage={(imageUrl) => setPreviewImage(imageUrl)} onMediaChange={fetchBook}/>
     <ToastContainer />
     </>
   );

@@ -149,15 +149,16 @@ const CreateEphemera: React.FC = () => {
                         />
                     </div>
                     <div className='col-span-4 flex flex-col gap-2'>
-                        <label className="text-sm font-semibold text-gray-600">Approximate Date</label>
+                        <label className="text-sm font-semibold text-gray-600">Approximate Year</label>
                         <input
-                        type="date"
-                        name="approximate_date"
-                        placeholder="Pages"
-                        value={ephemeraForm.approximate_date}
-                        onChange={handleInputChange}
-                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            type="number"
+                            name="approximate_date"
+                            placeholder="Enter Year"
+                            value={ephemeraForm.approximate_date}
+                            onChange={handleInputChange}// Restrict to current year
+                            className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
+
                     </div>
 
                     <div className='col-span-4 flex flex-col gap-2'>
@@ -189,22 +190,17 @@ const CreateEphemera: React.FC = () => {
                         >{ephemeraForm.condition}</textarea>
                     </div>
                 </div>
-            </div>
-
-            <div className="col-span-2 flex flex-wrap flex-col gap-2">
-
-            </div>
-            <div className="col-span-4 flex flex-col gap-2">
+                <div className="col-span-4 flex flex-col gap-2 mt-3">
                 <div className='grid grid-cols-12 gap-4'>
                     <div className='col-span-12 flex flex-col gap-2 border-b'>
                         <label className="text-lg font-semibold text-gray-600">Costing and History</label>
                     </div>
-                    <div className='col-span-6 flex flex-col gap-2'>
+                    <div className='hidden col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Date Added</label>
                         <input
                         type="date"
                         name="add_date"
-                        value={ephemeraForm.add_date}
+                        value={ephemeraForm.add_date || new Date().toISOString().split('T')[0]}// Default to today's date
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -220,7 +216,7 @@ const CreateEphemera: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-12 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Valuation</label>
                         <input
                         type="text"
@@ -279,6 +275,12 @@ const CreateEphemera: React.FC = () => {
                     </div>
                 </div>
             </div>
+            </div>
+
+            <div className="col-span-2 flex flex-wrap flex-col gap-2">
+
+            </div>
+          
             <div className="col-span-12 flex justify-between mt-4">
                 <button
                 type="button"

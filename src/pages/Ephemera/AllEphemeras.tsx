@@ -235,7 +235,7 @@ const AllEphemeras: React.FC = () => {
                 )}
                 </td>
                 <td className="border-b border-gray-50 p-1">{ephemera.ephemera_id}</td>
-                <td className="border-b border-gray-50 p-1">{ephemera.type}</td>
+                <td className="border-b border-gray-50 p-1">{ephemera.ephemera_type.type}</td>
                 <td className="border-b border-gray-50 p-1">{ephemera.details}</td>
                 <td className="border-b border-gray-50 p-1">{ephemera.size}</td>
                 <td className="border-b border-gray-50 p-1">{ephemera.condition}</td>

@@ -5,8 +5,8 @@ const constants = {
     BASE_URL: 'https://db.piscatoria.co.nz/backend/api',
     BASE_ASSET_URL: 'https://db.piscatoria.co.nz/backend/public',
 
-    // BASE_URL: 'http://localhost:8000/api',
-    // BASE_ASSET_URL: 'http://localhost:8000',
+     //BASE_URL: 'http://localhost:8000/api',
+     //BASE_ASSET_URL: 'http://localhost:8000',
 }
 
 export default constants;

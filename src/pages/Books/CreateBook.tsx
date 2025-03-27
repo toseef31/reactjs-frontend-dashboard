@@ -31,8 +31,14 @@ const CreateBook: React.FC = () => {
         buyer_name: '',
         buyer_email: '',
         valuation: '',
+        book_id: nextBook,
     });
-
+  useEffect(() => {
+        setBookForm(prevForm => ({
+            ...prevForm,
+            book_id: nextBook,  // Update book_id dynamically
+        }));
+    }, [nextBook]);
   const submitBook = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
@@ -130,12 +136,12 @@ const CreateBook: React.FC = () => {
                     <div className='col-span-3 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Book ID</label>
                         <input
-                        type="text"
-                        name="book_id"
-                        placeholder="Book ID"
-                        value={nextBook}
-                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 disabled:bg-yellow-100 disabled:cursor-not-allowed"
-                        disabled
+                            type="text"
+                            name="book_id"
+                            placeholder="Book ID"
+                            value={nextBook || ''}  // Ensure it's not null
+                            onChange={(e) => setNextBook(e.target.value)}  // Update state on input change
+                            className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 "
                         />
                     </div>
                     <div className='col-span-12 flex flex-col gap-2'>
@@ -176,7 +182,7 @@ const CreateBook: React.FC = () => {
                     <div className='col-span-4 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Year of Publication</label>
                         <input
-                        type="number"
+                        type="text"
                         min={1200}
                         max={new Date().getFullYear()}
                         name="publication_year"
@@ -274,25 +280,21 @@ const CreateBook: React.FC = () => {
                         >{bookForm.comment}</textarea>
                     </div>
                 </div>
-            </div>
-
-            <div className="col-span-2 flex flex-wrap flex-col gap-2">
-
-            </div>
-            <div className="col-span-4 flex flex-col gap-2">
+                <div className="col-span-4 flex flex-col gap-2 mt-3">
                 <div className='grid grid-cols-12 gap-4'>
                     <div className='col-span-12 flex flex-col gap-2 border-b'>
                         <label className="text-lg font-semibold text-gray-600">Costing and History</label>
                     </div>
-                    <div className='col-span-6 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2 hidden'>
                         <label className="text-sm font-semibold text-gray-600">Date Added</label>
                         <input
-                        type="date"
-                        name="add_date"
-                        value={bookForm.add_date}
-                        onChange={handleInputChange}
-                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            type="date"
+                            name="add_date"
+                            value={bookForm.add_date || new Date().toISOString().split('T')[0]} // Default to today's date
+                            onChange={handleInputChange}
+                            className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
+
                     </div>
                     <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Cost</label>
@@ -305,7 +307,7 @@ const CreateBook: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-12 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Valuation</label>
                         <input
                         type="text"
@@ -364,6 +366,12 @@ const CreateBook: React.FC = () => {
                     </div>
                 </div>
             </div>
+            </div>
+
+            <div className="col-span-2 flex flex-wrap flex-col gap-2">
+
+            </div>
+           
             <div className="col-span-12 flex justify-between mt-4">
                 <button
                 type="button"

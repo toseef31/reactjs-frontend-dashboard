@@ -13,7 +13,7 @@ const ECommerce: React.FC = () => {
   const randomvar = 'salam';
   return (
     <>
-      <WidgetCard parameter='books,ephemera,hardy_reels,lures,rods,penncatalogue'/>
+      <WidgetCard parameter='books,ephemera,hardy_reels,lures,rods,others_reels,others_tackle,use_tackle,penncatalogue'/>
     </>
   );
 };

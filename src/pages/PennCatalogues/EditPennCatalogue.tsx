@@ -11,6 +11,8 @@ const EditPennCatalogue: React.FC = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const isNewCreated = queryParams.get('newCreated') === 'true';
+    const [previewImage, setPreviewImage] = useState<string | null>(null);
+
 
     const [updated, setUpdated] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -54,6 +56,8 @@ const EditPennCatalogue: React.FC = () => {
         const url = constants.BASE_URL + '/penn-catalogue/' + id;
         const response = await axios.get(url);
         setPennCataloguesForm(response.data.data);
+        const thumbnail = response.data.data.penn_catalogue_media?.find((m: any) => m.thumbnail === 'thumbnail');
+        setPreviewImage(thumbnail ? `${constants.BASE_ASSET_URL}/storage/${thumbnail.media_path}` : '');
     }catch(err){
         if (axios.isAxiosError(err) && err.response) {
             console.error(err.response.data);
@@ -146,27 +150,22 @@ const EditPennCatalogue: React.FC = () => {
                     </div>
 
                 </div>
-            </div>
-
-            <div className="col-span-2 flex flex-wrap flex-col gap-2">
-
-            </div>
-            <div className="col-span-4 flex flex-col gap-2">
+                <div className="col-span-4 flex flex-col gap-2 mt-3">
                 <div className='grid grid-cols-12 gap-4'>
                     <div className='col-span-12 flex flex-col gap-2 border-b'>
                         <label className="text-lg font-semibold text-gray-600">Costing and History</label>
                     </div>
-                    <div className='col-span-6 flex flex-col gap-2'>
+                    {/* <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Date Added</label>
                         <input
                         type="date"
                         name="add_date"
-                        value={pennCataloguesForm.add_date}
+                        value={pennCataloguesForm.add_date || new Date().toISOString().split('T')[0]}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
-                    </div>
-                    <div className='col-span-6 flex flex-col gap-2'>
+                    </div> */}
+                    <div className='col-span-12 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Cost</label>
                         <input
                         type="number"
@@ -234,17 +233,49 @@ const EditPennCatalogue: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-12'>
-                    {pennCataloguesForm?.penn_catalogue_media?.length > 0 && (
-                        <img 
-                            src={`${constants.BASE_ASSET_URL}/storage/${pennCataloguesForm?.penn_catalogue_media[pennCataloguesForm?.penn_catalogue_media?.length-1].media_path}`} 
-                            alt='404'
-                            style={{width: '100%', height: '320px', objectFit: 'cover', borderRadius: '15px'}} 
-                        />
-                    )}
-                    </div>
+                 
                 </div>
             </div>
+            </div>
+
+            <div className="col-span-1 flex flex-wrap flex-col gap-2">
+
+            </div>
+            <div className="col-span-5 flex flex-wrap flex-col gap-2">
+            <div className="col-span-12">
+              {previewImage ? (
+                <img
+                  src={previewImage}
+                  alt="Preview"
+                  style={{  objectFit: 'cover', borderRadius: '15px' }}
+                />
+              ) : pennCataloguesForm?.penn_catalogue_media?.length > 0 ? (
+                (() => {
+                  const thumbnailImage = pennCataloguesForm.penn_catalogue_media.find(media => media.thumbnail === 'thumbnail');
+                  const imageUrl = thumbnailImage
+                    ? `${constants.BASE_ASSET_URL}/storage/${thumbnailImage.media_path}`
+                    : null;
+
+                  return imageUrl ? (
+                    <img
+                      src={imageUrl}
+                      alt="Preview"
+                      style={{  objectFit: 'cover', borderRadius: '15px' }}
+                    />
+                  ) : (
+                    <div className="w-full h-[320px] flex items-center justify-center border border-gray-300 rounded-lg text-gray-400">
+                      No Image Available
+                    </div>
+                  );
+                })()
+              ) : (
+                <div className="w-full h-[320px] flex items-center justify-center border border-gray-300 rounded-lg text-gray-400">
+                  No Image Available
+                </div>
+              )}
+            </div>
+          </div>
+            
             <div className="col-span-12 flex justify-between mt-4">
                 {error && <div className="text-red-500">{error.message+" : "+error.error}</div>}
                 <button
@@ -258,8 +289,12 @@ const EditPennCatalogue: React.FC = () => {
 
         </form>
     </div>
-    <MediaGallery pennCatalogue_id={id} />
-    <ToastContainer />
+    <MediaGallery
+        pennCatalogue_id={id}
+        onPreviewImage={(url) => setPreviewImage(url)}
+        onMediaChange={() => fetchPennCatalogue()}
+      />
+    {/* <ToastContainer /> */}
     </>
   );
 };

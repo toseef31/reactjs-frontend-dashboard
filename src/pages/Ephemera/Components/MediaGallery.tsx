@@ -5,14 +5,16 @@ import { toast, ToastContainer } from 'react-toastify';
 
 interface MediaGalleryProps {
     ephemera_id: number;
+    onPreviewImage: (imageUrl: string) => void;
+    onMediaChange: () => void;
 }
 
-const MediaGallery = ({ ephemera_id }: MediaGalleryProps) => {
+const MediaGallery = ({ ephemera_id, onPreviewImage, onMediaChange }: MediaGalleryProps) => {
     const [ephemeraMedia, setEphemeraMedia] = useState<any[]>([]);
     const [assetUrl, setAssetUrl] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const basePath = constants.BASE_ASSET_URL+assetUrl;
+    const basePath = constants.BASE_ASSET_URL + assetUrl;
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const getEphemeraMedia = async () => {
@@ -22,11 +24,7 @@ const MediaGallery = ({ ephemera_id }: MediaGalleryProps) => {
             setEphemeraMedia(response.data.data.media);
             setAssetUrl(response.data.data.media_path);
         } catch (err) {
-            if (axios.isAxiosError(err) && err.response) {
-                setError(err.response.data);
-            } else {
-                setError('An unexpected error occurred.');
-            }
+            setError('An unexpected error occurred.');
         } finally {
             setLoading(false);
         }
@@ -37,54 +35,58 @@ const MediaGallery = ({ ephemera_id }: MediaGalleryProps) => {
     }, [ephemera_id]);
 
     const deleteMedia = async (id: number) => {
-        const isConfirmed = window.confirm('Are you sure you want to delete this File?');
+        const confirm = window.confirm("Are you sure you want to delete this file?");
+        if (!confirm) return;
 
-        if (!isConfirmed) {
-          return; // Exit if the user cancels the action
-        }
         try {
             const url = `${constants.BASE_URL}/ephemera-media/delete`;
-            const response = await axios.post(url, { id });
-            toast.success(response.data.message);
+            await axios.post(url, { id });
+            toast.success("Deleted successfully!");
             getEphemeraMedia();
-        } catch (err) {
-            if (axios.isAxiosError(err) && err.response) {
-                setError(err.response.data);
-            } else {
-                setError('An unexpected error occurred.');
-            }
+            onMediaChange(); // Notify parent
+        } catch {
+            toast.error("Failed to delete media.");
         }
     };
-    const viewMedia = async (media_path: string) => {
-        window.open(`${media_path}`, '_blank');
+
+    const setAsThumbnail = async (mediaId: number, mediaPath: string) => {
+        try {
+            const url = `${constants.BASE_URL}/ephemera-media/set-thumbnail`;
+            await axios.post(url, { ephemera_id, media_id: mediaId });
+            toast.success("Thumbnail updated!");
+            onPreviewImage(mediaPath);
+            getEphemeraMedia();
+            onMediaChange();
+        } catch {
+            toast.error("Failed to set thumbnail.");
+        }
+    };
+
+    const viewMedia = (mediaPath: string) => {
+        window.open(mediaPath, "_blank");
     };
 
     const handleUploadClick = () => {
-        if (fileInputRef.current) {
-            fileInputRef.current.click(); // Trigger the hidden file input
-        }
+        fileInputRef.current?.click();
     };
+
     const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
-        if (files) {
-            const formData = new FormData();
-            formData.append('ephemera_id', String(ephemera_id));
-            for (let i = 0; i < files.length; i++) {
-                formData.append('media_file[]', files[i]); // Append each file to formData
-            }
+        if (!files) return;
 
-            try {
-                const url = `${constants.BASE_URL}/create-ephemera-media`;
-                await axios.post(url, formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                });
-                toast.success('Files uploaded successfully!');
-                getEphemeraMedia(); // Refresh media after upload
-            } catch (err) {
-                toast.error('Failed to upload files.');
-            }
+        const formData = new FormData();
+        formData.append('ephemera_id', String(ephemera_id));
+        Array.from(files).forEach(file => {
+            formData.append('media_file[]', file);
+        });
+
+        try {
+            const url = `${constants.BASE_URL}/create-ephemera-media`;
+            await axios.post(url, formData);
+            toast.success("Files uploaded!");
+            getEphemeraMedia();
+        } catch {
+            toast.error("Upload failed.");
         }
     };
 
@@ -95,26 +97,35 @@ const MediaGallery = ({ ephemera_id }: MediaGalleryProps) => {
         <div className="bg-white p-5 mt-3">
             <div className="text-lg font-semibold my-4">Ephemera Media</div>
             <div className="grid grid-cols-12 gap-2">
-                {ephemeraMedia.length > 0 ? (
-                    ephemeraMedia.slice().reverse().map((media) => (
-                        <div key={media.id} className="col-span-2 min-w-[150px] h-[150px] overflow-hidden border rounded-lg relative">
-                            <img src={`${basePath}${media.media_path}`} alt={media.media_path} className="w-full h-full object-cover" />
-                            <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40 flex items-baseline justify-between p-1">
-                                <button className="bg-primary text-white p-1 text-sm rounded" onClick={() => viewMedia(basePath+media.media_path)}>View</button>
-                                <button className="bg-danger text-white p-1 text-sm rounded" onClick={() => deleteMedia(media.id)}>Delete</button>
+                {ephemeraMedia.length > 0 ? ephemeraMedia.map((media) => (
+                    <div key={media.id} className="col-span-2 min-w-[150px] h-[150px] overflow-hidden border rounded-lg relative group">
+                        <img
+                            src={`${basePath}${media.media_path}`}
+                            alt={media.media_path}
+                            className="w-full h-full object-cover"
+                        />
+                        <div className="absolute top-0 right-2 mt-1 rounded p-1 bg-slate-300">
+                            <div className="relative">
+                                <button className="text-black text-xl font-bold focus:outline-none">&#8942;</button>
+                                <div className="absolute right-0 mt-0 hidden group-hover:block bg-white shadow-lg rounded-md text-sm z-10 min-w-[120px]">
+                                    <button onClick={() => viewMedia(basePath + media.media_path)} className="block w-full px-4 py-1 text-left hover:bg-gray-100">View</button>
+                                    <button onClick={() => deleteMedia(media.id)} className="block w-full px-4 py-1 text-left hover:bg-gray-100">Delete</button>
+                                    <button onClick={() => onPreviewImage(basePath + media.media_path)} className="block w-full px-4 py-1 text-left hover:bg-gray-100">Preview</button>
+                                    <button onClick={() => setAsThumbnail(media.id, basePath + media.media_path)} className="block w-full px-4 py-1 text-left hover:bg-gray-100">Thumbnail</button>
+                                </div>
                             </div>
                         </div>
-                    ))
-                ) : (
+                    </div>
+                )) : (
                     <div className="col-span-12 text-center">No media available</div>
                 )}
+
                 <div className="col-span-2 min-w-[150px] h-[150px] overflow-hidden border border-dashed rounded-lg relative">
                     <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center p-1">
                         <button onClick={handleUploadClick} className="bg-primary text-white p-1 text-sm rounded">
                             Upload
                         </button>
                     </div>
-                    {/* Hidden File Input */}
                     <input
                         ref={fileInputRef}
                         type="file"

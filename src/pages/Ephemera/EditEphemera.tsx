@@ -12,6 +12,8 @@ const EditEphemera: React.FC = () => {
     const queryParams = new URLSearchParams(location.search);
     const isNewCreated = queryParams.get('newCreated') === 'true';
     const [types, setTypes] = useState<any[]>([]);
+    const [previewImage, setPreviewImage] = useState<string>('');
+
 
     const [ephemeraProtected, setEphemeraProtected] = useState({
         id:id,
@@ -163,9 +165,9 @@ const EditEphemera: React.FC = () => {
                         />
                     </div>
                     <div className='col-span-4 flex flex-col gap-2'>
-                        <label className="text-sm font-semibold text-gray-600">Approximate Date</label>
+                        <label className="text-sm font-semibold text-gray-600">Approximate Year</label>
                         <input
-                        type="date"
+                        type="text"
                         name="approximate_date"
                         placeholder="Pages"
                         value={ephemeraForm.approximate_date}
@@ -178,18 +180,19 @@ const EditEphemera: React.FC = () => {
                         <label className="text-sm font-semibold text-gray-600">Type</label>
                         <select
                             name="type"
+                            value={ephemeraForm.type || ""} // Ensure the correct value is selected on edit
                             onChange={handleInputChange}
                             required
                             className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            >
+                        >
                             <option value="">Select</option>
                             {types.map((size) => (
                                 <option key={size.id} value={size.id}>
                                     {size.type}
                                 </option>
                             ))}
-                               
                         </select>
+
 
                     </div>
                     <div className='col-span-12 flex flex-col gap-2'>
@@ -203,22 +206,17 @@ const EditEphemera: React.FC = () => {
                         >{ephemeraForm.condition}</textarea>
                     </div>
                 </div>
-            </div>
-
-            <div className="col-span-2 flex flex-wrap flex-col gap-2">
-
-            </div>
-            <div className="col-span-4 flex flex-col gap-2">
+                <div className="col-span-4 flex flex-col gap-2">
                 <div className='grid grid-cols-12 gap-4'>
                     <div className='col-span-12 flex flex-col gap-2 border-b'>
                         <label className="text-lg font-semibold text-gray-600">Costing and History</label>
                     </div>
-                    <div className='col-span-6 flex flex-col gap-2'>
+                    <div className='hidden col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Date Added</label>
                         <input
                         type="date"
                         name="add_date"
-                        value={ephemeraForm.add_date}
+                        value={ephemeraForm.add_date || new Date().toISOString().split('T')[0]}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -234,7 +232,7 @@ const EditEphemera: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-12 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Valuation</label>
                         <input
                         type="text"
@@ -291,17 +289,49 @@ const EditEphemera: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-12'>
-                    {ephemeraForm?.ephemera_media?.length > 0 && (
-                        <img 
-                            src={`${constants.BASE_ASSET_URL}/storage/${ephemeraForm.ephemera_media[ephemeraForm?.ephemera_media?.length-1].media_path}`} 
-                            alt='404'
-                            style={{width: '100%', height: '320px', objectFit: 'cover', borderRadius: '15px'}} 
-                        />
-                    )}
-                    </div>
+                 
                 </div>
             </div>
+            </div>
+            <div className="col-span-1 flex flex-wrap flex-col gap-2">
+            </div>
+            <div className="col-span-5 flex flex-wrap flex-col gap-2">
+                <div className="col-span-12">
+                    {(() => {
+                    const thumbnailImage = ephemeraForm?.ephemera_media?.find(media => media.thumbnail === 'thumbnail');
+                    // const lastImage = ephemeraForm?.ephemera_media?.length > 0
+                    //     ? ephemeraForm.ephemera_media[ephemeraForm.ephemera_media.length - 1]
+                    //     : null;
+
+                    if (thumbnailImage) {
+                        return (
+                        <img
+                            src={`${constants.BASE_ASSET_URL}/storage/${thumbnailImage.media_path}`}
+                            alt="Ephemera Preview"
+                            style={{ width: '100%', height: '320px', objectFit: 'cover', borderRadius: '15px' }}
+                        />
+                        );
+                    } 
+                    // else if (lastImage) {
+                    //     return (
+                    //     <img
+                    //         src={`${constants.BASE_ASSET_URL}/storage/${lastImage.media_path}`}
+                    //         alt="Ephemera Preview"
+                    //         style={{ width: '100%', height: '320px', objectFit: 'cover', borderRadius: '15px' }}
+                    //     />
+                    //     );
+                    // } 
+                    else {
+                        return (
+                        <div className="w-full h-[320px] flex items-center justify-center border border-gray-300 rounded-lg text-gray-400">
+                            No Image Available
+                        </div>
+                        );
+                    }
+                    })()}
+                </div>
+                </div>
+           
             <div className="col-span-12 flex justify-between mt-4">
                 {error && <div className="text-red-500">{error.message+" : "+error.error}</div>}
                 <button
@@ -314,8 +344,11 @@ const EditEphemera: React.FC = () => {
             </div>
         </form>
     </div>
-    <MediaGallery ephemera_id={id} />
-    <ToastContainer />
+    <MediaGallery
+    ephemera_id={id}
+    onPreviewImage={(url) => setPreviewImage(url)}
+    onMediaChange={fetchEphemera}
+/>    <ToastContainer />
     </>
   );
 };

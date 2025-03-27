@@ -10,6 +10,9 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
     const [widgetData, setWidgetData] = useState({
         users: null,
         hardy_reels: null,
+        others_reels: null,
+        others_tackle: null,
+        use_tackle: null,
         books: null,
         ephemera: null,
         lures: null,
@@ -27,6 +30,7 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
                     url += `?${parameter.split(',').map(param => `${param}=1`).join('&')}`;
                 }
                 const response = await axios.get(url);
+                console.log(response.data.data);
                 setWidgetData(response.data.data);
                 setLoading(false);
             } catch (error) {
@@ -136,6 +140,60 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
                         </p>
                         <p className="text-gray-600">
                             Total Valuation Cost: ${widgetData.rods.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
+                        </p>
+                    </div>
+                )}
+
+                
+               {widgetData.others_reels && (
+                    <div className="bg-white shadow-lg rounded-lg p-6">
+                        <h2 className="text-xl font-bold mb-4">Other Reels</h2>
+                        <p className="text-gray-600">
+                            Next ID: <span className="text-lg font-bold">{widgetData.others_reels.next_id}</span>
+                        </p>
+                        <p className="text-gray-700 text-lg font-semibold">
+                            Count: {widgetData.others_reels.count || 0}
+                        </p>
+                        <p className="text-gray-600">
+                            Total Cost: ${widgetData.others_reels.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
+                        </p>
+                        <p className="text-gray-600">
+                            Total Valuation Cost: ${widgetData.others_reels.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
+                        </p>
+                    </div>
+                )}
+
+               {widgetData.others_tackle && (
+                    <div className="bg-white shadow-lg rounded-lg p-6">
+                        <h2 className="text-xl font-bold mb-4">Other Tackles</h2>
+                        <p className="text-gray-600">
+                            Next ID: <span className="text-lg font-bold">{widgetData.others_tackle.next_id}</span>
+                        </p>
+                        <p className="text-gray-700 text-lg font-semibold">
+                            Count: {widgetData.others_tackle.count || 0}
+                        </p>
+                        <p className="text-gray-600">
+                            Total Cost: ${widgetData.others_tackle.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
+                        </p>
+                        <p className="text-gray-600">
+                            Total Valuation Cost: ${widgetData.others_tackle.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
+                        </p>
+                    </div>
+                )}
+                {widgetData.use_tackle && (
+                    <div className="bg-white shadow-lg rounded-lg p-6">
+                        <h2 className="text-xl font-bold mb-4">In Use Tackles</h2>
+                        <p className="text-gray-600">
+                            Next ID: <span className="text-lg font-bold">{widgetData.use_tackle.next_id}</span>
+                        </p>
+                        <p className="text-gray-700 text-lg font-semibold">
+                            Count: {widgetData.use_tackle.count || 0}
+                        </p>
+                        <p className="text-gray-600">
+                            Total Cost: ${widgetData.use_tackle.total_cost_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
+                        </p>
+                        <p className="text-gray-600">
+                            Total Valuation Cost: ${widgetData.use_tackle.total_valuation_price?.toLocaleString('en-US', { minimumFractionDigits: 0 }).replace('.', ',') || '0,00'}
                         </p>
                     </div>
                 )}
