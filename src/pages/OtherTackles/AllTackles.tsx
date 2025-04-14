@@ -123,7 +123,7 @@ const AllTackles: React.FC = () => {
 
   return (
     <>
-      <Breadcrumb pageName="All Tackle" backLink="/" createLink='/othertackles/create' />
+      <Breadcrumb pageName="All Other Items" backLink="/" createLink='/othertackles/create' />
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3">
         <form className="grid grid-cols-12 gap-1" onSubmit={handleSearch}>
           <input
@@ -205,7 +205,7 @@ const AllTackles: React.FC = () => {
               <th className="border-b border-gray-300 p-2 w-20">Tackle ID</th>
               <th className="border-b border-gray-300 p-2 w-30">Makers Name</th>
               <th className="border-b border-gray-300 p-2 w-30">Model</th>
-              <th className="border-b border-gray-300 p-2 w-30">Sub Model</th>
+              {/* <th className="border-b border-gray-300 p-2 w-30">Sub Model</th> */}
               <th className="border-b border-gray-300 p-2 w-30">Size</th>
               <th className="border-b border-gray-300 p-2 w-20">Cost</th>
               <th className="border-b border-gray-300 p-2 w-30 hidden">Sale Cost</th>
@@ -237,7 +237,7 @@ const AllTackles: React.FC = () => {
                 <td className="border-b border-gray-50 p-1">{othertackles.tackle_id}</td>
                 <td className="border-b border-gray-50 p-1">{othertackles.makers_name}</td>
                 <td className="border-b border-gray-50 p-1">{othertackles.model}</td>
-                <td className="border-b border-gray-50 p-1">{othertackles.sub_model}</td>
+                {/* <td className="border-b border-gray-50 p-1">{othertackles.sub_model}</td> */}
                 <td className="border-b border-gray-50 p-1">{othertackles.size}</td>
                 <td className="border-b border-gray-50 p-1">{Math.floor(othertackles.cost_price)}</td>
                 <td className="border-b border-gray-50 p-1 hidden">{othertackles.sold_price}</td>

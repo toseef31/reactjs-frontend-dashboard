@@ -151,7 +151,7 @@ const EditTackles: React.FC = () => {
                         />
                     </div>
 
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    {/* <div className='col-span-4 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Sub Model</label>
                         <input
                         type="text"
@@ -161,7 +161,7 @@ const EditTackles: React.FC = () => {
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
-                    </div>
+                    </div> */}
 
                     <div className='col-span-4 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Approximate Date</label>
@@ -186,7 +186,7 @@ const EditTackles: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    {/* <div className='col-span-4 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Serial Number</label>
                         <input
                         type="text"
@@ -196,7 +196,7 @@ const EditTackles: React.FC = () => {
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
-                    </div>
+                    </div> */}
                     <div className='col-span-4 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Type</label>
                         <select

@@ -193,7 +193,7 @@ const AllEphemeras: React.FC = () => {
             {/* Table Header */}
             <tr className="py-2">
               <th className="border-b border-gray-300 p-2"></th>
-              <th className="border-b border-gray-300 p-2 w-20">Thumbnail</th>
+              {/* <th className="border-b border-gray-300 p-2 w-20">Thumbnail</th> */}
               <th className="border-b border-gray-300 p-2 w-40">Ephemera ID</th>
               <th className="border-b border-gray-300 p-2 w-40">Ephemera Type</th>
               <th className="border-b border-gray-300 p-2">Details</th>
@@ -225,7 +225,7 @@ const AllEphemeras: React.FC = () => {
                   <button onClick={() => deleteEphemera(ephemera.id)} className="text-red-500 font-bold">Delete</button>
                   </div>
                 </td>
-                <td className="border-b border-gray-50 p-1">
+                {/* <td className="border-b border-gray-50 p-1">
                 {(() => {
                   const thumbnailImage = ephemera?.ephemera_media?.find(
                     (media) => media.thumbnail === 'thumbnail'
@@ -243,7 +243,7 @@ const AllEphemeras: React.FC = () => {
                   }
                 })()}
 
-                </td>
+                </td> */}
                 <td className="border-b border-gray-50 p-1">{ephemera.ephemera_id}</td>
                 <td className="border-b border-gray-50 p-1">{ephemera.ephemera_type.type}</td>
                 <td className="border-b border-gray-50 p-1">{ephemera.details}</td>

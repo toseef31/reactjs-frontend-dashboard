@@ -165,7 +165,7 @@ const WidgetCard = ({ parameter }: WidgetCardProps) => {
 
                {widgetData.others_tackle && (
                     <div className="bg-white shadow-lg rounded-lg p-6">
-                        <h2 className="text-xl font-bold mb-4">Other Tackles</h2>
+                        <h2 className="text-xl font-bold mb-4">Other Items</h2>
                         <p className="text-gray-600">
                             Next ID: <span className="text-lg font-bold">{widgetData.others_tackle.next_id}</span>
                         </p>

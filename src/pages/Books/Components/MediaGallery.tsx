@@ -100,7 +100,7 @@ const MediaGallery = ({ book_id, onPreviewImage, onMediaChange }: MediaGalleryPr
                 media_id: mediaId,
             });
             onPreviewImage(media_file);
-            toast.success('Thumbnail set successfully!');
+            // toast.success('Thumbnail set successfully!');
             getBookMedia(); // Refresh media list to reflect change
             onMediaChange(); 
         } catch (err) {
@@ -147,17 +147,17 @@ const MediaGallery = ({ book_id, onPreviewImage, onMediaChange }: MediaGalleryPr
                             Delete
                             </button>
                             <button
-                            onClick={() => onPreviewImage(basePath + media.media_path)}
+                            onClick={() => setAsThumbnail(media.id, basePath + media.media_path)}
                             className="block w-full px-4 py-1 text-left hover:bg-gray-100"
                             >
                             Preview
                             </button>
-                            <button
+                            {/* <button
                             onClick={() => setAsThumbnail(media.id, basePath + media.media_path)} // Replace with your thumbnail logic
                             className="block w-full px-4 py-1 text-left hover:bg-gray-100"
                             >
                             Thumbnail
-                            </button>
+                            </button> */}
                         </div>
                         </div>
                     </div>

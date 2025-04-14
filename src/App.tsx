@@ -143,9 +143,9 @@ function App() {
             <Route path="/penn-catalogues/create" element={<><PageTitle title="Create Penn Catalogue | Collection Portal" /> <CreatePennCatalogue /></>} />
             <Route path="/penn-catalogues/edit/:id" element={<><PageTitle title="Edit Penn Catalogue | Collection Portal" /> <EditPennCatalogue /></>} />
 
-            <Route path="/othertackles/all" element={<><PageTitle title="All Other Tackles | Collection Portal" /> <AllTackles /></>} />
-            <Route path="/othertackles/create" element={<><PageTitle title="Create Other Tackle | Collection Portal" /> <CreateTackle /></>} />
-            <Route path="/othertackles/edit/:id" element={<><PageTitle title="Edit Other Tackle | Collection Portal" /> <EditTackle /></>} />
+            <Route path="/othertackles/all" element={<><PageTitle title="All Other Items | Collection Portal" /> <AllTackles /></>} />
+            <Route path="/othertackles/create" element={<><PageTitle title="Create Other Item | Collection Portal" /> <CreateTackle /></>} />
+            <Route path="/othertackles/edit/:id" element={<><PageTitle title="Edit Other Item | Collection Portal" /> <EditTackle /></>} />
 
             <Route path="/inusetackles/all" element={<><PageTitle title="All In Use Tackles | Collection Portal" /> <AllInUseTackles /></>} />
             <Route path="/inusetackles/create" element={<><PageTitle title="Create In Use Tackle | Collection Portal" /> <CreateInUseTackle /></>} />

@@ -61,7 +61,7 @@ const CreateEphemera: React.FC = () => {
   }
   const fetchTypes = async () => {
     try{
-        const url = constants.BASE_URL + '/types';
+        const url = constants.BASE_URL + '/alltypes';
         const response = await axios.get(url);
         setTypes(response.data.data);
     }catch(err){

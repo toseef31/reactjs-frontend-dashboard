@@ -232,7 +232,7 @@ const AllBooks: React.FC = () => {
       <th className="border-b border-gray-300 p-2 w-10 pl-4">&nbsp;</th>
       <th className="border-b border-gray-300 p-2 w-10"></th>
       <th className="border-b border-gray-300 p-2 w-40">Book ID</th>
-      <th className="border-b border-gray-300 p-2 w-20">Thumbnail</th>
+      {/* <th className="border-b border-gray-300 p-2 w-20">Thumbnail</th> */}
       <th className="border-b border-gray-300 p-2">Book Name</th>
       <th className="border-b border-gray-300 p-2 w-40">Author</th>
       <th className="border-b border-gray-300 p-2 w-40">Publisher</th>
@@ -271,7 +271,7 @@ const AllBooks: React.FC = () => {
           </div>
         </td>
         <td className="border-b border-gray-50 p-1">{book.book_id}</td>
-        <td className="border-b border-gray-50 p-1">
+        {/* <td className="border-b border-gray-50 p-1">
         {(() => {
           const thumbnailImage = book?.book_media?.find(media => media.thumbnail === 'thumbnail');
           // const firstImage = book?.book_media?.[0];
@@ -297,7 +297,7 @@ const AllBooks: React.FC = () => {
             ) : null;
         })()}
 
-        </td>
+        </td> */}
         <td className="border-b border-gray-50 p-1">{book.title}</td>
         <td className="border-b border-gray-50 p-1">{book.author}</td>
         <td className="border-b border-gray-50 p-1">{book.publisher}</td>

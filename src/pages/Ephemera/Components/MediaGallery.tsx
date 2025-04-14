@@ -53,7 +53,7 @@ const MediaGallery = ({ ephemera_id, onPreviewImage, onMediaChange }: MediaGalle
         try {
             const url = `${constants.BASE_URL}/ephemera-media/set-thumbnail`;
             await axios.post(url, { ephemera_id, media_id: mediaId });
-            toast.success("Thumbnail updated!");
+            // toast.success("Thumbnail updated!");
             onPreviewImage(mediaPath);
             getEphemeraMedia();
             onMediaChange();
@@ -110,8 +110,8 @@ const MediaGallery = ({ ephemera_id, onPreviewImage, onMediaChange }: MediaGalle
                                 <div className="absolute right-0 mt-0 hidden group-hover:block bg-white shadow-lg rounded-md text-sm z-10 min-w-[120px]">
                                     <button onClick={() => viewMedia(basePath + media.media_path)} className="block w-full px-4 py-1 text-left hover:bg-gray-100">View</button>
                                     <button onClick={() => deleteMedia(media.id)} className="block w-full px-4 py-1 text-left hover:bg-gray-100">Delete</button>
-                                    <button onClick={() => onPreviewImage(basePath + media.media_path)} className="block w-full px-4 py-1 text-left hover:bg-gray-100">Preview</button>
-                                    <button onClick={() => setAsThumbnail(media.id, basePath + media.media_path)} className="block w-full px-4 py-1 text-left hover:bg-gray-100">Thumbnail</button>
+                                    <button onClick={() => setAsThumbnail(media.id, basePath + media.media_path)} className="block w-full px-4 py-1 text-left hover:bg-gray-100">Preview</button>
+                                    {/* <button onClick={() => setAsThumbnail(media.id, basePath + media.media_path)} className="block w-full px-4 py-1 text-left hover:bg-gray-100">Thumbnail</button> */}
                                 </div>
                             </div>
                         </div>

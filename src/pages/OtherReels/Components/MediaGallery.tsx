@@ -52,7 +52,7 @@ const MediaGallery = ({ reel_id, onPreviewImage, onMediaChange }: MediaGalleryPr
                 reel_id,
                 media_id: mediaId,
             });
-            toast.success('Thumbnail updated');
+            // toast.success('Thumbnail updated');
             onPreviewImage?.(fullPath);
             await getReelMedia();
             onMediaChange?.();
@@ -110,8 +110,8 @@ const MediaGallery = ({ reel_id, onPreviewImage, onMediaChange }: MediaGalleryPr
                                         <div className="absolute right-0 mt-0 hidden group-hover:block bg-white shadow-lg rounded-md text-sm z-10 min-w-[120px]">
                                             <button onClick={() => viewMedia(fullPath)} className="block w-full px-4 py-1 text-left hover:bg-gray-100">View</button>
                                             <button onClick={() => deleteMedia(media.id)} className="block w-full px-4 py-1 text-left hover:bg-gray-100">Delete</button>
-                                            <button onClick={() => onPreviewImage?.(fullPath)} className="block w-full px-4 py-1 text-left hover:bg-gray-100">Preview</button>
-                                            <button onClick={() => setAsThumbnail(media.id, fullPath)} className="block w-full px-4 py-1 text-left hover:bg-gray-100">Thumbnail</button>
+                                            <button onClick={() => setAsThumbnail(media.id, fullPath)} className="block w-full px-4 py-1 text-left hover:bg-gray-100">Preview</button>
+                                            {/* <button onClick={() => setAsThumbnail(media.id, fullPath)} className="block w-full px-4 py-1 text-left hover:bg-gray-100">Thumbnail</button> */}
                                         </div>
                                     </div>
                                 </div>

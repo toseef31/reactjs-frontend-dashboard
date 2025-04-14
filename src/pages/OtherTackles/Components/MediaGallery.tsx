@@ -60,7 +60,7 @@ const MediaGallery = ({ tackle_id, onPreviewImage, onMediaChange }: MediaGallery
         media_id: mediaId,
       });
       onPreviewImage?.(media_file);
-      toast.success('Thumbnail set successfully!');
+      // toast.success('Thumbnail set successfully!');
       getOtherTackleMedia();
       onMediaChange?.();
     } catch (err) {
@@ -135,17 +135,17 @@ const MediaGallery = ({ tackle_id, onPreviewImage, onMediaChange }: MediaGallery
                       Delete
                     </button>
                     <button
-                      onClick={() => onPreviewImage?.(basePath + media.media_path)}
+                      onClick={() => setAsThumbnail(media.id, basePath + media.media_path)}
                       className="block w-full px-4 py-1 text-left hover:bg-gray-100"
                     >
                       Preview
                     </button>
-                    <button
+                    {/* <button
                       onClick={() => setAsThumbnail(media.id, basePath + media.media_path)}
                       className="block w-full px-4 py-1 text-left hover:bg-gray-100"
                     >
                       Thumbnail
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>

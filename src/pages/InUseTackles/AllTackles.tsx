@@ -123,7 +123,7 @@ const AllTackles: React.FC = () => {
 
   return (
     <>
-      <Breadcrumb pageName="All Tackle" backLink="/" createLink='/inusetackles/create' />
+      <Breadcrumb pageName="All Other Items" backLink="/" createLink='/inusetackles/create' />
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3">
         <form className="grid grid-cols-12 gap-1" onSubmit={handleSearch}>
           <input
