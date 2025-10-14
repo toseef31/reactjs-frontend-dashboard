@@ -4,6 +4,7 @@ import axios from 'axios';
 import constants from '../../Constants';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import { getYears } from '../../utils/getYear';
 
 const CreateTackle: React.FC = () => {
     const navigate = useNavigate();
@@ -28,6 +29,8 @@ const CreateTackle: React.FC = () => {
         buyer_email: '',
         valuation: '',
     });
+
+    const years = getYears();
 
   const submitTackles = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -151,7 +154,7 @@ const CreateTackle: React.FC = () => {
                         />
                     </div> */}
 
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    {/* <div className='col-span-4 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Approximate Date</label>
                         <input
                         type="date"
@@ -161,6 +164,23 @@ const CreateTackle: React.FC = () => {
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
+                    </div> */}
+
+                    <div className='col-span-4 flex flex-col gap-2'>
+                        <label className="text-sm font-semibold text-gray-600">Year</label>
+                        <select
+                            name="approximate_date"
+                                  value={tackleForm.approximate_date}
+                            onChange={handleInputChange}
+                            className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                            <option value="">Select Year</option>
+                            {years.map((year) => (
+                                <option key={year} value={year}>
+                                    {year}
+                                </option>
+                            ))}
+                        </select>
                     </div>
 
                     <div className='col-span-4 flex flex-col gap-2'>

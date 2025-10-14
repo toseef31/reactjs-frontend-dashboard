@@ -18,8 +18,8 @@ const AllBooks: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<any | null>(null);
   const [pageInfo, setPageInfo] = useState({
-      current_page: 1,
-      total: 1,
+    current_page: 1,
+    total: 1,
   });
   const [searchParams, setSearchParams] = useState({
     book_id: '',
@@ -33,12 +33,12 @@ const AllBooks: React.FC = () => {
 
   const fetchBooks = async (params = {}, nextPageUrl = null, perPage = 25) => {
     setLoading(true);
-  
+
     // Filter out empty parameters
     const filteredParams = Object.fromEntries(
       Object.entries(params).filter(([_, value]) => value !== '')
     );
-  
+
     try {
       const url = nextPageUrl || constants.BASE_URL + '/books';
       const response = await axios.get(url, { params: { ...filteredParams, per_page: perPage } });
@@ -55,13 +55,13 @@ const AllBooks: React.FC = () => {
       if (axios.isAxiosError(error) && error.response) {
         setError(error.response.data);
       } else {
-          console.error('Unexpected Error:', error);
-          toast.error('An unexpected error occurred. Please try again.');
+        console.error('Unexpected Error:', error);
+        toast.error('An unexpected error occurred. Please try again.');
       }
     }
     setLoading(false);
   };
-  
+
 
   const handleNextPage = async () => {
     fetchBooks(searchParams, nextPage);
@@ -227,51 +227,51 @@ const AllBooks: React.FC = () => {
       <div className="w-full overflow-x-auto rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-3 mt-2">
         {/* Table and Pagination */}
         <table className="min-w-full border-collapse border border-gray-200 rounded-md">
-  <thead className="bg-gray-100 text-left text-gray-600">
-    <tr className="py-2">
-      <th className="border-b border-gray-300 p-2 w-10 pl-4">&nbsp;</th>
-      <th className="border-b border-gray-300 p-2 w-10"></th>
-      <th className="border-b border-gray-300 p-2 w-40">Book ID</th>
-      {/* <th className="border-b border-gray-300 p-2 w-20">Thumbnail</th> */}
-      <th className="border-b border-gray-300 p-2">Book Name</th>
-      <th className="border-b border-gray-300 p-2 w-40">Author</th>
-      <th className="border-b border-gray-300 p-2 w-40">Publisher</th>
-      <th className="border-b border-gray-300 p-2 w-20">Year</th>
-      <th className="border-b border-gray-300 p-2 w-30">Edition</th>
-    </tr>
-  </thead>
-  <tbody>
-    {loading ? (
-      <tr>
-        <td colSpan={7} className="text-center">Loading...</td>
-      </tr>
-    ) : error ? (
-      <tr>
-        <td colSpan={7} className="text-center">Error: {error.message}</td>
-      </tr>
-    ) : null}
-    {books.map((book) => (
-      <tr className="hover:bg-gray-50" key={book.id}>
-        <td className="border-b border-gray-50 p-1 w-10 pl-4">
-          <input
-            type="checkbox"
-            className="w-4 h-4"
-            name="id"
-            value={book.id}
-            onChange={() => handleCheckboxChange(book.id)}
-          />
-        </td>
-        <td className="border-b border-gray-50 p-1 w-10 pr-5 relative">
-          <div className="action-buttons w-60">
-            <Link to={`/books/edit/${book.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
-            <span className="mx-2"></span>
-            <button onClick={() => duplicateBook(book.id)} className="text-green-500 font-bold hover:underline">Duplicate</button>
-            <span className="mx-2"></span>
-            <button onClick={() => deleteBook(book.id)} className="text-red-500 font-bold">Delete</button>
-          </div>
-        </td>
-        <td className="border-b border-gray-50 p-1">{book.book_id}</td>
-        {/* <td className="border-b border-gray-50 p-1">
+          <thead className="bg-gray-100 text-left text-gray-600">
+            <tr className="py-2">
+              <th className="border-b border-gray-300 p-2 w-10 pl-4">&nbsp;</th>
+              <th className="border-b border-gray-300 p-2 w-10"></th>
+              <th className="border-b border-gray-300 p-2 w-40">Book ID</th>
+              {/* <th className="border-b border-gray-300 p-2 w-20">Thumbnail</th> */}
+              <th className="border-b border-gray-300 p-2">Book Name</th>
+              <th className="border-b border-gray-300 p-2 w-40">Author</th>
+              <th className="border-b border-gray-300 p-2 w-40">Publisher</th>
+              <th className="border-b border-gray-300 p-2 w-20">Year</th>
+              <th className="border-b border-gray-300 p-2 w-30">Edition</th>
+            </tr>
+          </thead>
+          <tbody>
+            {loading ? (
+              <tr>
+                <td colSpan={7} className="text-center">Loading...</td>
+              </tr>
+            ) : error ? (
+              <tr>
+                <td colSpan={7} className="text-center">Error: {error.message}</td>
+              </tr>
+            ) : null}
+            {books.map((book) => (
+              <tr className="hover:bg-gray-50" key={book.id}>
+                <td className="border-b border-gray-50 p-1 w-10 pl-4">
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4"
+                    name="id"
+                    value={book.id}
+                    onChange={() => handleCheckboxChange(book.id)}
+                  />
+                </td>
+                <td className="border-b border-gray-50 p-1 w-10 pr-5 relative">
+                  <div className="action-buttons w-60">
+                    <Link to={`/books/edit/${book.id}`} className="text-yellow-500 font-bold hover:underline">Edit</Link>
+                    <span className="mx-2"></span>
+                    <button onClick={() => duplicateBook(book.id)} className="text-green-500 font-bold hover:underline">Duplicate</button>
+                    <span className="mx-2"></span>
+                    <button onClick={() => deleteBook(book.id)} className="text-red-500 font-bold">Delete</button>
+                  </div>
+                </td>
+                <td className="border-b border-gray-50 p-1">{book.book_id}</td>
+                {/* <td className="border-b border-gray-50 p-1">
         {(() => {
           const thumbnailImage = book?.book_media?.find(media => media.thumbnail === 'thumbnail');
           // const firstImage = book?.book_media?.[0];
@@ -298,15 +298,15 @@ const AllBooks: React.FC = () => {
         })()}
 
         </td> */}
-        <td className="border-b border-gray-50 p-1">{book.title}</td>
-        <td className="border-b border-gray-50 p-1">{book.author}</td>
-        <td className="border-b border-gray-50 p-1">{book.publisher}</td>
-        <td className="border-b border-gray-50 p-1">{book.publication_year}</td>
-        <td className="border-b border-gray-50 p-1">{book.edition}</td>
-      </tr>
-    ))}
-  </tbody>
-</table>
+                <td className="border-b border-gray-50 p-1">{book.title}</td>
+                <td className="border-b border-gray-50 p-1">{book.author}</td>
+                <td className="border-b border-gray-50 p-1">{book.publisher}</td>
+                <td className="border-b border-gray-50 p-1">{book.publication_year}</td>
+                <td className="border-b border-gray-50 p-1">{book.edition}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
         {/* Pagination Controls */}
         <div className="flex justify-between items-center mt-3">

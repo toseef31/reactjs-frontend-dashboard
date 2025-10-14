@@ -5,6 +5,7 @@ import axios from 'axios';
 import constants from '../../Constants';
 import { toast, ToastContainer } from 'react-toastify';
 import MediaGallery from './Components/MediaGallery';
+import { getYears } from '../../utils/getYear';
 
 const EditRods: React.FC = () => {
     const { id } = useParams();
@@ -40,7 +41,7 @@ const EditRods: React.FC = () => {
         valuation: '',
         rods_media: [],
     });
-      
+    const years = getYears();
     const updateRodsId = (newRodsId:string) => {
         setRodsProtected((prevState) => ({
           ...prevState, // Keep the existing state
@@ -166,6 +167,23 @@ const EditRods: React.FC = () => {
                     </div>
 
                     <div className='col-span-4 flex flex-col gap-2'>
+                        <label className="text-sm font-semibold text-gray-600">Year</label>
+                        <select
+                            name="approximate_date"
+                            value={rodsForm.approximate_date}
+                            onChange={handleInputChange}
+                            className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                            <option value="">Select Year</option>
+                            {years.map((year) => (
+                                <option key={year} value={year}>
+                                    {year}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    {/* <div className='col-span-4 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Approximate Date</label>
                         <input
                         type="date"
@@ -175,7 +193,7 @@ const EditRods: React.FC = () => {
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
-                    </div>
+                    </div> */}
 
                     <div className='col-span-4 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Size</label>

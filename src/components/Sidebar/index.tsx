@@ -714,7 +714,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                 (isActive && '!text-white')
                               }
                             >
-                              All Other Items
+                              {/* All Other Items */}
+                              All Inuse Tackles
                             </NavLink>
                           </li>
                           <li>

@@ -29,7 +29,7 @@ const CreatePennCatalogues: React.FC = () => {
     try{
         const url = constants.BASE_URL + '/create-penn-catalogues';
         const response = await axios.post(url, pennCataloguesForm);
-        navigate(`/pennCatalogues/edit/${response.data.data.id}?newCreated=true`);
+        navigate(`/penn-catalogues/edit/${response.data.data.id}?newCreated=true`);
     }catch(err){
         if (axios.isAxiosError(err) && err.response) {
             setError(err.response.data);

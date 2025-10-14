@@ -4,6 +4,7 @@ import axios from 'axios';
 import constants from '../../Constants';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import { getYears } from '../../utils/getYear';
 
 const CreateLures: React.FC = () => {
     const navigate = useNavigate();
@@ -27,6 +28,8 @@ const CreateLures: React.FC = () => {
         buyer_email: '',
         valuation: '',
     });
+
+    const years = getYears()
 
   const submitLures = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -115,7 +118,7 @@ const CreateLures: React.FC = () => {
                         />
                     </div>
                     <div className='col-span-12 flex flex-col gap-2'>
-                        <label className="text-sm font-semibold text-gray-600">Makers Name</label>
+                        <label className="text-sm font-semibold text-gray-600">Details</label>
                         <input
                         type="text"
                         name="makers_name"
@@ -125,7 +128,7 @@ const CreateLures: React.FC = () => {
                         className="border border-blue-300 w-full p-3 font-bold text-lg rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    {/* <div className='col-span-4 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Model</label>
                         <input
                         type="text"
@@ -135,9 +138,9 @@ const CreateLures: React.FC = () => {
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
-                    </div>
+                    </div> */}
 
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    {/* <div className='col-span-4 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Sub Model</label>
                         <input
                         type="text"
@@ -147,9 +150,26 @@ const CreateLures: React.FC = () => {
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
-                    </div>
+                    </div> */}
 
                     <div className='col-span-4 flex flex-col gap-2'>
+                        <label className="text-sm font-semibold text-gray-600">Year</label>
+                        <select
+                            name="approximate_date"
+                                  value={luresForm.approximate_date}
+                            onChange={handleInputChange}
+                            className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                            <option value="">Select Year</option>
+                            {years.map((year) => (
+                                <option key={year} value={year}>
+                                    {year}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    {/* <div className='col-span-4 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Approximate Date</label>
                         <input
                         type="date"
@@ -159,7 +179,7 @@ const CreateLures: React.FC = () => {
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
-                    </div>
+                    </div> */}
 
                     <div className='col-span-4 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Size</label>
@@ -172,7 +192,7 @@ const CreateLures: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-8 flex flex-col gap-2'>
+                    {/* <div className='col-span-8 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Serial Number</label>
                         <input
                         type="text"
@@ -182,7 +202,7 @@ const CreateLures: React.FC = () => {
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
-                    </div>
+                    </div> */}
                 
                     <div className='col-span-12 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Condition</label>

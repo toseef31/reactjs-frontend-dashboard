@@ -5,6 +5,7 @@ import axios from 'axios';
 import constants from '../../Constants';
 import { toast, ToastContainer } from 'react-toastify';
 import MediaGallery from './Components/MediaGallery';
+import { getYears } from '../../utils/getYear';
 
 const EditTackles: React.FC = () => {
     const { id } = useParams();
@@ -40,6 +41,7 @@ const EditTackles: React.FC = () => {
         valuation: '',
         tackle_media: [],
     });
+    const years = getYears();
       
     const updateTacklesId = (newTacklesId:string) => {
         setTacklesProtected((prevState) => ({
@@ -163,7 +165,7 @@ const EditTackles: React.FC = () => {
                         />
                     </div> */}
 
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    {/* <div className='col-span-4 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Approximate Date</label>
                         <input
                         type="date"
@@ -173,6 +175,23 @@ const EditTackles: React.FC = () => {
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
+                    </div> */}
+
+                    <div className='col-span-4 flex flex-col gap-2'>
+                        <label className="text-sm font-semibold text-gray-600">Year</label>
+                        <select
+                            name="approximate_date"
+                            value={tacklesForm.approximate_date}
+                            onChange={handleInputChange}
+                            className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                            <option value="">Select Year</option>
+                            {years.map((year) => (
+                                <option key={year} value={year}>
+                                    {year}
+                                </option>
+                            ))}
+                        </select>
                     </div>
 
                     <div className='col-span-4 flex flex-col gap-2'>
