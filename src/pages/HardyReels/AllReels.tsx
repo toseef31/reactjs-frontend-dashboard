@@ -19,16 +19,22 @@ const AllReels: React.FC = () => {
       current_page: 1,
       total: 1,
   });
-  const [searchParams, setSearchParams] = useState({
-    reel_id: '',
-    makers_name: '',
-    model: '',
-    sub_model: '',
-    handle: '',
-    foot: '',
-    tension_regultor: '',
-    size: '',
-    cost_price: '',
+  const [searchParams, setSearchParams] = useState(() => {
+    const saved = localStorage.getItem("reelSearchParams");
+    return saved
+      ? JSON.parse(saved)
+      : 
+      {    
+        reel_id: '',
+        makers_name: '',
+        model: '',
+        sub_model: '',
+        handle: '',
+        foot: '',
+        tension_regultor: '',
+        size: '',
+        cost_price: ''
+      };
   });
 
   const fetchReels = async (params = {}, nextPageUrl = null, perPage = 25) => {
@@ -72,8 +78,26 @@ const AllReels: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchReels();
+    const saved = localStorage.getItem("reelSearchParams");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      setSearchParams(parsed);
+
+      const hasFilters = Object.values(parsed).some((val) => val !== "");
+      if (hasFilters) {
+        fetchReels(parsed, null, 1000);
+      } else {
+        fetchReels({}, null, 25);
+      }
+    } else {
+      fetchReels({}, null, 25);
+    }
+    // fetchReels();
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("reelSearchParams", JSON.stringify(searchParams));
+  }, [searchParams]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;

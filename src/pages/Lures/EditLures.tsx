@@ -24,6 +24,7 @@ const EditLures: React.FC = () => {
     const [error, setError] = useState<any[] | null>(null);
     const [luresForm, setLuresForm] = useState({
         id:id,
+        lures_id: '',
         makers_name: '',
         model: '',
         sub_model: '',
@@ -71,7 +72,7 @@ const EditLures: React.FC = () => {
         const url = constants.BASE_URL + '/lure/' + id;
         const response = await axios.get(url);
         updateLuresId(response.data.data.lures_id);
-        delete response.data.data.lures_id;
+        // delete response.data.data.lures_id;
         setLuresForm(response.data.data);
         const thumbnail = response.data.data.lures_media?.find((m: any) => m.thumbnail === 'thumbnail');
         setPreviewImage(thumbnail ? `${constants.BASE_ASSET_URL}/storage/${thumbnail.media_path}` : '');
@@ -126,13 +127,18 @@ const EditLures: React.FC = () => {
                         type="text"
                         name="lures_id"
                         placeholder="Lures ID"
-                        value={luresProtected.lures_id}
-                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 disabled:bg-yellow-100 disabled:cursor-not-allowed"
-                        disabled
+                        value={luresForm.lures_id}
+                        onChange={(e) =>
+                            setLuresForm((prevForm) => ({
+                                ...prevForm,
+                                lures_id: e.target.value, // Allow editing
+                            }))
+                        }
+                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
                         />
                     </div>
                     <div className='col-span-12 flex flex-col gap-2'>
-                        <label className="text-sm font-semibold text-gray-600">Details</label>
+                        <label className="text-sm font-semibold text-gray-600">Name</label>
                         <input
                         type="text"
                         name="makers_name"
@@ -166,7 +172,7 @@ const EditLures: React.FC = () => {
                         />
                     </div> */}
 
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Year</label>
                         <select
                             name="approximate_date"
@@ -195,7 +201,7 @@ const EditLures: React.FC = () => {
                         />
                     </div> */}
 
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Size</label>
                         <input
                         type="text"

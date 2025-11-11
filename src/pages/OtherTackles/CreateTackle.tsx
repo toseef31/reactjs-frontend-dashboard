@@ -127,10 +127,10 @@ const CreateTackle: React.FC = () => {
                         placeholder="Makers Name"
                         value={tackleForm.makers_name}
                         onChange={handleInputChange}
-                        className="border border-blue-300 w-full p-3 font-bold text-lg rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="border border-blue-300 w-full p-3 font-bold text-lg rounded-md placeholder:font-normal focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Model</label>
                         <input
                         type="text"
@@ -166,7 +166,7 @@ const CreateTackle: React.FC = () => {
                         />
                     </div> */}
 
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Year</label>
                         <select
                             name="approximate_date"
@@ -183,7 +183,7 @@ const CreateTackle: React.FC = () => {
                         </select>
                     </div>
 
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Size</label>
                         <input
                         type="text"
@@ -205,7 +205,7 @@ const CreateTackle: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div> */}
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Type</label>
                         <select
                             name="type"

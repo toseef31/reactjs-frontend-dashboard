@@ -4,6 +4,7 @@ import axios from 'axios';
 import constants from '../../Constants';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import { getYears } from '../../utils/getYear';
 
 const CreatePennCatalogues: React.FC = () => {
     const navigate = useNavigate();
@@ -22,6 +23,8 @@ const CreatePennCatalogues: React.FC = () => {
         buyer_email: '',
         valuation: '',
     });
+
+    const years = getYears();
 
   const submitPennCatalogues = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -89,14 +92,27 @@ const CreatePennCatalogues: React.FC = () => {
                     </div>
                     <div className='col-span-4 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Year</label>
-                        <input
+                        <select
+                            name="year"
+                                  value={pennCataloguesForm.year}
+                            onChange={handleInputChange}
+                            className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                            <option value="">Select Year</option>
+                            {years.map((year) => (
+                                <option key={year} value={year}>
+                                    {year}
+                                </option>
+                            ))}
+                        </select>
+                        {/* <input
                         type="text"
                         name="year"
                         placeholder="Year"
                         value={pennCataloguesForm.year}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
+                        /> */}
                     </div>
 
                     <div className='col-span-4 flex flex-col gap-2'>

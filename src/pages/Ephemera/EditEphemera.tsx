@@ -24,6 +24,7 @@ const EditEphemera: React.FC = () => {
     const [error, setError] = useState<any[] | null>(null);
     const [ephemeraForm, setEphemeraForm] = useState({
         id:id,
+        ephemera_id: '',
         type: '',
         details: '',
         size: '',
@@ -68,7 +69,7 @@ const EditEphemera: React.FC = () => {
         const url = constants.BASE_URL + '/ephemera/' + id;
         const response = await axios.get(url);
         updateEphemeraId(response.data.data.ephemera_id);
-        delete response.data.data.ephemera_id;
+        // delete response.data.data.ephemera_id;
         setEphemeraForm(response.data.data);
         const thumbnail = response.data.data.ephemera_media?.find((m: any) => m.thumbnail === 'thumbnail');
     setPreviewImage(thumbnail ? `${constants.BASE_ASSET_URL}/storage/${thumbnail.media_path}` : '');
@@ -133,14 +134,20 @@ const EditEphemera: React.FC = () => {
                         <label className="text-lg font-semibold text-gray-600">Ephemera Details</label>
                     </div>
                     <div className='col-span-3 flex flex-col gap-2'>
+                       eee { ephemeraForm.ephemera_id}
                         <label className="text-sm font-semibold text-gray-600">Ephemera ID</label>
                         <input
                         type="text"
                         name="ephemera_id"
                         placeholder="Ephemera ID"
-                        value={ephemeraProtected.ephemera_id}
-                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 disabled:bg-yellow-100 disabled:cursor-not-allowed"
-                        disabled
+                        value={ephemeraForm.ephemera_id}
+                        onChange={(e) =>
+                            setEphemeraForm((prevForm) => ({
+                                ...prevForm,
+                                ephemera_id: e.target.value, // Allow editing
+                            }))
+                        }
+                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
                         />
                     </div>
                     <div className='col-span-12 flex flex-col gap-2'>

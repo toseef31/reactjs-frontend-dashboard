@@ -205,8 +205,8 @@ const AllLures: React.FC = () => {
               <th className="border-b border-gray-300 p-2"></th>
               <th className="border-b border-gray-300 p-2 w-20">Lures ID</th>
               <th className="border-b border-gray-300 p-2 w-30">Makers Name</th>
-              <th className="border-b border-gray-300 p-2 w-30">Model</th>
-              <th className="border-b border-gray-300 p-2 w-30">Sub Model</th>
+              {/* <th className="border-b border-gray-300 p-2 w-30">Model</th>
+              <th className="border-b border-gray-300 p-2 w-30">Sub Model</th> */}
               <th className="border-b border-gray-300 p-2 w-30">Size</th>
               <th className="border-b border-gray-300 p-2 w-30">Valuation</th>
               <th className="border-b border-gray-300 p-2 w-20">Cost</th>
@@ -237,8 +237,8 @@ const AllLures: React.FC = () => {
                 </td>
                 <td className="border-b border-gray-50 p-1">{lures.lures_id}</td>
                 <td className="border-b border-gray-50 p-1">{lures.makers_name}</td>
-                <td className="border-b border-gray-50 p-1">{lures.model}</td>
-                <td className="border-b border-gray-50 p-1">{lures.sub_model}</td>
+                {/* <td className="border-b border-gray-50 p-1">{lures.model}</td>
+                <td className="border-b border-gray-50 p-1">{lures.sub_model}</td> */}
                 <td className="border-b border-gray-50 p-1">{lures.size}</td>
                 <td className="border-b border-gray-50 p-1">{lures.valuation}</td>
                 <td className="border-b border-gray-50 p-1">{Math.floor(lures.cost_price)}</td>

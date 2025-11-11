@@ -23,6 +23,7 @@ const CreateReel: React.FC = () => {
     const [error, setError] = useState<any[] | null>(null);
     const [reelForm, setReelForm] = useState({
         id:id,
+        reel_id: '',
         makers_name: '',
         model: '',
         sub_model: '',
@@ -72,7 +73,7 @@ const CreateReel: React.FC = () => {
         const url = constants.BASE_URL + '/hardyreel/' + id;
         const response = await axios.get(url);
         updateReelId(response.data.data.reel_id);
-        delete response.data.data.reel_id;
+        // delete response.data.data.reel_id;
         setReelForm(response.data.data);
     }catch(err){
         if (axios.isAxiosError(err) && err.response) {
@@ -125,9 +126,14 @@ const CreateReel: React.FC = () => {
                         type="text"
                         name="reel_id"
                         placeholder="Reel ID"
-                        value={reelProtected.reel_id}
-                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 disabled:bg-yellow-100 disabled:cursor-not-allowed"
-                        disabled
+                        value={reelForm.reel_id}
+                        onChange={(e) =>
+                            setReelForm((prevForm) => ({
+                                ...prevForm,
+                                reel_id: e.target.value, // Allow editing
+                            }))
+                        }
+                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
                         />
                     </div>
                     <div className='col-span-12 flex flex-col gap-2'>

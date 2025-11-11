@@ -118,7 +118,7 @@ const CreateLures: React.FC = () => {
                         />
                     </div>
                     <div className='col-span-12 flex flex-col gap-2'>
-                        <label className="text-sm font-semibold text-gray-600">Details</label>
+                        <label className="text-sm font-semibold text-gray-600">Name</label>
                         <input
                         type="text"
                         name="makers_name"
@@ -152,7 +152,7 @@ const CreateLures: React.FC = () => {
                         />
                     </div> */}
 
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Year</label>
                         <select
                             name="approximate_date"
@@ -181,7 +181,7 @@ const CreateLures: React.FC = () => {
                         />
                     </div> */}
 
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Size</label>
                         <input
                         type="text"

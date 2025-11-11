@@ -21,13 +21,18 @@ const AllBooks: React.FC = () => {
     current_page: 1,
     total: 1,
   });
-  const [searchParams, setSearchParams] = useState({
-    book_id: '',
-    title: '',
-    author: '',
-    publisher: '',
-    publication_year: '',
-    edition: '',
+  const [searchParams, setSearchParams] = useState(() => {
+    const saved = localStorage.getItem("bookSearchParams");
+    return saved
+      ? JSON.parse(saved)
+      : {
+          book_id: "",
+          title: "",
+          author: "",
+          publisher: "",
+          publication_year: "",
+          edition: "",
+        };
   });
   const [selectedBooks, setSelectedBooks] = useState<number[]>([]);
 
@@ -72,8 +77,29 @@ const AllBooks: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchBooks();
+    const saved = localStorage.getItem("bookSearchParams");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      setSearchParams(parsed);
+
+      const hasFilters = Object.values(parsed).some((val) => val !== "");
+      if (hasFilters) {
+        fetchBooks(parsed, null, 1000);
+      } else {
+        fetchBooks({}, null, 25);
+      }
+    } else {
+      fetchBooks({}, null, 25);
+    }
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("bookSearchParams", JSON.stringify(searchParams));
+  }, [searchParams]);
+
+  // useEffect(() => {
+  //   fetchBooks();
+  // }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -96,7 +122,7 @@ const AllBooks: React.FC = () => {
       publication_year: '',
       edition: '',
     });
-
+    localStorage.removeItem("bookSearchParams");
     fetchBooks({}, null, 25);
   };
 
@@ -109,7 +135,9 @@ const AllBooks: React.FC = () => {
     try {
       const response = await axios.post(constants.BASE_URL + '/book/duplicate/'+id );
       fetchBooks();
-      toast.success(response.data.message);
+      console.log(response.data);
+      navigate(`/books/edit/${response.data.data.id}?newCreated=true`);
+      // toast.success(response.data.message);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         console.error(error.response.data);

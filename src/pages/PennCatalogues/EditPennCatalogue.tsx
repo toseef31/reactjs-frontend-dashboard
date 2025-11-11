@@ -5,6 +5,7 @@ import axios from 'axios';
 import constants from '../../Constants';
 import { toast, ToastContainer } from 'react-toastify';
 import MediaGallery from './Components/MediaGallery';
+import { getYears } from '../../utils/getYear';
 
 const EditPennCatalogue: React.FC = () => {
     const { id } = useParams();
@@ -32,7 +33,8 @@ const EditPennCatalogue: React.FC = () => {
         valuation: '',
         penn_catalogue_media: [],
     });
-      
+  
+  const years = getYears();
   const submitPennCatalogue = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
@@ -116,14 +118,27 @@ const EditPennCatalogue: React.FC = () => {
                     </div>
                     <div className='col-span-4 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Year</label>
-                        <input
+                        <select
+                            name="year"
+                                  value={pennCataloguesForm.year}
+                            onChange={handleInputChange}
+                            className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                            <option value="">Select Year</option>
+                            {years.map((year) => (
+                                <option key={year} value={year}>
+                                    {year}
+                                </option>
+                            ))}
+                        </select>
+                        {/* <input
                         type="text"
                         name="year"
                         placeholder="Year"
                         value={pennCataloguesForm.year}
                         onChange={handleInputChange}
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
+                        /> */}
                     </div>
 
                     <div className='col-span-4 flex flex-col gap-2'>

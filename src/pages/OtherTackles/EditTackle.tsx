@@ -23,6 +23,7 @@ const EditTackles: React.FC = () => {
     const [error, setError] = useState<any[] | null>(null);
     const [tacklesForm, setTacklesForm] = useState({
         id:id,
+        tackle_id: '',
         makers_name: '',
         model: '',
         type: '',
@@ -72,7 +73,7 @@ const EditTackles: React.FC = () => {
         const url = constants.BASE_URL + '/othertackle/' + id;
         const response = await axios.get(url);
         updateTacklesId(response.data.data.tackle_id);
-        delete response.data.data.tackle_id;
+        // delete response.data.data.tackle_id;
         setTacklesForm(response.data.data);
     }catch(err){
         if (axios.isAxiosError(err) && err.response) {
@@ -125,9 +126,14 @@ const EditTackles: React.FC = () => {
                         type="text"
                         name="tackle_id"
                         placeholder="Tackle ID"
-                        value={tacklesProtected.tackle_id}
-                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 disabled:bg-yellow-100 disabled:cursor-not-allowed"
-                        disabled
+                        value={tacklesForm.tackle_id}
+                        onChange={(e) => 
+                            setTacklesForm((prevForm) => ({
+                                ...prevForm,
+                                tackle_id: e.target.value, // Allow editing
+                            }))
+                        }
+                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
                         />
                     </div>
                     <div className='col-span-12 flex flex-col gap-2'>
@@ -141,7 +147,7 @@ const EditTackles: React.FC = () => {
                         className="border border-blue-300 w-full p-3 font-bold text-lg rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Model</label>
                         <input
                         type="text"
@@ -177,7 +183,7 @@ const EditTackles: React.FC = () => {
                         />
                     </div> */}
 
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Year</label>
                         <select
                             name="approximate_date"
@@ -194,7 +200,7 @@ const EditTackles: React.FC = () => {
                         </select>
                     </div>
 
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Size</label>
                         <input
                         type="text"
@@ -216,7 +222,7 @@ const EditTackles: React.FC = () => {
                         className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div> */}
-                    <div className='col-span-4 flex flex-col gap-2'>
+                    <div className='col-span-6 flex flex-col gap-2'>
                         <label className="text-sm font-semibold text-gray-600">Type</label>
                         <select
                             name="type"

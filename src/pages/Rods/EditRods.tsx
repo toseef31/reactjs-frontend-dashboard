@@ -24,6 +24,7 @@ const EditRods: React.FC = () => {
     const [error, setError] = useState<any[] | null>(null);
     const [rodsForm, setRodsForm] = useState({
         id:id,
+        rod_id: '',
         makers_name: '',
         model: '',
         sub_model: '',
@@ -71,7 +72,7 @@ const EditRods: React.FC = () => {
         const url = constants.BASE_URL + '/rod/' + id;
         const response = await axios.get(url);
         updateRodsId(response.data.data.rod_id);
-        delete response.data.data.rod_id;
+        // delete response.data.data.rod_id;
         setRodsForm(response.data.data);
         const thumbnail = response.data.data.rods_media?.find((m: any) => m.thumbnail === 'thumbnail');
        setPreviewImage(thumbnail ? `${constants.BASE_ASSET_URL}/storage/${thumbnail.media_path}` : '');
@@ -126,9 +127,14 @@ const EditRods: React.FC = () => {
                         type="text"
                         name="rod_id"
                         placeholder="Rods ID"
-                        value={rodsProtected.rod_id}
-                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 disabled:bg-yellow-100 disabled:cursor-not-allowed"
-                        disabled
+                        value={rodsForm.rod_id}
+                        className="border border-blue-300 w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
+                        onChange={(e) => 
+                            setRodsForm((prevForm) => ({
+                                ...prevForm,
+                                rod_id: e.target.value, // Allow editing
+                            }))
+                        }
                         />
                     </div>
                     <div className='col-span-12 flex flex-col gap-2'>
